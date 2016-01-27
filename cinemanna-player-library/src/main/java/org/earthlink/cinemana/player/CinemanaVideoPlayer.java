@@ -448,12 +448,13 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
     private void configureSubtitleView() {
         int defaultSubtitleColor = Color.argb(255, 218, 218, 218);
+        int outlineColor = Color.argb(255, 43, 43, 43);
         Typeface subtitleTypeface = Typeface.createFromAsset(surfaceView.getContext().getAssets(), "fonts/Abdo-Line.otf");
         CaptionStyleCompat style =
                 new CaptionStyleCompat(defaultSubtitleColor,
                         Color.TRANSPARENT, Color.TRANSPARENT,
-                        CaptionStyleCompat.EDGE_TYPE_NONE,
-                        Color.WHITE, subtitleTypeface);
+                        CaptionStyleCompat.EDGE_TYPE_OUTLINE,
+                        outlineColor, subtitleTypeface);
         float fontScale = 2.0f;
 //        if (Util.SDK_INT >= 19) {
 ////            style = getUserCaptionStyleV19();
