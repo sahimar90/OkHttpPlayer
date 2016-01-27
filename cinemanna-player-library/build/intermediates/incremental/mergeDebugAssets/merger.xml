@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/assets"><file name="fonts/Abdo-Line.otf" path="/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/assets/fonts/Abdo-Line.otf"/></source></dataSet><dataSet config="debug"><source path="/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/debug/assets"/></dataSet></merger>

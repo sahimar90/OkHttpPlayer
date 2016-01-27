@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ExoPlayerWrapper</string>
+    <string name="title_activity_player">SimplePlayer</string>
+</resources>
