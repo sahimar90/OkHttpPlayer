@@ -54,14 +54,7 @@ The subtitles style can be configured from the library in the file [`CinemanaVid
                         Color.TRANSPARENT, Color.TRANSPARENT,
                         CaptionStyleCompat.EDGE_TYPE_OUTLINE,
                         outlineColor, subtitleTypeface);
-        float fontScale = 2.0f;
-//        if (Util.SDK_INT >= 19) {
-////            style = getUserCaptionStyleV19();
-//            fontScale = getUserCaptionFontScaleV19();
-//        } else {
-////            style = CaptionStyleCompat.DEFAULT;
-//            fontScale = 1.5f;
-//        }
+
         subtitleLayout.setStyle(style);
         subtitleLayout.setFractionalTextSize(SubtitleLayout.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
     }
