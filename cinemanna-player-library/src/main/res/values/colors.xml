@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="selectedQuality">@color/malibu</color>
+    <color name="unselectedQuality">@color/jumbo</color>
+
+    <color name="malibu">#68ACDB</color>
+    <color name="jumbo">#c8caca</color>
+
+</resources>

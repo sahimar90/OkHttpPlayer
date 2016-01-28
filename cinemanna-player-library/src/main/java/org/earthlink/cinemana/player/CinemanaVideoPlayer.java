@@ -1,21 +1,26 @@
 package org.earthlink.cinemana.player;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.accessibility.CaptioningManager;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.exoplayer.AspectRatioFrameLayout;
@@ -49,7 +54,7 @@ import java.util.Map;
  * Created by cklar on 23.09.15.
  */
 public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
-        CinemanaPlayer.Listener, CinemanaPlayer.CaptionListener,
+        CinemanaPlayer.Listener, CinemanaPlayer.CaptionListener, View.OnClickListener,
         CinemanaPlayer.Id3MetadataListener, AudioCapabilitiesReceiver.Listener {
 
 
@@ -73,15 +78,24 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
     private SurfaceView surfaceView;
     private SubtitleLayout subtitleLayout;
 
-    private CinemanaPlayer wrapper;
+    private CinemanaPlayer player;
     private boolean playerNeedsPrepare;
 
     private int wantedResolution = VideoFile.QUALITY_720P;
     private long playerPosition;
     private final boolean autoAspectRatio;
+    private boolean enableBackgroundAudio = false;
 
     private AudioCapabilitiesReceiver audioCapabilitiesReceiver;
-    private boolean enableBackgroundAudio; //Not yet implemented
+
+    LinearLayout qualityTextLL, videoControlsLL, additionalControlsLL;
+    ImageView incrementSubs, decrementSubs;
+    private float fontScale = 2f;
+
+    TextView videoTitle;
+
+    private ProgressBar circleProgress;
+
 
     public CinemanaVideoPlayer(Activity activity,
                                FrameLayout root,
@@ -110,7 +124,6 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
         root.setLayoutParams(oldRoot.getLayoutParams());
         ViewGroupUtils.replaceView(oldRoot, root);
-
 
 
         root.setOnTouchListener(new View.OnTouchListener() {
@@ -146,9 +159,37 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
         subtitleLayout = (SubtitleLayout) root.findViewById(R.id.subtitles);
 
 
+        qualityTextLL = (LinearLayout) root.findViewById(R.id.qualityTextLL);
+        videoControlsLL = (LinearLayout) root.findViewById(R.id.videoControlsLL);
+
+
         mediaController = new MediaController(activity);
         mediaController.setAnchorView(root);
 
+        incrementSubs = (ImageView) root.findViewById(R.id.incrementSubs);
+        decrementSubs = (ImageView) root.findViewById(R.id.decrementSubs);
+
+        videoTitle = (TextView) root.findViewById(R.id.videoTitle);
+
+        videoTitle.setText(video.title);
+
+        additionalControlsLL = (LinearLayout) root.findViewById(R.id.additionalControlsLL);
+
+        circleProgress = (ProgressBar) root.findViewById(R.id.circleProgress);
+        circleProgress.setAlpha(0.4f);
+
+        incrementSubs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                incrementFontSize();
+            }
+        });
+        decrementSubs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                decrementFontSize();
+            }
+        });
 
         CookieHandler currentHandler = CookieHandler.getDefault();
         if (currentHandler != defaultCookieManager) {
@@ -158,13 +199,41 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
         configureSubtitleView();
 
-        // The wrapper will be prepared on receiving audio capabilities.
+        // The player will be prepared on receiving audio capabilities.
         audioCapabilitiesReceiver.register();
-        if (wrapper == null) {
+        if (player == null) {
             preparePlayer(autoplay);
         } else {
-            wrapper.setBackgrounded(false);
+            player.setBackgrounded(false);
         }
+
+
+        addQualitiesTextViews();
+
+
+        initializeAndPreparePlayer();
+
+    }
+
+
+
+    // adds a control view to the end of videoControlsLL
+    public void addViewControl(View view) {
+        int margin = (int) surfaceView.getContext().getResources().getDimension(R.dimen.side_control_margin);
+        LinearLayout.LayoutParams params =
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(margin, margin, margin, margin); //substitute parameters for left, top, right, bottom
+        view.setLayoutParams(params);
+
+        additionalControlsLL.addView(view);
+    }
+
+
+    @Override
+    public void onClick(View view) {
+
+
+        Log.i(TAG, "view with id clicked: " + view.getId());
 
 
     }
@@ -176,12 +245,12 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
     public void onResume() {
         configureSubtitleView();
 
-        // The wrapper will be prepared on receiving audio capabilities.
+        // The player will be prepared on receiving audio capabilities.
         audioCapabilitiesReceiver.register();
-        if (wrapper == null) {
+        if (player == null) {
             preparePlayer(autoplay);
         } else {
-            wrapper.setBackgrounded(false);
+            player.setBackgrounded(false);
         }
     }
 
@@ -189,7 +258,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
         if (!enableBackgroundAudio) {
             releasePlayer();
         } else {
-            wrapper.setBackgrounded(true);
+            player.setBackgrounded(true);
         }
         shutterView.setVisibility(View.VISIBLE);
     }
@@ -204,14 +273,14 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
     @Override
     public void onAudioCapabilitiesChanged(AudioCapabilities audioCapabilities) {
-        if (wrapper == null) {
+        if (player == null) {
             return;
         }
-        boolean backgrounded = wrapper.getBackgrounded();
-        boolean playWhenReady = wrapper.getPlayWhenReady();
+        boolean backgrounded = player.getBackgrounded();
+        boolean playWhenReady = player.getPlayWhenReady();
         releasePlayer();
         preparePlayer(playWhenReady);
-        wrapper.setBackgrounded(backgrounded);
+        player.setBackgrounded(backgrounded);
     }
 
     // Internal methods
@@ -235,70 +304,49 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
     }
 
     private void preparePlayer(boolean playWhenReady) {
-        if (wrapper == null) {
-            createNewWrapper();
+        if (player == null) {
+            player = new CinemanaPlayer(getRendererBuilder());
+            player.addListener(this);
+            player.seekTo(playerPosition);
+            playerNeedsPrepare = true;
+            mediaController.setMediaPlayer(player.getPlayerControl());
+            mediaController.setEnabled(true);
+            eventLogger = new EventLogger();
+            eventLogger.startSession();
+            player.addListener(eventLogger);
+            player.setInfoListener(eventLogger);
+            player.setCaptionListener(this);
+            player.setInternalErrorListener(eventLogger);
         }
-        wrapper.setSurface(surfaceView.getHolder().getSurface());
-        wrapper.setPlayWhenReady(playWhenReady);
-    }
-
-    private void createNewWrapper() {
-        wrapper = new CinemanaPlayer(getRendererBuilder());
-        wrapper.addListener(this);
-        wrapper.setCaptionListener(this);
-        wrapper.setMetadataListener(this);
-        wrapper.seekTo(playerPosition);
-        playerNeedsPrepare = true;
-        mediaController.setMediaPlayer(wrapper.getPlayerControl());
-        mediaController.setEnabled(true);
-        eventLogger = new EventLogger();
-        eventLogger.startSession();
-        wrapper.addListener(eventLogger);
-        wrapper.setInfoListener(eventLogger);
-        wrapper.setInternalErrorListener(eventLogger);
         if (playerNeedsPrepare) {
-            wrapper.prepare();
+            player.prepare();
             playerNeedsPrepare = false;
         }
+        player.setSurface(surfaceView.getHolder().getSurface());
+        player.setPlayWhenReady(playWhenReady);
     }
 
-
+    private void releasePlayer() {
+        if (player != null) {
+            playerPosition = player.getCurrentPosition();
+            player.release();
+            player = null;
+            eventLogger.endSession();
+            eventLogger = null;
+        }
+    }
 
 
     public void changeResolution(int wantedResolution) {
 
         this.wantedResolution = wantedResolution;
-        createNewWrapper();
-        if (playerNeedsPrepare) {
-            wrapper.prepare();
-            playerNeedsPrepare = false;
-        }
-        wrapper.setSurface(surfaceView.getHolder().getSurface());
 
+        releasePlayer();
 
-    }
-    public void changeVideo(VideoFile video, long playerPosition, boolean playWhenReady){
-        this.video = video;
-        this.playerPosition = playerPosition;
-        createNewWrapper();
-        if (playerNeedsPrepare) {
-            wrapper.prepare();
-            playerNeedsPrepare = false;
-        }
-        wrapper.setSurface(surfaceView.getHolder().getSurface());
-        wrapper.setPlayWhenReady(playWhenReady);
+        initializeAndPreparePlayer();
 
     }
 
-    public void releasePlayer() {
-        if (wrapper != null) {
-            playerPosition = wrapper.getCurrentPosition();
-            wrapper.release();
-            wrapper = null;
-            eventLogger.endSession();
-            eventLogger = null;
-        }
-    }
 
     /**
      * Pause video playback.
@@ -306,25 +354,25 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
     public void pause() {
         // Set the autoplay for the video surface layer in case the surface hasn't been created yet.
         // This way, when the surface is created, it won't start playing.
-        wrapper.getPlayerControl().pause();
+        player.getPlayerControl().pause();
     }
+
     /**
      * Pause video playback.
      */
     public void play() {
         // Set the autoplay for the video surface layer in case the surface hasn't been created yet.
         // This way, when the surface is created, it won't start playing.
-        wrapper.setPlayWhenReady(false);
+        player.setPlayWhenReady(false);
     }
 
     /**
      * Returns the current playback position in milliseconds.
      */
     public long getCurrentPosition() {
-        return wrapper.getCurrentPosition();
+        return player.getCurrentPosition();
     }
 
-    // ExoplayerWrapper.Listener implementation
 
     @Override
     public void onStateChanged(boolean playWhenReady, int playbackState) {
@@ -335,6 +383,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
         switch (playbackState) {
             case ExoPlayer.STATE_BUFFERING:
                 text += "buffering";
+                circleProgress.setVisibility(View.VISIBLE);
                 break;
             case ExoPlayer.STATE_ENDED:
                 text += "ended";
@@ -346,6 +395,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
                 text += "preparing";
                 break;
             case ExoPlayer.STATE_READY:
+                circleProgress.setVisibility(View.INVISIBLE);
                 text += "ready";
                 break;
             default:
@@ -354,6 +404,9 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
         }
         Log.v(TAG, text);
     }
+
+
+
 
     @Override
     public void onError(Exception e) {
@@ -383,13 +436,26 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
     private void toggleControlsVisibility() {
         if (mediaController.isShowing()) {
-            mediaController.hide();
+            hideControls();
         } else {
             showControls();
         }
     }
 
+    private void hideControls() {
+        videoControlsLL.setVisibility(View.GONE);
+        qualityTextLL.setVisibility(View.GONE);
+        videoTitle.setVisibility(View.GONE);
+        additionalControlsLL.setVisibility(View.GONE);
+        mediaController.hide();
+
+    }
+
     private void showControls() {
+        videoControlsLL.setVisibility(View.VISIBLE);
+        qualityTextLL.setVisibility(View.VISIBLE);
+        videoTitle.setVisibility(View.VISIBLE);
+        additionalControlsLL.setVisibility(View.VISIBLE);
         mediaController.show(0);
     }
 
@@ -429,8 +495,8 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        if (wrapper != null) {
-            wrapper.setSurface(holder.getSurface());
+        if (player != null) {
+            player.setSurface(holder.getSurface());
         }
     }
 
@@ -441,8 +507,8 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        if (wrapper != null) {
-            wrapper.blockingClearSurface();
+        if (player != null) {
+            player.blockingClearSurface();
         }
     }
 
@@ -455,30 +521,122 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
                         Color.TRANSPARENT, Color.TRANSPARENT,
                         CaptionStyleCompat.EDGE_TYPE_OUTLINE,
                         outlineColor, subtitleTypeface);
-        float fontScale = 2.0f;
-//        if (Util.SDK_INT >= 19) {
-////            style = getUserCaptionStyleV19();
-//            fontScale = getUserCaptionFontScaleV19();
-//        } else {
-////            style = CaptionStyleCompat.DEFAULT;
-//            fontScale = 1.5f;
-//        }
+
         subtitleLayout.setStyle(style);
         subtitleLayout.setFractionalTextSize(SubtitleLayout.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
     }
 
-    @TargetApi(19)
-    private float getUserCaptionFontScaleV19() {
-        CaptioningManager captioningManager =
-                (CaptioningManager) activity.getSystemService(Context.CAPTIONING_SERVICE);
-        return captioningManager.getFontScale();
+    private void initializeAndPreparePlayer() {
+        circleProgress.setVisibility(View.VISIBLE);
+
+        if (player == null) {
+            preparePlayer(true);
+        } else {
+            player.setBackgrounded(false);
+        }
     }
 
-    @TargetApi(19)
-    private CaptionStyleCompat getUserCaptionStyleV19() {
-        CaptioningManager captioningManager =
-                (CaptioningManager) activity.getSystemService(Context.CAPTIONING_SERVICE);
-        return CaptionStyleCompat.createFromCaptionStyle(captioningManager.getUserStyle());
+
+    private void decrementFontSize() {
+        fontScale = Math.max(fontScale / 1.05f, 0.5f);
+        subtitleLayout.setFractionalTextSize(SubtitleLayout.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
+
+        Log.i(TAG, "fontScale: " + fontScale);
+
     }
 
+    private void incrementFontSize() {
+
+        fontScale = Math.min(fontScale * 1.05f, 3f);
+        subtitleLayout.setFractionalTextSize(SubtitleLayout.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
+
+        Log.i(TAG, "fontScale: " + fontScale);
+
+    }
+
+    private void addQualitiesTextViews() {
+
+        Context context = surfaceView.getContext();
+        Log.i(TAG, "adding quality TextViews");
+
+        Switch videoFormatSwitch = new Switch(context);
+        videoFormatSwitch.setLayoutParams(
+                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+        for (int quality : video.resolutions.keySet()) {
+            TextView qualityTextView = new TextView(context);
+            String qualityText = VideoFile.getQualityString(quality);    // spaces before and after the text, e.g., 720p,
+            // to have a space when its background border is active
+            qualityTextView.setText(qualityText);
+
+            qualityTextView.setTag(video.resolutions.get(quality)); // the url link
+
+            qualityTextView.setOnClickListener(qualityChangeListener);
+
+            if (wantedResolution == quality) {
+                setQualityTextStyle(qualityTextView, true, false);
+
+            } else {
+                setQualityTextStyle(qualityTextView, false, false);
+            }
+            qualityTextLL.addView(qualityTextView);
+        }
+
+    }
+
+    View.OnClickListener qualityChangeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            for (int i = 0; i < qualityTextLL.getChildCount(); i++) {
+                TextView qualityTextView = (TextView) qualityTextLL.getChildAt(i);
+                setQualityTextStyle(qualityTextView, false, true);
+
+            }
+            setQualityTextStyle((TextView) view, true, true);
+
+            wantedResolution = VideoFile.getQualityIndex((String) ((TextView) view).getText());
+
+
+            Log.i(TAG, "will change to resolution " + VideoFile.getQualityString(wantedResolution));
+            changeResolution(wantedResolution);
+        }
+    };
+
+
+    private void setQualityTextStyle(TextView qualityTextView, boolean active, boolean onlyBoldAndColor) {
+//        Typeface videoQualityTextTypeface = Typeface.createFromAsset(surfaceView.getContext().getAssets(),
+//                "fonts/ITCFranklinGothicStd-BkCp.otf");
+
+        if (!onlyBoldAndColor) {
+            float qualityTextSize =
+                    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 20, surfaceView.getContext().getResources().getDisplayMetrics());
+
+
+            LinearLayout.LayoutParams qualityTextViewsMargins = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            qualityTextViewsMargins.setMargins(3, 3, 3, 3);
+//            qualityTextView.setTextSize(qualityTextSize);
+            qualityTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            qualityTextView.setLayoutParams(qualityTextViewsMargins);
+        }
+
+//        qualityTextView.setTypeface(videoQualityTextTypeface, Typeface.NORMAL);
+
+
+        if (active) {
+            qualityTextView.setTextColor(surfaceView.getContext().getResources().getColor(R.color.selectedQuality));
+//            qualityTextView.setBackgroundResource(R.drawable.video_rounded_frame);
+            qualityTextView.setTypeface(null, Typeface.BOLD);
+        } else {
+            qualityTextView.setTextColor(surfaceView.getContext().getResources().getColor(R.color.unselectedQuality));
+//            qualityTextView.setBackground(null);
+            qualityTextView.setTypeface(null,Typeface.NORMAL);
+        }
+    }
 }

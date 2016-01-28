@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="2"
@@ -8,16 +9,18 @@
 
     <FrameLayout
         android:id="@+id/root_view"
-        android:layout_weight="1"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp" />
-
-
-
-    <View
-        android:background="@color/colorAccent"
-        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/videoInfoLL"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
 
 </LinearLayout>

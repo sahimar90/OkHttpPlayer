@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="side_control_margin">5dp</dimen>
+    <dimen name="side_quality_ll_margin">10dp</dimen>
+
+    <dimen name="default_circle_view_size">150dp</dimen>
+</resources>

@@ -71,17 +71,15 @@ Screenshots
 ==
 Here, it is showin an Arabic subtitle of srt type, from the Titanic movie:
 <p align="center">
-<img src="titanic_screenshot01.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
+<img src="art/sc01.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
 </p>
 <p align="center">
-<img src="titanic_screenshot02.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
+<img src="art/sc04.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
 </p>
 <p align="center">
-<img src="titanic_screenshot03.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
+<img src="art/sc03.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
 </p>
-<p align="center">
-<img src="titanic_screenshot04.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
-</p>
+
 
 
 

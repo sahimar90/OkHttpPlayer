@@ -1,11 +1,18 @@
 package org.cinemana.player.app.demo;
 
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import org.earthlink.cinemana.player.CinemanaVideoPlayer;
 import org.earthlink.cinemana.player.VideoFile;
@@ -29,6 +36,8 @@ public class PlayerActivity extends FragmentActivity {
     String allVideoInfo_URL = "http://cinemana.earthlinktele.com/api/android/allVideoInfo/id/";
     VideoFile videoFile = new VideoFile();
 
+    LinearLayout mainLL;
+
     private CinemanaVideoPlayer cinemanaVideoPlayer;
 
     @Override
@@ -37,6 +46,7 @@ public class PlayerActivity extends FragmentActivity {
 
         setContentView(R.layout.activity_player);
 
+        mainLL = (LinearLayout) findViewById(R.id.mainLL);
         getTranscodedFiles("10847");
 
     }
@@ -45,6 +55,8 @@ public class PlayerActivity extends FragmentActivity {
 
     private void startCinemanaPlayer(FrameLayout playerFL, VideoFile videoFile) {
         cinemanaVideoPlayer = new CinemanaVideoPlayer(this, playerFL, videoFile);
+
+        cinemanaVideoPlayer.addViewControl(getFullscreenIV());
 
     }
 
@@ -70,6 +82,8 @@ public class PlayerActivity extends FragmentActivity {
 
                     videoFile.arTranslationFilePath = arTranslationFilePath;
 
+                    videoFile.title = response.optString("en_title");
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -92,6 +106,49 @@ public class PlayerActivity extends FragmentActivity {
         getResponse(allVideoInfo_URL + videoId, callback);
 
     }
+
+
+
+    private ImageView getFullscreenIV() {
+        LayoutInflater inflater;
+
+        inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        ImageView imageView = (ImageView) inflater.inflate(R.layout.fullscreen_imageview, null);
+
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+                    switchPortrait();
+                else switchLandscape();
+            }
+        });
+
+        return imageView;
+    }
+
+    private void switchLandscape() {
+        Log.i(TAG, "switching to landscape mode");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+//        videoInfoLL.setVisibility(View.GONE);
+        mainLL.setWeightSum(1);
+
+        //set icon is full screen
+    }
+
+    private void switchPortrait() {
+        Log.i(TAG, "switching to portrait mode");
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+//        videoInfoLL.setVisibility(View.VISIBLE);
+        mainLL.setWeightSum(2);
+
+    }
+
 
     private void getTranscodedFiles(final String videoId) {
 
