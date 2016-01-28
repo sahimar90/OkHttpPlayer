@@ -1,7 +1,7 @@
 Features
 ==
 <li> OkHttpDataSource
-<li> Subtitles (.srt files)
+<li> Subtitles (.srt files, e.g., Arabic subtitles)
 
 
 API
@@ -31,7 +31,7 @@ The *VideoFile* data structure is shown below:
     public int videoType = OTHER;
 
     public String title;
-    public HashMap<Integer, String> resolutions = new HashMap<>();  // <quality, url>; e.g, <QUALITY_720P, "http://example.com/video720p.mp4"
+    public HashMap<Integer, String> resolutions = new HashMap<>();  // <quality, url>; e.g, <QUALITY_720P,     "http://example.com/video720p.mp4"
     public int selectedResolutioin;
 
     public String arTranslationFilePath;
@@ -41,7 +41,8 @@ The *VideoFile* data structure is shown below:
 Subtitles
 ==
 
-The subtitles style can be configured from the library in the file `CinemanaVideoPlayer.java`:
+The subtitles style can be configured from the library in the file [`CinemanaVideoPlayer.java`](https://github.com/bluemix/CinemanaPlayer/blob/master/cinemanna-player-library/src/main/java/org/earthlink/cinemana/player/CinemanaVideoPlayer.java):
+
 
 ```
     private void configureSubtitleView() {
