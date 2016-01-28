@@ -40,17 +40,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int side_quality_ll_margin=0x7f050002;
     }
     public static final class id {
-        public static int additionalControlsLL=0x7f08000a;
+        public static int additionalControlsLL=0x7f080008;
         public static int circleProgress=0x7f08000b;
-        public static int decrementSubs=0x7f080008;
-        public static int incrementSubs=0x7f080007;
+        public static int decrementSubs=0x7f08000a;
+        public static int incrementSubs=0x7f080009;
         public static int qualityTextLL=0x7f080005;
         public static int root=0x7f080000;
         public static int shutter=0x7f080003;
         public static int subtitles=0x7f080004;
         public static int surface_view=0x7f080002;
-        public static int videoControlsLL=0x7f080006;
-        public static int videoTitle=0x7f080009;
+        public static int videoControlsLL=0x7f080007;
+        public static int videoTitle=0x7f080006;
         public static int video_frame=0x7f080001;
     }
     public static final class layout {

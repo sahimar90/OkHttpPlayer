@@ -81,7 +81,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
     private CinemanaPlayer player;
     private boolean playerNeedsPrepare;
 
-    private int wantedResolution = VideoFile.QUALITY_720P;
+    private int wantedResolution = VideoFile.QUALITY_480P;
     private long playerPosition;
     private final boolean autoAspectRatio;
     private boolean enableBackgroundAudio = false;
@@ -206,6 +206,9 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
         } else {
             player.setBackgrounded(false);
         }
+
+
+        wantedResolution = video.wantedResolution;
 
 
         addQualitiesTextViews();

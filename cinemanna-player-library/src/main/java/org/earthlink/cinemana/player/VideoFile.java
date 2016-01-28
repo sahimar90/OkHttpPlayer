@@ -22,7 +22,7 @@ public class VideoFile {
 
     public String title;
     public TreeMap<Integer, String> resolutions = new TreeMap<>();  // <quality, url>; e.g, <QUALITY_720P, "http://example.com/video720p.mp4"
-    public int selectedResolutioin;
+    public int wantedResolution = QUALITY_360P;
 
     public String arTranslationFilePath;
 

@@ -84,6 +84,7 @@ public class PlayerActivity extends FragmentActivity {
 
                     videoFile.title = response.optString("en_title");
 
+                    videoFile.wantedResolution = VideoFile.QUALITY_480P;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
