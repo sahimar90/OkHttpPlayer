@@ -1,4 +1,4 @@
-package co.klar.android.exoplayerwrapper;
+package org.cinemana.player.app.demo;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

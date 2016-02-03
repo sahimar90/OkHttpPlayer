@@ -13,6 +13,7 @@ int id circleProgress 0x7f08000b
 int id decrementSubs 0x7f08000a
 int id incrementSubs 0x7f080009
 int id qualityTextLL 0x7f080005
+int id retry_button 0x7f08000c
 int id root 0x7f080000
 int id shutter 0x7f080003
 int id subtitles 0x7f080004
@@ -23,12 +24,13 @@ int id video_frame 0x7f080001
 int layout fullscreen_imageview 0x7f030000
 int layout player_view_layout 0x7f030001
 int mipmap full_screen5 0x7f020000
-int mipmap subtitle_decrement 0x7f020001
-int mipmap subtitle_decrement2 0x7f020002
-int mipmap subtitle_decrement3 0x7f020003
-int mipmap subtitle_decrement4 0x7f020004
-int mipmap subtitle_increment3 0x7f020005
-int mipmap subtitle_increment4 0x7f020006
+int mipmap retry_icon 0x7f020001
+int mipmap subtitle_decrement 0x7f020002
+int mipmap subtitle_decrement2 0x7f020003
+int mipmap subtitle_decrement3 0x7f020004
+int mipmap subtitle_decrement4 0x7f020005
+int mipmap subtitle_increment3 0x7f020006
+int mipmap subtitle_increment4 0x7f020007
 int string drm_error_not_supported 0x7f060000
 int string drm_error_unknown 0x7f060001
 int string drm_error_unsupported_scheme 0x7f060002

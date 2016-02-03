@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/mipmap-xhdpi-v4/retry_icon.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-xhdpi/retry_icon.png"
+    },
+    {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/mipmap-xhdpi-v4/subtitle_decrement3.png",
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-xhdpi/subtitle_decrement3.png"
     },

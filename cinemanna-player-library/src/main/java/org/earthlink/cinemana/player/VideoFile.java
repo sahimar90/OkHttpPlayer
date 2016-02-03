@@ -21,6 +21,7 @@ public class VideoFile {
     public int videoType = OTHER;
 
     public String title;
+    public String id;
     public TreeMap<Integer, String> resolutions = new TreeMap<>();  // <quality, url>; e.g, <QUALITY_720P, "http://example.com/video720p.mp4"
     public int wantedResolution = QUALITY_360P;
 

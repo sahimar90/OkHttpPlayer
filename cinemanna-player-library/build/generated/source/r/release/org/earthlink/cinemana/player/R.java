@@ -45,6 +45,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static int decrementSubs=0x7f08000a;
         public static int incrementSubs=0x7f080009;
         public static int qualityTextLL=0x7f080005;
+        public static int retry_button=0x7f08000c;
         public static int root=0x7f080000;
         public static int shutter=0x7f080003;
         public static int subtitles=0x7f080004;
@@ -59,12 +60,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class mipmap {
         public static int full_screen5=0x7f020000;
-        public static int subtitle_decrement=0x7f020001;
-        public static int subtitle_decrement2=0x7f020002;
-        public static int subtitle_decrement3=0x7f020003;
-        public static int subtitle_decrement4=0x7f020004;
-        public static int subtitle_increment3=0x7f020005;
-        public static int subtitle_increment4=0x7f020006;
+        public static int retry_icon=0x7f020001;
+        public static int subtitle_decrement=0x7f020002;
+        public static int subtitle_decrement2=0x7f020003;
+        public static int subtitle_decrement3=0x7f020004;
+        public static int subtitle_decrement4=0x7f020005;
+        public static int subtitle_increment3=0x7f020006;
+        public static int subtitle_increment4=0x7f020007;
     }
     public static final class string {
         public static int drm_error_not_supported=0x7f060000;

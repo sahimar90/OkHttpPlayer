@@ -83,6 +83,7 @@ public class PlayerActivity extends FragmentActivity {
                     videoFile.arTranslationFilePath = arTranslationFilePath;
 
                     videoFile.title = response.optString("en_title");
+                    videoFile.id = response.optString("nb");
 
                     videoFile.wantedResolution = VideoFile.QUALITY_480P;
                     runOnUiThread(new Runnable() {
@@ -96,10 +97,7 @@ public class PlayerActivity extends FragmentActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
 
-                    arTranslationFilePath = "";
                 }
-
-
 
             }
         };

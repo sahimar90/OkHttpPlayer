@@ -14,6 +14,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -93,7 +94,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
     private float fontScale = 2f;
 
     TextView videoTitle;
-
+    Button retryButton;
     private ProgressBar circleProgress;
 
 
@@ -162,6 +163,8 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
         qualityTextLL = (LinearLayout) root.findViewById(R.id.qualityTextLL);
         videoControlsLL = (LinearLayout) root.findViewById(R.id.videoControlsLL);
 
+        retryButton = (Button) root.findViewById(R.id.retry_button);
+        retryButton.setOnClickListener(this);
 
         mediaController = new MediaController(activity);
         mediaController.setAnchorView(root);
@@ -204,7 +207,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
         if (player == null) {
             preparePlayer(autoplay);
         } else {
-            player.setBackgrounded(false);
+            player.setBackgrounded(player.getBackgrounded());
         }
 
 
@@ -237,7 +240,9 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
 
         Log.i(TAG, "view with id clicked: " + view.getId());
-
+        if (view == retryButton) {
+            initializeAndPreparePlayer();
+        }
 
     }
 
@@ -279,11 +284,10 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
         if (player == null) {
             return;
         }
-        boolean backgrounded = player.getBackgrounded();
         boolean playWhenReady = player.getPlayWhenReady();
         releasePlayer();
         preparePlayer(playWhenReady);
-        player.setBackgrounded(backgrounded);
+        player.setBackgrounded(player.getBackgrounded());
     }
 
     // Internal methods
@@ -312,6 +316,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
             player.addListener(this);
             player.seekTo(playerPosition);
             playerNeedsPrepare = true;
+            player.setBackgrounded(enableBackgroundAudio);
             mediaController.setMediaPlayer(player.getPlayerControl());
             mediaController.setEnabled(true);
             eventLogger = new EventLogger();
@@ -455,6 +460,8 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
     }
 
     private void showControls() {
+        retryButton.setVisibility(playerNeedsPrepare ? View.VISIBLE : View.GONE);
+
         videoControlsLL.setVisibility(View.VISIBLE);
         qualityTextLL.setVisibility(View.VISIBLE);
         videoTitle.setVisibility(View.VISIBLE);
@@ -535,7 +542,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
         if (player == null) {
             preparePlayer(true);
         } else {
-            player.setBackgrounded(false);
+            player.setBackgrounded(player.getBackgrounded());
         }
     }
 
