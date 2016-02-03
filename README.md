@@ -65,13 +65,13 @@ Screenshots
 ==
 Here, it is showin an Arabic subtitle of srt type, from the Titanic movie:
 <p align="center">
-<img src="art/sc01.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
+![Arabic subtitle ExoPlayer](art/sc01.png "Arabic subtitle ExoPlayer")
 </p>
 <p align="center">
-<img src="art/sc04.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
+![Arabic subtitle ExoPlayer](art/sc04.png "Arabic subtitle ExoPlayer")
 </p>
 <p align="center">
-<img src="art/sc03.png" alt="Arabic subtitle ExoPlayer" title="Arabic subtitle ExoPlayer" width="500"/>
+![Arabic subtitle ExoPlayer](art/sc03.png "Arabic subtitle ExoPlayer")
 </p>
 
 
