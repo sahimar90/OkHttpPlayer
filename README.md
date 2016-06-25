@@ -78,6 +78,6 @@ Here, it is showin an Arabic subtitle of srt type, from the Titanic movie:
 
 
 
-Notes
+Credits
 ==
-This project was a fork from [ExoPlayerWrapper](https://github.com/cklar/ExoPlayerWrapper). Thanks a lot :)
+* How to use FrameLayout into an Activity: [ExoPlayerWrapper](https://github.com/cklar/ExoPlayerWrapper)
