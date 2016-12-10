@@ -48,7 +48,6 @@ public class PlayerActivity extends FragmentActivity {
 
         mainLL = (LinearLayout) findViewById(R.id.mainLL);
         getTranscodedFiles("10847");
-
     }
 
 
@@ -57,7 +56,6 @@ public class PlayerActivity extends FragmentActivity {
         cinemanaVideoPlayer = new CinemanaVideoPlayer(this, playerFL, videoFile);
 
         cinemanaVideoPlayer.addViewControl(getFullscreenIV());
-
     }
 
 
@@ -75,7 +73,6 @@ public class PlayerActivity extends FragmentActivity {
                 String arTranslationFilePath = "";
                 try {
                     response = new JSONObject(_response.body().string());
-
 
                     arTranslationFilePath = (String) response.opt("arTranslationFilePath");
                     Log.i(TAG, "arTranslationFilePath: " + arTranslationFilePath);
@@ -96,7 +93,6 @@ public class PlayerActivity extends FragmentActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-
                 }
 
             }

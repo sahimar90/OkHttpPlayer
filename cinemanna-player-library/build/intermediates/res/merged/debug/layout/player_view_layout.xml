@@ -1,15 +1,18 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
     android:focusable="true"
-    android:keepScreenOn="true">
+    android:keepScreenOn="true"
+    android:layoutDirection="ltr">
+
 
     <com.google.android.exoplayer.AspectRatioFrameLayout
         android:id="@+id/video_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         android:layout_gravity="center">
 
         <SurfaceView
@@ -29,4 +32,84 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.exoplayer.AspectRatioFrameLayout>
-</FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/qualityTextLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|top|center_vertical"
+        android:layout_below="@+id/videoTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="@dimen/side_quality_ll_margin"
+        android:layoutDirection="rtl"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/videoControlsLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:gravity="end"
+        android:layoutDirection="rtl"
+        android:orientation="vertical"
+        android:layout_below="@+id/additionalControlsLL"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <ImageView
+            android:id="@+id/incrementSubs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/side_control_margin"
+            android:src="@mipmap/subtitle_increment4" />
+
+        <ImageView
+            android:id="@+id/decrementSubs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/side_control_margin"
+            android:src="@mipmap/subtitle_decrement4" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/videoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|top"
+        android:layout_margin="@dimen/side_control_margin"
+        android:textColor="@android:color/primary_text_dark" />
+
+
+    <LinearLayout
+        android:id="@+id/additionalControlsLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end|center_vertical"
+        android:layout_margin="@dimen/side_quality_ll_margin"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layoutDirection="rtl"
+        android:orientation="vertical"></LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/circleProgress"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="true" />
+
+
+    <Button android:id="@+id/retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Retry"
+        android:visibility="gone"/>
+
+</RelativeLayout>

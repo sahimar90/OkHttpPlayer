@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/fullscreen_imageview.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/layout/fullscreen_imageview.xml"
+    },
+    {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/player_view_layout.xml",
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/layout/player_view_layout.xml"
     }
