@@ -99,12 +99,3 @@ Here, it is showin an Arabic subtitle of srt type, from the Titanic movie:
 ![Arabic subtitle ExoPlayer](art/sc01.png "Arabic subtitle ExoPlayer")
 ![Arabic subtitle ExoPlayer](art/sc04.png "Arabic subtitle ExoPlayer")
 ![Arabic subtitle ExoPlayer](art/sc03.png "Arabic subtitle ExoPlayer")
-
-
-
-
-
-
-Credits
-==
-* How to use FrameLayout into an Activity: [ExoPlayerWrapper](https://github.com/cklar/ExoPlayerWrapper)
