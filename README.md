@@ -4,15 +4,31 @@ Features
 <li> Subtitles (.srt files, e.g., Arabic subtitles)
 
 
+
+Setup
+==
+Adding CinemanaPlayer Activity to your Manifest.xml
+```
+<activity android:name="org.earthlink.cinemana.player.CinemanaVideoPlayer"
+    android:configChanges="orientation|screenSize|keyboardHidden"
+    />
+```
+
+
 API
 ==
-```CinemanaVideoPlayer  cinemanaVideoPlayer = new CinemanaVideoPlayer(this, playerFL, videoFile);```
+```
+Intent i = new Intent(this, CinemanaVideoPlayer.class);
+i.putExtra(CinemanaVideoPlayer.KEY_VIDEO_FILE, videoFile);
+i.putExtra(CinemanaVideoPlayer.KEY_START_POSITION, 0);
+
+startActivity(i);
+
+```
 
 
 where:
-<li> **playerFL**: A `FrameLayout` to be usesd as the container of the videoFile player.
 <li> **videoFile**: A data structure that has a `HashMap` containing a resolution and its url link.
-arTranslationFilePath is the url link of the subtitle as an `srt` format.
 
 The *VideoFile* data structure is shown below:
 
@@ -34,12 +50,27 @@ The *VideoFile* data structure is shown below:
     public HashMap<Integer, String> resolutions = new HashMap<>();  // <quality, url>; e.g, <QUALITY_720P,     "http://example.com/video720p.mp4"
     public int selectedResolutioin;
 
-    public String arTranslationFilePath;
+    public String arTranslationFilePath;  // is the url link of the subtitle as an `srt` format.
+
 ```
 
 
 Subtitles
 ==
+
+```
+Format textFormat = Format.createTextSampleFormat(null, MimeTypes.APPLICATION_SUBRIP,
+        null, Format.NO_VALUE, Format.NO_VALUE, "ar", null);
+
+
+MediaSource subtitleSource =
+        new SingleSampleMediaSource(subtitleUri,
+                mediaDataSourceFactory, textFormat, C.TIME_UNSET);
+
+ExtractorMediaSource extractorMediaSource =
+        new ExtractorMediaSource(uri, mediaDataSourceFactory, new DefaultExtractorsFactory(),
+                mainHandler, eventLogger);
+```
 
 The subtitles style can be configured from the library in the file [`CinemanaVideoPlayer.java`](https://github.com/bluemix/CinemanaPlayer/blob/master/cinemanna-player-library/src/main/java/org/earthlink/cinemana/player/CinemanaVideoPlayer.java):
 
@@ -64,15 +95,11 @@ The subtitles style can be configured from the library in the file [`CinemanaVid
 Screenshots
 ==
 Here, it is showin an Arabic subtitle of srt type, from the Titanic movie:
-<p align="center">
+
 ![Arabic subtitle ExoPlayer](art/sc01.png "Arabic subtitle ExoPlayer")
-</p>
-<p align="center">
 ![Arabic subtitle ExoPlayer](art/sc04.png "Arabic subtitle ExoPlayer")
-</p>
-<p align="center">
 ![Arabic subtitle ExoPlayer](art/sc03.png "Arabic subtitle ExoPlayer")
-</p>
+
 
 
 
