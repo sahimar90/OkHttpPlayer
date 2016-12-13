@@ -1,184 +1,168 @@
 package org.earthlink.cinemana.player;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.exoplayer.AspectRatioFrameLayout;
-import com.google.android.exoplayer.ExoPlayer;
-import com.google.android.exoplayer.audio.AudioCapabilities;
-import com.google.android.exoplayer.audio.AudioCapabilitiesReceiver;
-import com.google.android.exoplayer.drm.UnsupportedDrmException;
-import com.google.android.exoplayer.metadata.GeobMetadata;
-import com.google.android.exoplayer.metadata.PrivMetadata;
-import com.google.android.exoplayer.metadata.TxxxMetadata;
-import com.google.android.exoplayer.text.CaptionStyleCompat;
-import com.google.android.exoplayer.text.Cue;
-import com.google.android.exoplayer.text.SubtitleLayout;
-import com.google.android.exoplayer.util.Util;
+import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlaybackException;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Format;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.Timeline;
+import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.mediacodec.MediaCodecRenderer;
+import com.google.android.exoplayer2.mediacodec.MediaCodecUtil;
+import com.google.android.exoplayer2.source.ConcatenatingMediaSource;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.MergingMediaSource;
+import com.google.android.exoplayer2.source.SingleSampleMediaSource;
+import com.google.android.exoplayer2.source.TrackGroupArray;
+import com.google.android.exoplayer2.source.dash.DashMediaSource;
+import com.google.android.exoplayer2.source.dash.DefaultDashChunkSource;
+import com.google.android.exoplayer2.source.hls.HlsMediaSource;
+import com.google.android.exoplayer2.source.smoothstreaming.DefaultSsChunkSource;
+import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource;
+import com.google.android.exoplayer2.text.CaptionStyleCompat;
+import com.google.android.exoplayer2.text.Cue;
+import com.google.android.exoplayer2.text.TextRenderer;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.FixedTrackSelection;
+import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.trackselection.TrackSelections;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
+import com.google.android.exoplayer2.ui.PlaybackControlView;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.ui.SubtitleView;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.util.MimeTypes;
+import com.google.android.exoplayer2.util.Util;
 
-import org.earthlink.cinemana.player.extractor.CinemanaPlayer;
-import org.earthlink.cinemana.player.extractor.DashRendererBuilder;
-import org.earthlink.cinemana.player.extractor.ExtractorRendererBuilder;
-import org.earthlink.cinemana.player.extractor.HlsRendererBuilder;
-import org.earthlink.cinemana.player.util.EventLogger;
-import org.earthlink.cinemana.player.util.ViewGroupUtils;
-
-import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import okhttp3.OkHttpClient;
 
 
 /**
  * Created by cklar on 23.09.15.
  */
-public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
-        CinemanaPlayer.Listener, CinemanaPlayer.CaptionListener, View.OnClickListener,
-        CinemanaPlayer.Id3MetadataListener, AudioCapabilitiesReceiver.Listener {
+public class CinemanaVideoPlayer extends Activity implements View.OnClickListener, ExoPlayer.EventListener,
+        TrackSelector.EventListener<MappingTrackSelector.MappedTrackInfo>,
+        PlaybackControlView.VisibilityListener, TextRenderer.Output {
 
 
-    private static final String TAG = "CinemanaVideoPlayer";
+    private static final String TAG = CinemanaVideoPlayer.class.getSimpleName();
+    public static final String KEY_VIDEO_FILE = "key_video_file";
+    public static final String KEY_START_POSITION = "key_start_position";
 
-    private static final CookieManager defaultCookieManager;
 
-    static {
-        defaultCookieManager = new CookieManager();
-        defaultCookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ORIGINAL_SERVER);
-    }
+    private static final DefaultBandwidthMeter BANDWIDTH_METER = new DefaultBandwidthMeter();
 
-    private Activity activity;
-    private VideoFile video;
-    private boolean autoplay;
+    private static final long MAX_POSITION_FOR_SEEK_TO_PREVIOUS = 3000;
 
+    protected String userAgent;
+    private VideoFile videoFile;
     private EventLogger eventLogger;
-    private MediaController mediaController;
-    private View shutterView;
-    private AspectRatioFrameLayout videoFrame;
-    private SurfaceView surfaceView;
-    private SubtitleLayout subtitleLayout;
+    private SubtitleView subtitleLayout;
 
-    private CinemanaPlayer player;
-    private boolean playerNeedsPrepare;
+    private int wantedResolution = VideoFile.QUALITY_720P;
 
-    private int wantedResolution = VideoFile.QUALITY_480P;
-    private long playerPosition;
-    private final boolean autoAspectRatio;
-    private boolean enableBackgroundAudio = false;
-
-    private AudioCapabilitiesReceiver audioCapabilitiesReceiver;
 
     LinearLayout qualityTextLL, videoControlsLL, additionalControlsLL;
     ImageView incrementSubs, decrementSubs;
     private float fontScale = 2f;
 
     TextView videoTitle;
-    Button retryButton;
     private ProgressBar circleProgress;
 
+    private Handler mainHandler;
+    private Timeline.Window window;
+    private SimpleExoPlayerView simpleExoPlayerView;
+    private Button retryButton;
 
-    public CinemanaVideoPlayer(Activity activity,
-                               FrameLayout root,
-                               VideoFile video) {
-        this(activity, root, video, true, 0, true);
+    private DataSource.Factory mediaDataSourceFactory;
+    private SimpleExoPlayer player;
+    private MappingTrackSelector trackSelector;
+
+    private boolean playerNeedsSource;
+
+    private boolean shouldAutoPlay;
+    private int playerWindow;
+    private long playerPosition;
+    protected Timer hideOSBarsTimer;
+    protected static final int HIDE_SYSTEM_BARS_DELAY = 2500;
+
+
+    OkHttpClient okHttpClient;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        videoFile = (VideoFile) getIntent().getSerializableExtra(KEY_VIDEO_FILE);
+        playerPosition = getIntent().getLongExtra(KEY_START_POSITION, 0);
+
+        initUi();
+        hideSystemBars();
+
     }
 
-    public CinemanaVideoPlayer(Activity activity,
-                               FrameLayout root,
-                               VideoFile video,
-                               boolean autoplay,
-                               int startPostitionMs,
-                               boolean autoAspectRatio) {
-        this.activity = activity;
-        this.video = video;
-        this.autoplay = autoplay;
-        this.playerPosition = startPostitionMs;
-        this.autoAspectRatio = autoAspectRatio;
+    void initUi() {
 
-        bindView(root);
-    }
+        setContentView(R.layout.player_view_layout);
 
-    private void bindView(FrameLayout oldRoot) {
-        @SuppressLint("InflateParams")
-        View root = activity.getLayoutInflater().inflate(R.layout.player_view_layout, null);
+        userAgent = Util.getUserAgent(this, TAG);
 
-        root.setLayoutParams(oldRoot.getLayoutParams());
-        ViewGroupUtils.replaceView(oldRoot, root);
+        okHttpClient = new OkHttpClient();
+
+        hideOSBarsTimer = new Timer();
+        hideOSBarsTimer.schedule(new HideSystemBarsTask(), HIDE_SYSTEM_BARS_DELAY);
 
 
-        root.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    toggleControlsVisibility();
-                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    view.performClick();
-                }
-                return true;
-            }
-        });
-        root.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_MENU) {
-                    return false;
-                }
-                return mediaController.dispatchKeyEvent(event);
-            }
-        });
+        subtitleLayout = (SubtitleView) findViewById(R.id.subtitles);
 
-        audioCapabilitiesReceiver = new AudioCapabilitiesReceiver(activity.getApplicationContext(),
-                this);
+        qualityTextLL = (LinearLayout) findViewById(R.id.qualityTextLL);
+        videoControlsLL = (LinearLayout) findViewById(R.id.videoControlsLL);
 
-        shutterView = root.findViewById(R.id.shutter);
-
-        videoFrame = (AspectRatioFrameLayout) root.findViewById(R.id.video_frame);
-        surfaceView = (SurfaceView) root.findViewById(R.id.surface_view);
-        surfaceView.getHolder().addCallback(this);
-
-        subtitleLayout = (SubtitleLayout) root.findViewById(R.id.subtitles);
-
-
-        qualityTextLL = (LinearLayout) root.findViewById(R.id.qualityTextLL);
-        videoControlsLL = (LinearLayout) root.findViewById(R.id.videoControlsLL);
-
-        retryButton = (Button) root.findViewById(R.id.retry_button);
+        retryButton = (Button) findViewById(R.id.retry_button);
         retryButton.setOnClickListener(this);
 
-        mediaController = new MediaController(activity);
-        mediaController.setAnchorView(root);
 
-        incrementSubs = (ImageView) root.findViewById(R.id.incrementSubs);
-        decrementSubs = (ImageView) root.findViewById(R.id.decrementSubs);
+        incrementSubs = (ImageView) findViewById(R.id.incrementSubs);
+        decrementSubs = (ImageView) findViewById(R.id.decrementSubs);
 
-        videoTitle = (TextView) root.findViewById(R.id.videoTitle);
+        videoTitle = (TextView) findViewById(R.id.videoTitle);
 
-        videoTitle.setText(video.title);
+        videoTitle.setText(videoFile.title);
 
-        additionalControlsLL = (LinearLayout) root.findViewById(R.id.additionalControlsLL);
+        additionalControlsLL = (LinearLayout) findViewById(R.id.additionalControlsLL);
 
-        circleProgress = (ProgressBar) root.findViewById(R.id.circleProgress);
+        circleProgress = (ProgressBar) findViewById(R.id.circleProgress);
         circleProgress.setAlpha(0.4f);
 
         incrementSubs.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +171,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
                 incrementFontSize();
             }
         });
+
         decrementSubs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,182 +179,169 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
             }
         });
 
-        CookieHandler currentHandler = CookieHandler.getDefault();
-        if (currentHandler != defaultCookieManager) {
-            CookieHandler.setDefault(defaultCookieManager);
-        }
-
-
         configureSubtitleView();
-
-        // The player will be prepared on receiving audio capabilities.
-        audioCapabilitiesReceiver.register();
-        if (player == null) {
-            preparePlayer(autoplay);
-        } else {
-            player.setBackgrounded(player.getBackgrounded());
-        }
+        wantedResolution = videoFile.wantedResolution;
 
 
-        wantedResolution = video.wantedResolution;
+        shouldAutoPlay = true;
+        mediaDataSourceFactory = buildDataSourceFactory(true);
+        mainHandler = new Handler();
+        window = new Timeline.Window();
+
+        Log.i(TAG, "window.getDefaultPositionMs(): " + window.getDefaultPositionMs());
+
+
+        View rootView = findViewById(R.id.root);
+        rootView.setOnClickListener(this);
+
+
+        AspectRatioFrameLayout aspectRatioFrameLayout = (AspectRatioFrameLayout) findViewById(R.id.video_frame);
+        aspectRatioFrameLayout.setOnClickListener(this);
+
+        retryButton = (Button) findViewById(R.id.retry_button);
+        retryButton.setOnClickListener(this);
+
+        simpleExoPlayerView = (SimpleExoPlayerView) findViewById(R.id.player_view);
+        simpleExoPlayerView.setControllerVisibilityListener(this);
+//        simpleExoPlayerView.requestFocus();
 
 
         addQualitiesTextViews();
 
-
-        initializeAndPreparePlayer();
+        initializePlayer();
 
     }
 
 
+    private void hideSystemBars() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+        );
 
-    // adds a control view to the end of videoControlsLL
-    public void addViewControl(View view) {
-        int margin = (int) surfaceView.getContext().getResources().getDimension(R.dimen.side_control_margin);
-        LinearLayout.LayoutParams params =
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(margin, margin, margin, margin); //substitute parameters for left, top, right, bottom
-        view.setLayoutParams(params);
 
-        additionalControlsLL.addView(view);
     }
 
+
+    private void initializePlayer() {
+
+        circleProgress.setVisibility(View.VISIBLE);
+
+
+        if (player == null) {
+
+            eventLogger = new EventLogger();
+            TrackSelection.Factory videoTrackSelectionFactory =
+                    new FixedTrackSelection.Factory();
+            trackSelector = new DefaultTrackSelector(mainHandler, videoTrackSelectionFactory);
+            trackSelector.addListener(this);
+            trackSelector.addListener(eventLogger);
+
+            player = ExoPlayerFactory.newSimpleInstance(this, trackSelector, new DefaultLoadControl());
+            player.addListener(this);
+            player.addListener(eventLogger);
+            player.setAudioDebugListener(eventLogger);
+            player.setVideoDebugListener(eventLogger);
+            player.setId3Output(eventLogger);
+
+            simpleExoPlayerView.setPlayer(player);
+            if (playerPosition == C.TIME_UNSET) {
+                player.seekToDefaultPosition(playerWindow);
+            } else {
+                player.seekTo(playerWindow, playerPosition);
+            }
+
+            player.setPlayWhenReady(shouldAutoPlay);
+            playerNeedsSource = true;
+        }
+        if (playerNeedsSource) {
+            Uri[] uris;
+            String[] extensions;
+
+            List<String> uriStrings = new ArrayList<>();
+
+            for (Map.Entry<Integer, String> entry : videoFile.resolutions.entrySet()) {
+                int key = entry.getKey();
+                String value = entry.getValue();
+                uriStrings.add(value);
+            }
+
+            uris = new Uri[uriStrings.size()];
+            for (int i = 0; i < uriStrings.size(); i++) {
+                uris[i] = Uri.parse(uriStrings.get(i));
+            }
+
+            extensions = new String[uriStrings.size()];
+
+            if (Util.maybeRequestReadExternalStoragePermission(this, uris)) {
+                // The player will be reinitialized if the permission is granted.
+                return;
+            }
+
+            MediaSource[] mediaSources = new MediaSource[uris.length];
+            for (int i = 0; i < uris.length; i++) {
+                mediaSources[i] = buildMediaSource(uris[i], Uri.parse(videoFile.arTranslationFilePath), extensions[i]);
+                Log.i(TAG, "uris[" + i + "]: " + uris[i]);
+            }
+
+            MediaSource mediaSource = mediaSources.length == 1 ? mediaSources[0]
+                    : new ConcatenatingMediaSource(mediaSources);
+
+
+            player.prepare(mediaSource, false, false);
+            playerNeedsSource = false;
+            updateButtonVisibilities();
+        }
+    }
+
+//    // adds a control view to the end of videoControlsLL
+//    public void addViewControl(View view) {
+//        int margin = (int) surfaceView.getContext().getResources().getDimension(R.dimen.side_control_margin);
+//        LinearLayout.LayoutParams params =
+//                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT);
+//        params.setMargins(margin, margin, margin, margin); //substitute parameters for left, top, right, bottom
+//        view.setLayoutParams(params);
+//
+//        additionalControlsLL.addView(view);
+//    }
 
     @Override
     public void onClick(View view) {
-
-
-        Log.i(TAG, "view with id clicked: " + view.getId());
         if (view == retryButton) {
-            initializeAndPreparePlayer();
+            initializePlayer();
         }
+
 
     }
 
-
-    // old Activity lifecycle Must be called in ExoplayerWrapper#activity lifecycle
-
-
-    public void onResume() {
-        configureSubtitleView();
-
-        // The player will be prepared on receiving audio capabilities.
-        audioCapabilitiesReceiver.register();
-        if (player == null) {
-            preparePlayer(autoplay);
-        } else {
-            player.setBackgrounded(false);
-        }
-    }
-
-    public void onPause() {
-        if (!enableBackgroundAudio) {
-            releasePlayer();
-        } else {
-            player.setBackgrounded(true);
-        }
-        shutterView.setVisibility(View.VISIBLE);
-    }
-
-    public void onDestroy() {
-        audioCapabilitiesReceiver.unregister();
-        releasePlayer();
-    }
-
-
-    // AudioCapabilitiesReceiver.Listener methods
-
-    @Override
-    public void onAudioCapabilitiesChanged(AudioCapabilities audioCapabilities) {
-        if (player == null) {
-            return;
-        }
-        boolean playWhenReady = player.getPlayWhenReady();
-        releasePlayer();
-        preparePlayer(playWhenReady);
-        player.setBackgrounded(player.getBackgrounded());
-    }
-
-    // Internal methods
-
-    private CinemanaPlayer.RendererBuilder getRendererBuilder() {
-        String userAgent = Util.getUserAgent(activity, "ExoPlayerDemo");
-        switch (video.videoType) {
-            case VideoFile.SS:
-
-            case VideoFile.DASH:
-                return new DashRendererBuilder(activity, userAgent, video.resolutions.get(wantedResolution),
-                        null);
-            case VideoFile.HLS:
-                return new HlsRendererBuilder(activity, userAgent, video.resolutions.get(wantedResolution));
-            case VideoFile.OTHER:
-                return new ExtractorRendererBuilder(activity, userAgent,
-                        Uri.parse(video.resolutions.get(wantedResolution)), Uri.parse(video.arTranslationFilePath));
-            default:
-                throw new IllegalStateException("Unsupported type: " + video.videoType);
-        }
-    }
-
-    private void preparePlayer(boolean playWhenReady) {
-        if (player == null) {
-            player = new CinemanaPlayer(getRendererBuilder());
-            player.addListener(this);
-            player.seekTo(playerPosition);
-            playerNeedsPrepare = true;
-            player.setBackgrounded(enableBackgroundAudio);
-            mediaController.setMediaPlayer(player.getPlayerControl());
-            mediaController.setEnabled(true);
-            eventLogger = new EventLogger();
-            eventLogger.startSession();
-            player.addListener(eventLogger);
-            player.setInfoListener(eventLogger);
-            player.setCaptionListener(this);
-            player.setInternalErrorListener(eventLogger);
-        }
-        if (playerNeedsPrepare) {
-            player.prepare();
-            playerNeedsPrepare = false;
-        }
-        player.setSurface(surfaceView.getHolder().getSurface());
-        player.setPlayWhenReady(playWhenReady);
-    }
 
     private void releasePlayer() {
         if (player != null) {
-            playerPosition = player.getCurrentPosition();
+            shouldAutoPlay = player.getPlayWhenReady();
+            playerWindow = player.getCurrentWindowIndex();
+            playerPosition = C.TIME_UNSET;
+            Timeline timeline = player.getCurrentTimeline();
+            if (timeline != null && timeline.getWindow(playerWindow, window).isSeekable) {
+                playerPosition = player.getCurrentPosition();
+            }
             player.release();
             player = null;
-            eventLogger.endSession();
+            trackSelector = null;
             eventLogger = null;
         }
     }
 
 
-    public void changeResolution(int wantedResolution) {
-
-        this.wantedResolution = wantedResolution;
-
-        releasePlayer();
-
-        initializeAndPreparePlayer();
-
-    }
-
-
     /**
-     * Pause video playback.
-     */
-    public void pause() {
-        // Set the autoplay for the video surface layer in case the surface hasn't been created yet.
-        // This way, when the surface is created, it won't start playing.
-        player.getPlayerControl().pause();
-    }
-
-    /**
-     * Pause video playback.
+     * Pause videoFile playback.
      */
     public void play() {
-        // Set the autoplay for the video surface layer in case the surface hasn't been created yet.
+        // Set the autoplay for the videoFile surface layer in case the surface hasn't been created yet.
         // This way, when the surface is created, it won't start playing.
         player.setPlayWhenReady(false);
     }
@@ -383,10 +355,17 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
 
     @Override
-    public void onStateChanged(boolean playWhenReady, int playbackState) {
+    public void onLoadingChanged(boolean isLoading) {
+
+    }
+
+    @Override
+    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
         if (playbackState == ExoPlayer.STATE_ENDED) {
             showControls();
         }
+        updateButtonVisibilities();
+
         String text = "playWhenReady=" + playWhenReady + ", playbackState=";
         switch (playbackState) {
             case ExoPlayer.STATE_BUFFERING:
@@ -399,9 +378,6 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
             case ExoPlayer.STATE_IDLE:
                 text += "idle";
                 break;
-            case ExoPlayer.STATE_PREPARING:
-                text += "preparing";
-                break;
             case ExoPlayer.STATE_READY:
                 circleProgress.setVisibility(View.INVISIBLE);
                 text += "ready";
@@ -410,122 +386,131 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
                 text += "unknown";
                 break;
         }
+
         Log.v(TAG, text);
+
+    }
+
+    @Override
+    public void onTimelineChanged(Timeline timeline, Object manifest) {
+
     }
 
 
-
-
     @Override
-    public void onError(Exception e) {
-        if (e instanceof UnsupportedDrmException) {
-            // Special case DRM failures.
-            UnsupportedDrmException unsupportedDrmException = (UnsupportedDrmException) e;
-            int stringId = Util.SDK_INT < 18 ? R.string.drm_error_not_supported
-                    : unsupportedDrmException.reason == UnsupportedDrmException.REASON_UNSUPPORTED_SCHEME
-                    ? R.string.drm_error_unsupported_scheme : R.string.drm_error_unknown;
-            Toast.makeText(activity.getApplicationContext(), stringId, Toast.LENGTH_LONG).show();
+    public void onPlayerError(ExoPlaybackException e) {
+        String errorString = null;
+        if (e.type == ExoPlaybackException.TYPE_RENDERER) {
+            Exception cause = e.getRendererException();
+            if (cause instanceof MediaCodecRenderer.DecoderInitializationException) {
+                // Special case for decoder initialization failures.
+                MediaCodecRenderer.DecoderInitializationException decoderInitializationException =
+                        (MediaCodecRenderer.DecoderInitializationException) cause;
+                if (decoderInitializationException.decoderName == null) {
+                    if (decoderInitializationException.getCause() instanceof MediaCodecUtil.DecoderQueryException) {
+                        errorString = getString(R.string.error_querying_decoders);
+                    } else if (decoderInitializationException.secureDecoderRequired) {
+                        errorString = getString(R.string.error_no_secure_decoder,
+                                decoderInitializationException.mimeType);
+                    } else {
+                        errorString = getString(R.string.error_no_decoder,
+                                decoderInitializationException.mimeType);
+                    }
+                } else {
+                    errorString = getString(R.string.error_instantiating_decoder,
+                            decoderInitializationException.decoderName);
+                }
+            }
         }
-        playerNeedsPrepare = true;
+        if (errorString != null) {
+            showToast(errorString);
+        }
+        playerNeedsSource = true;
+        updateButtonVisibilities();
         showControls();
     }
 
     @Override
-    public void onVideoSizeChanged(int width, int height, int unappliedRotationDegrees,
-                                   float pixelWidthHeightRatio) {
-        shutterView.setVisibility(View.GONE);
-        if (autoAspectRatio) {
-            videoFrame.setAspectRatio(
-                    height == 0 ? 1 : (width * pixelWidthHeightRatio) / height);
-        }
+    public void onPositionDiscontinuity() {
+
     }
 
-    // User controls
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-    private void toggleControlsVisibility() {
-        if (mediaController.isShowing()) {
-            hideControls();
-        } else {
-            showControls();
+        if (null != hideOSBarsTimer) {
+            hideOSBarsTimer.cancel();
         }
+
+
+        player.stop();
+
+        releasePlayer();
     }
+
 
     private void hideControls() {
         videoControlsLL.setVisibility(View.GONE);
         qualityTextLL.setVisibility(View.GONE);
         videoTitle.setVisibility(View.GONE);
         additionalControlsLL.setVisibility(View.GONE);
-        mediaController.hide();
-
     }
 
     private void showControls() {
-        retryButton.setVisibility(playerNeedsPrepare ? View.VISIBLE : View.GONE);
+        retryButton.setVisibility(View.VISIBLE);
 
         videoControlsLL.setVisibility(View.VISIBLE);
         qualityTextLL.setVisibility(View.VISIBLE);
         videoTitle.setVisibility(View.VISIBLE);
         additionalControlsLL.setVisibility(View.VISIBLE);
-        mediaController.show(0);
     }
 
-    // ExoplayerWrapper.CaptionListener implementation
 
-    @Override
-    public void onCues(List<Cue> cues) {
-        subtitleLayout.setCues(cues);
-    }
+    private void updateButtonVisibilities() {
+        retryButton.setVisibility(playerNeedsSource ? View.VISIBLE : View.GONE);
 
-    // ExoplayerWrapper.MetadataListener implementation
+        if (player == null) {
+            return;
+        }
 
-    @Override
-    public void onId3Metadata(Map<String, Object> metadata) {
-        for (Map.Entry<String, Object> entry : metadata.entrySet()) {
-            if (TxxxMetadata.TYPE.equals(entry.getKey())) {
-                TxxxMetadata txxxMetadata = (TxxxMetadata) entry.getValue();
-                Log.i(TAG, String.format("ID3 TimedMetadata %s: description=%s, value=%s",
-                        TxxxMetadata.TYPE, txxxMetadata.description, txxxMetadata.value));
-            } else if (PrivMetadata.TYPE.equals(entry.getKey())) {
-                PrivMetadata privMetadata = (PrivMetadata) entry.getValue();
-                Log.i(TAG, String.format("ID3 TimedMetadata %s: owner=%s",
-                        PrivMetadata.TYPE, privMetadata.owner));
-            } else if (GeobMetadata.TYPE.equals(entry.getKey())) {
-                GeobMetadata geobMetadata = (GeobMetadata) entry.getValue();
-                Log.i(TAG, String.format("ID3 TimedMetadata %s: mimeType=%s, filename=%s, " +
-                                "description=%s",
-                        GeobMetadata.TYPE, geobMetadata.mimeType, geobMetadata.filename,
-                        geobMetadata.description));
-            } else {
-                Log.i(TAG, String.format("ID3 TimedMetadata %s", entry.getKey()));
+        TrackSelections<MappingTrackSelector.MappedTrackInfo>
+                trackSelections = trackSelector.getCurrentSelections();
+        if (trackSelections == null) {
+            return;
+        }
+
+        int rendererCount = trackSelections.length;
+        for (int i = 0; i < rendererCount; i++) {
+            TrackGroupArray trackGroups = trackSelections.info.getTrackGroups(i);
+            if (trackGroups.length != 0) {
+                Button button = new Button(this);
+                int label;
+                switch (player.getRendererType(i)) {
+                    case C.TRACK_TYPE_AUDIO:
+                        label = R.string.audio;
+                        break;
+                    case C.TRACK_TYPE_VIDEO:
+                        label = R.string.video;
+                        break;
+                    case C.TRACK_TYPE_TEXT:
+                        label = R.string.text;
+                        break;
+                    default:
+                        continue;
+                }
+                button.setText(label);
+                button.setTag(i);
+                button.setOnClickListener(this);
             }
         }
     }
 
-    // SurfaceHolder.Callback implementation
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        if (player != null) {
-            player.setSurface(holder.getSurface());
-        }
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        // Do nothing.
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        if (player != null) {
-            player.blockingClearSurface();
-        }
-    }
 
     private void configureSubtitleView() {
         int defaultSubtitleColor = Color.argb(255, 218, 218, 218);
         int outlineColor = Color.argb(255, 43, 43, 43);
-        Typeface subtitleTypeface = Typeface.createFromAsset(surfaceView.getContext().getAssets(), "fonts/Abdo-Line.otf");
+        Typeface subtitleTypeface = Typeface.createFromAsset(getAssets(), "fonts/Abdo-Line.otf");
         CaptionStyleCompat style =
                 new CaptionStyleCompat(defaultSubtitleColor,
                         Color.TRANSPARENT, Color.TRANSPARENT,
@@ -533,64 +518,51 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
                         outlineColor, subtitleTypeface);
 
         subtitleLayout.setStyle(style);
-        subtitleLayout.setFractionalTextSize(SubtitleLayout.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
-    }
-
-    private void initializeAndPreparePlayer() {
-        circleProgress.setVisibility(View.VISIBLE);
-
-        if (player == null) {
-            preparePlayer(true);
-        } else {
-            player.setBackgrounded(player.getBackgrounded());
-        }
+        subtitleLayout.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
     }
 
 
     private void decrementFontSize() {
         fontScale = Math.max(fontScale / 1.05f, 0.5f);
-        subtitleLayout.setFractionalTextSize(SubtitleLayout.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
+        subtitleLayout.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
 
         Log.i(TAG, "fontScale: " + fontScale);
-
     }
 
     private void incrementFontSize() {
 
         fontScale = Math.min(fontScale * 1.05f, 3f);
-        subtitleLayout.setFractionalTextSize(SubtitleLayout.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
+        subtitleLayout.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
 
         Log.i(TAG, "fontScale: " + fontScale);
-
     }
 
     private void addQualitiesTextViews() {
-
-        Context context = surfaceView.getContext();
         Log.i(TAG, "adding quality TextViews");
 
-        Switch videoFormatSwitch = new Switch(context);
-        videoFormatSwitch.setLayoutParams(
-                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT));
+//        Switch videoFormatSwitch = new Switch(this);
+//        videoFormatSwitch.setLayoutParams(
+//                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT));
 
-
-        for (int quality : video.resolutions.keySet()) {
-            TextView qualityTextView = new TextView(context);
+        int i = 0;
+        for (int quality : videoFile.resolutions.keySet()) {
+            TextView qualityTextView = new TextView(this);
             String qualityText = VideoFile.getQualityString(quality);    // spaces before and after the text, e.g., 720p,
             // to have a space when its background border is active
             qualityTextView.setText(qualityText);
 
-            qualityTextView.setTag(video.resolutions.get(quality)); // the url link
+            qualityTextView.setTag(videoFile.resolutions.get(quality)); // the url link
+            qualityTextView.setTag(-101, i++);
 
             qualityTextView.setOnClickListener(qualityChangeListener);
 
             if (wantedResolution == quality) {
                 setQualityTextStyle(qualityTextView, true, false);
-
             } else {
                 setQualityTextStyle(qualityTextView, false, false);
             }
+
             qualityTextLL.addView(qualityTextView);
         }
 
@@ -603,17 +575,37 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
             for (int i = 0; i < qualityTextLL.getChildCount(); i++) {
                 TextView qualityTextView = (TextView) qualityTextLL.getChildAt(i);
                 setQualityTextStyle(qualityTextView, false, true);
-
             }
+
             setQualityTextStyle((TextView) view, true, true);
 
             wantedResolution = VideoFile.getQualityIndex((String) ((TextView) view).getText());
 
 
             Log.i(TAG, "will change to resolution " + VideoFile.getQualityString(wantedResolution));
-            changeResolution(wantedResolution);
+            changeResolution(wantedResolution, (int) view.getTag(-101));
         }
     };
+
+    public void changeResolution(int wantedResolution, int position) {
+        this.wantedResolution = wantedResolution;
+
+        Timeline currentTimeline = player.getCurrentTimeline();
+        if (currentTimeline == null) {
+            return;
+        }
+        int currentWindowIndex = player.getCurrentWindowIndex();
+        Log.i(TAG, "position: " + position);
+        Log.i(TAG, "player.getCurrentWindowIndex(): " + player.getCurrentWindowIndex());
+
+        if (currentWindowIndex < currentTimeline.getWindowCount() - 1) {
+//            Log.i(TAG, "will change window to " + (currentWindowIndex + 1));
+//            player.seekToDefaultPosition(currentWindowIndex + 1);
+            player.seekToDefaultPosition(position);
+        } else if (currentTimeline.getWindow(currentWindowIndex, window, false).isDynamic) {
+            player.seekToDefaultPosition();
+        }
+    }
 
 
     private void setQualityTextStyle(TextView qualityTextView, boolean active, boolean onlyBoldAndColor) {
@@ -622,7 +614,7 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
         if (!onlyBoldAndColor) {
             float qualityTextSize =
-                    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 20, surfaceView.getContext().getResources().getDisplayMetrics());
+                    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 20, getResources().getDisplayMetrics());
 
 
             LinearLayout.LayoutParams qualityTextViewsMargins = new LinearLayout.LayoutParams(
@@ -640,13 +632,114 @@ public class CinemanaVideoPlayer implements SurfaceHolder.Callback,
 
 
         if (active) {
-            qualityTextView.setTextColor(surfaceView.getContext().getResources().getColor(R.color.selectedQuality));
+            qualityTextView.setTextColor(getResources().getColor(R.color.selectedQuality));
 //            qualityTextView.setBackgroundResource(R.drawable.video_rounded_frame);
             qualityTextView.setTypeface(null, Typeface.BOLD);
         } else {
-            qualityTextView.setTextColor(surfaceView.getContext().getResources().getColor(R.color.unselectedQuality));
+            qualityTextView.setTextColor(getResources().getColor(R.color.unselectedQuality));
 //            qualityTextView.setBackground(null);
-            qualityTextView.setTypeface(null,Typeface.NORMAL);
+            qualityTextView.setTypeface(null, Typeface.NORMAL);
+        }
+    }
+
+
+    private DataSource.Factory buildDataSourceFactory(boolean useBandwidthMeter) {
+        return buildDataSourceFactory(useBandwidthMeter ? BANDWIDTH_METER : null);
+    }
+
+
+    DataSource.Factory buildDataSourceFactory(DefaultBandwidthMeter bandwidthMeter) {
+        return new OkHttpDataSourceFactory(okHttpClient, userAgent, bandwidthMeter);
+    }
+
+
+
+    private MediaSource buildMediaSource(Uri uri, Uri subtitleUri, String overrideExtension) {
+        int type = Util.inferContentType(!TextUtils.isEmpty(overrideExtension) ? "." + overrideExtension
+                : uri.getLastPathSegment());
+        switch (type) {
+            case C.TYPE_SS:
+                return new SsMediaSource(uri, buildDataSourceFactory(false),
+                        new DefaultSsChunkSource.Factory(mediaDataSourceFactory), mainHandler, eventLogger);
+            case C.TYPE_DASH:
+                return new DashMediaSource(uri, buildDataSourceFactory(false),
+                        new DefaultDashChunkSource.Factory(mediaDataSourceFactory), mainHandler, eventLogger);
+            case C.TYPE_HLS:
+                return new HlsMediaSource(uri, mediaDataSourceFactory, mainHandler, eventLogger);
+            case C.TYPE_OTHER:
+                Log.i(TAG, "C.TYPE_OTHER");
+
+                Format textFormat = Format.createTextSampleFormat(null, MimeTypes.APPLICATION_SUBRIP,
+                        null, Format.NO_VALUE, Format.NO_VALUE, "ar", null);
+
+
+                MediaSource subtitleSource =
+                        new SingleSampleMediaSource(subtitleUri,
+                                mediaDataSourceFactory, textFormat, C.TIME_UNSET);
+
+                ExtractorMediaSource extractorMediaSource =
+                        new ExtractorMediaSource(uri, mediaDataSourceFactory, new DefaultExtractorsFactory(),
+                                mainHandler, eventLogger);
+                return new MergingMediaSource(extractorMediaSource, subtitleSource);
+
+
+            default: {
+                throw new IllegalStateException("Unsupported type: " + type);
+            }
+        }
+    }
+
+
+    @Override
+    public void onTrackSelectionsChanged(TrackSelections<?
+            extends MappingTrackSelector.MappedTrackInfo> trackSelections) {
+        updateButtonVisibilities();
+        MappingTrackSelector.MappedTrackInfo trackInfo = trackSelections.info;
+        if (trackInfo.hasOnlyUnplayableTracks(C.TRACK_TYPE_VIDEO)) {
+            showToast(R.string.error_unsupported_video);
+        }
+        if (trackInfo.hasOnlyUnplayableTracks(C.TRACK_TYPE_AUDIO)) {
+            showToast(R.string.error_unsupported_audio);
+        }
+    }
+
+    @Override
+    public void onVisibilityChange(int visibility) {
+        Log.i(TAG, "visibility changed...");
+
+        hideOSBarsTimer = new Timer();
+        hideOSBarsTimer.schedule(new HideSystemBarsTask(), HIDE_SYSTEM_BARS_DELAY);
+
+    }
+
+    @Override
+    public void onCues(List<Cue> cues) {
+        subtitleLayout.setCues(cues);
+
+        Log.i(TAG, "calling onCues...");
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    private void showToast(int messageId) {
+        showToast(getString(messageId));
+    }
+
+
+
+    private class HideSystemBarsTask extends TimerTask {
+        @Override
+        public void run() {
+            Log.i(TAG, "will hide system bars");
+
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    hideSystemBars();
+                }
+            });
         }
     }
 }

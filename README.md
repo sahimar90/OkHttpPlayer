@@ -10,7 +10,7 @@ API
 
 
 where:
-<li> **playerFL**: A `FrameLayout` to be usesd as the container of the video player.
+<li> **playerFL**: A `FrameLayout` to be usesd as the container of the videoFile player.
 <li> **videoFile**: A data structure that has a `HashMap` containing a resolution and its url link.
 arTranslationFilePath is the url link of the subtitle as an `srt` format.
 

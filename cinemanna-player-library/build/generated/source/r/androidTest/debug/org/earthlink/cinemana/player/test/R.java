@@ -14,70 +14,206 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int color1=0x7f010000;
+        public static final int color1=0x7f010004;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int color2=0x7f010001;
+        public static final int color2=0x7f010005;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int color3=0x7f010002;
+        public static final int color3=0x7f010006;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int fastforward_increment=0x7f010000;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>fit</code></td><td>0</td><td></td></tr>
+<tr><td><code>fixed_width</code></td><td>1</td><td></td></tr>
+<tr><td><code>fixed_height</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int resize_mode=0x7f010001;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int rewind_increment=0x7f010002;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int show_timeout=0x7f010003;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int use_controller=0x7f010007;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int use_texture_view=0x7f010008;
     }
     public static final class color {
-        public static final int jumbo=0x7f040000;
-        public static final int malibu=0x7f040001;
-        public static final int selectedQuality=0x7f040002;
-        public static final int unselectedQuality=0x7f040003;
+        public static final int jumbo=0x7f060000;
+        public static final int malibu=0x7f060001;
+        public static final int selectedQuality=0x7f060002;
+        public static final int unselectedQuality=0x7f060003;
     }
     public static final class dimen {
-        public static final int default_circle_view_size=0x7f050000;
-        public static final int side_control_margin=0x7f050001;
-        public static final int side_quality_ll_margin=0x7f050002;
+        public static final int default_circle_view_size=0x7f070000;
+        public static final int side_control_margin=0x7f070001;
+        public static final int side_quality_ll_margin=0x7f070002;
+    }
+    public static final class drawable {
+        public static final int exo_controls_fastforward=0x7f020000;
+        public static final int exo_controls_next=0x7f020001;
+        public static final int exo_controls_pause=0x7f020002;
+        public static final int exo_controls_play=0x7f020003;
+        public static final int exo_controls_previous=0x7f020004;
+        public static final int exo_controls_rewind=0x7f020005;
     }
     public static final class id {
-        public static final int additionalControlsLL=0x7f080008;
-        public static final int circleProgress=0x7f08000b;
-        public static final int decrementSubs=0x7f08000a;
-        public static final int incrementSubs=0x7f080009;
-        public static final int qualityTextLL=0x7f080005;
-        public static final int retry_button=0x7f08000c;
-        public static final int root=0x7f080000;
-        public static final int shutter=0x7f080003;
-        public static final int subtitles=0x7f080004;
-        public static final int surface_view=0x7f080002;
-        public static final int videoControlsLL=0x7f080007;
-        public static final int videoTitle=0x7f080006;
-        public static final int video_frame=0x7f080001;
+        public static final int additionalControlsLL=0x7f090014;
+        public static final int circleProgress=0x7f090017;
+        public static final int control=0x7f09000e;
+        public static final int decrementSubs=0x7f090016;
+        public static final int ffwd=0x7f090006;
+        public static final int fit=0x7f090000;
+        public static final int fixed_height=0x7f090001;
+        public static final int fixed_width=0x7f090002;
+        public static final int incrementSubs=0x7f090015;
+        public static final int mediacontroller_progress=0x7f090009;
+        public static final int next=0x7f090007;
+        public static final int play=0x7f090005;
+        public static final int player_view=0x7f090010;
+        public static final int prev=0x7f090003;
+        public static final int qualityTextLL=0x7f090011;
+        public static final int retry_button=0x7f090018;
+        public static final int rew=0x7f090004;
+        public static final int root=0x7f09000f;
+        public static final int shutter=0x7f09000c;
+        public static final int subtitles=0x7f09000d;
+        public static final int time=0x7f09000a;
+        public static final int time_current=0x7f090008;
+        public static final int videoControlsLL=0x7f090013;
+        public static final int videoTitle=0x7f090012;
+        public static final int video_frame=0x7f09000b;
     }
     public static final class layout {
-        public static final int fullscreen_imageview=0x7f030000;
-        public static final int player_view_layout=0x7f030001;
+        public static final int exo_playback_control_view=0x7f040000;
+        public static final int exo_simple_player_view=0x7f040001;
+        public static final int fullscreen_imageview=0x7f040002;
+        public static final int player_view_layout=0x7f040003;
     }
     public static final class mipmap {
-        public static final int full_screen5=0x7f020000;
-        public static final int retry_icon=0x7f020001;
-        public static final int subtitle_decrement=0x7f020002;
-        public static final int subtitle_decrement2=0x7f020003;
-        public static final int subtitle_decrement3=0x7f020004;
-        public static final int subtitle_decrement4=0x7f020005;
-        public static final int subtitle_increment3=0x7f020006;
-        public static final int subtitle_increment4=0x7f020007;
+        public static final int full_screen5=0x7f030000;
+        public static final int retry_icon=0x7f030001;
+        public static final int subtitle_decrement=0x7f030002;
+        public static final int subtitle_decrement2=0x7f030003;
+        public static final int subtitle_decrement3=0x7f030004;
+        public static final int subtitle_decrement4=0x7f030005;
+        public static final int subtitle_increment3=0x7f030006;
+        public static final int subtitle_increment4=0x7f030007;
     }
     public static final class string {
-        public static final int drm_error_not_supported=0x7f060000;
-        public static final int drm_error_unknown=0x7f060001;
-        public static final int drm_error_unsupported_scheme=0x7f060002;
-        public static final int failed=0x7f060003;
+        public static final int audio=0x7f050007;
+        public static final int drm_error_not_supported=0x7f050008;
+        public static final int drm_error_unknown=0x7f050009;
+        public static final int drm_error_unsupported_scheme=0x7f05000a;
+        public static final int enable_random_adaptation=0x7f05000b;
+        public static final int error_drm_not_supported=0x7f05000c;
+        public static final int error_drm_unknown=0x7f05000d;
+        public static final int error_drm_unsupported_scheme=0x7f05000e;
+        public static final int error_instantiating_decoder=0x7f05000f;
+        public static final int error_no_decoder=0x7f050010;
+        public static final int error_no_secure_decoder=0x7f050011;
+        public static final int error_querying_decoders=0x7f050012;
+        public static final int error_unsupported_audio=0x7f050013;
+        public static final int error_unsupported_video=0x7f050014;
+        public static final int exo_controls_fastforward_description=0x7f050000;
+        public static final int exo_controls_next_description=0x7f050001;
+        public static final int exo_controls_pause_description=0x7f050002;
+        public static final int exo_controls_play_description=0x7f050003;
+        public static final int exo_controls_previous_description=0x7f050004;
+        public static final int exo_controls_rewind_description=0x7f050005;
+        public static final int exo_controls_stop_description=0x7f050006;
+        public static final int failed=0x7f050015;
+        public static final int sample_list_load_error=0x7f050016;
+        public static final int selection_default=0x7f050017;
+        public static final int selection_default_none=0x7f050018;
+        public static final int selection_disabled=0x7f050019;
+        public static final int storage_permission_denied=0x7f05001a;
+        public static final int text=0x7f05001b;
+        public static final int unexpected_intent_action=0x7f05001c;
+        public static final int video=0x7f05001d;
     }
     public static final class style {
-        public static final int qualityTextsStyle=0x7f070000;
+        public static final int ExoMediaButton=0x7f080000;
+        public static final int ExoMediaButton_FastForward=0x7f080001;
+        public static final int ExoMediaButton_Next=0x7f080002;
+        public static final int ExoMediaButton_Previous=0x7f080003;
+        public static final int ExoMediaButton_Rewind=0x7f080004;
+        public static final int qualityTextsStyle=0x7f080005;
     }
     public static final class styleable {
+        /** Attributes that can be used with a AspectRatioFrameLayout.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #AspectRatioFrameLayout_resize_mode org.earthlink.cinemana.player.test:resize_mode}</code></td><td></td></tr>
+           </table>
+           @see #AspectRatioFrameLayout_resize_mode
+         */
+        public static final int[] AspectRatioFrameLayout = {
+            0x7f010001
+        };
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#resize_mode}
+          attribute's value can be found in the {@link #AspectRatioFrameLayout} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>fit</code></td><td>0</td><td></td></tr>
+<tr><td><code>fixed_width</code></td><td>1</td><td></td></tr>
+<tr><td><code>fixed_height</code></td><td>2</td><td></td></tr>
+</table>
+          @attr name org.earthlink.cinemana.player.test:resize_mode
+        */
+        public static final int AspectRatioFrameLayout_resize_mode = 0;
         /** Attributes that can be used with a CircleProgress.
            <p>Includes the following attributes:</p>
            <table>
@@ -93,7 +229,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            @see #CircleProgress_color3
          */
         public static final int[] CircleProgress = {
-            0x7f010000, 0x7f010001, 0x7f010002
+            0x7f010004, 0x7f010005, 0x7f010006
         };
         /**
           <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#color1}
@@ -131,5 +267,176 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name org.earthlink.cinemana.player.test:color3
         */
         public static final int CircleProgress_color3 = 2;
+        /** Attributes that can be used with a PlaybackControlView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #PlaybackControlView_fastforward_increment org.earthlink.cinemana.player.test:fastforward_increment}</code></td><td></td></tr>
+           <tr><td><code>{@link #PlaybackControlView_rewind_increment org.earthlink.cinemana.player.test:rewind_increment}</code></td><td></td></tr>
+           <tr><td><code>{@link #PlaybackControlView_show_timeout org.earthlink.cinemana.player.test:show_timeout}</code></td><td></td></tr>
+           </table>
+           @see #PlaybackControlView_fastforward_increment
+           @see #PlaybackControlView_rewind_increment
+           @see #PlaybackControlView_show_timeout
+         */
+        public static final int[] PlaybackControlView = {
+            0x7f010000, 0x7f010002, 0x7f010003
+        };
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#fastforward_increment}
+          attribute's value can be found in the {@link #PlaybackControlView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player.test:fastforward_increment
+        */
+        public static final int PlaybackControlView_fastforward_increment = 0;
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#rewind_increment}
+          attribute's value can be found in the {@link #PlaybackControlView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player.test:rewind_increment
+        */
+        public static final int PlaybackControlView_rewind_increment = 1;
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#show_timeout}
+          attribute's value can be found in the {@link #PlaybackControlView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player.test:show_timeout
+        */
+        public static final int PlaybackControlView_show_timeout = 2;
+        /** Attributes that can be used with a SimpleExoPlayerView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SimpleExoPlayerView_fastforward_increment org.earthlink.cinemana.player.test:fastforward_increment}</code></td><td></td></tr>
+           <tr><td><code>{@link #SimpleExoPlayerView_resize_mode org.earthlink.cinemana.player.test:resize_mode}</code></td><td></td></tr>
+           <tr><td><code>{@link #SimpleExoPlayerView_rewind_increment org.earthlink.cinemana.player.test:rewind_increment}</code></td><td></td></tr>
+           <tr><td><code>{@link #SimpleExoPlayerView_show_timeout org.earthlink.cinemana.player.test:show_timeout}</code></td><td></td></tr>
+           <tr><td><code>{@link #SimpleExoPlayerView_use_controller org.earthlink.cinemana.player.test:use_controller}</code></td><td></td></tr>
+           <tr><td><code>{@link #SimpleExoPlayerView_use_texture_view org.earthlink.cinemana.player.test:use_texture_view}</code></td><td></td></tr>
+           </table>
+           @see #SimpleExoPlayerView_fastforward_increment
+           @see #SimpleExoPlayerView_resize_mode
+           @see #SimpleExoPlayerView_rewind_increment
+           @see #SimpleExoPlayerView_show_timeout
+           @see #SimpleExoPlayerView_use_controller
+           @see #SimpleExoPlayerView_use_texture_view
+         */
+        public static final int[] SimpleExoPlayerView = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010007, 0x7f010008
+        };
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#fastforward_increment}
+          attribute's value can be found in the {@link #SimpleExoPlayerView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player.test:fastforward_increment
+        */
+        public static final int SimpleExoPlayerView_fastforward_increment = 0;
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#resize_mode}
+          attribute's value can be found in the {@link #SimpleExoPlayerView} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>fit</code></td><td>0</td><td></td></tr>
+<tr><td><code>fixed_width</code></td><td>1</td><td></td></tr>
+<tr><td><code>fixed_height</code></td><td>2</td><td></td></tr>
+</table>
+          @attr name org.earthlink.cinemana.player.test:resize_mode
+        */
+        public static final int SimpleExoPlayerView_resize_mode = 1;
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#rewind_increment}
+          attribute's value can be found in the {@link #SimpleExoPlayerView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player.test:rewind_increment
+        */
+        public static final int SimpleExoPlayerView_rewind_increment = 2;
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#show_timeout}
+          attribute's value can be found in the {@link #SimpleExoPlayerView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player.test:show_timeout
+        */
+        public static final int SimpleExoPlayerView_show_timeout = 3;
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#use_controller}
+          attribute's value can be found in the {@link #SimpleExoPlayerView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player.test:use_controller
+        */
+        public static final int SimpleExoPlayerView_use_controller = 4;
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.test.R.attr#use_texture_view}
+          attribute's value can be found in the {@link #SimpleExoPlayerView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player.test:use_texture_view
+        */
+        public static final int SimpleExoPlayerView_use_texture_view = 5;
     };
 }

@@ -20,12 +20,12 @@
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/mipmap-xhdpi-v4/subtitle_decrement.png"
     },
     {
-        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/mipmap-xhdpi-v4/subtitle_decrement3.png",
-        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/mipmap-xhdpi-v4/subtitle_decrement3.png"
-    },
-    {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/mipmap-xhdpi-v4/subtitle_decrement2.png",
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/mipmap-xhdpi-v4/subtitle_decrement2.png"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/mipmap-xhdpi-v4/subtitle_decrement3.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/mipmap-xhdpi-v4/subtitle_decrement3.png"
     },
     {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/mipmap-xhdpi-v4/subtitle_increment4.png",

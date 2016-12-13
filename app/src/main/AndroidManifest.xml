@@ -18,6 +18,12 @@ package="org.cinemana.player.app.demo" >
             <category android:name="android.intent.category.LAUNCHER"/>
         </intent-filter>
     </activity>
+
+
+    <activity android:name="org.earthlink.cinemana.player.CinemanaVideoPlayer"
+        android:configChanges="orientation|screenSize|keyboardHidden"
+        />
+
 </application>
 
 </manifest>

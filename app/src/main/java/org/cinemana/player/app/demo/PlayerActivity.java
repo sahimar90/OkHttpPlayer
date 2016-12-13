@@ -1,6 +1,7 @@
 package org.cinemana.player.app.demo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -38,7 +38,6 @@ public class PlayerActivity extends FragmentActivity {
 
     LinearLayout mainLL;
 
-    private CinemanaVideoPlayer cinemanaVideoPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +46,17 @@ public class PlayerActivity extends FragmentActivity {
         setContentView(R.layout.activity_player);
 
         mainLL = (LinearLayout) findViewById(R.id.mainLL);
-        getTranscodedFiles("10847");
+        getTranscodedFiles("4100");
     }
 
 
 
-    private void startCinemanaPlayer(FrameLayout playerFL, VideoFile videoFile) {
-        cinemanaVideoPlayer = new CinemanaVideoPlayer(this, playerFL, videoFile);
+    private void startCinemanaPlayer(VideoFile videoFile) {
+        Intent i = new Intent(this, CinemanaVideoPlayer.class);
+        i.putExtra(CinemanaVideoPlayer.KEY_VIDEO_FILE, videoFile);
+        i.putExtra(CinemanaVideoPlayer.KEY_START_POSITION, 0);
 
-        cinemanaVideoPlayer.addViewControl(getFullscreenIV());
+        startActivity(i);
     }
 
 
@@ -82,12 +83,11 @@ public class PlayerActivity extends FragmentActivity {
                     videoFile.title = response.optString("en_title");
                     videoFile.id = response.optString("nb");
 
-                    videoFile.wantedResolution = VideoFile.QUALITY_480P;
+                    videoFile.wantedResolution = VideoFile.QUALITY_720P;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            FrameLayout root = (FrameLayout) findViewById(R.id.root_view);
-                            startCinemanaPlayer(root, videoFile);
+                            startCinemanaPlayer(videoFile);
                         }
                     });
 
@@ -99,7 +99,6 @@ public class PlayerActivity extends FragmentActivity {
         };
 
         getResponse(allVideoInfo_URL + videoId, callback);
-
     }
 
 
@@ -155,39 +154,36 @@ public class PlayerActivity extends FragmentActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                JSONArray transcodedFiles = null;
-                if (this != null) {
-                    try {
-                        transcodedFiles = new JSONArray(response.body().string());
-                        for (int i = 0; i < transcodedFiles.length(); i++) {
-                            JSONObject transcodedFileObj = transcodedFiles.getJSONObject(i);
+                JSONArray transcodedFiles;
+                try {
+                    transcodedFiles = new JSONArray(response.body().string());
+                    for (int i = 0; i < transcodedFiles.length(); i++) {
+                        JSONObject transcodedFileObj = transcodedFiles.getJSONObject(i);
 
-                            if (transcodedFileObj.optString("container").contains("mp4")) {
-                                switch (transcodedFileObj.optString("resolution")) {
-                                    case "240p":
-                                        videoFile.resolutions.put(VideoFile.QUALITY_240P ,transcodedFileObj.optString("videoUrl"));
-                                        break;
-                                    case "360p":
-                                        videoFile.resolutions.put(VideoFile.QUALITY_360P ,transcodedFileObj.optString("videoUrl"));
-                                        break;
-                                    case "480p":
-                                        videoFile.resolutions.put(VideoFile.QUALITY_480P ,transcodedFileObj.optString("videoUrl"));
-                                        break;
-                                    case "720p":
-                                        videoFile.resolutions.put(VideoFile.QUALITY_720P ,transcodedFileObj.optString("videoUrl"));
-                                        break;
-                                }
-
+                        if (transcodedFileObj.optString("container").contains("mp4")) {
+                            switch (transcodedFileObj.optString("resolution")) {
+                                case "240p":
+                                    videoFile.resolutions.put(VideoFile.QUALITY_240P ,transcodedFileObj.optString("videoUrl"));
+                                    break;
+                                case "360p":
+                                    videoFile.resolutions.put(VideoFile.QUALITY_360P ,transcodedFileObj.optString("videoUrl"));
+                                    break;
+                                case "480p":
+                                    videoFile.resolutions.put(VideoFile.QUALITY_480P ,transcodedFileObj.optString("videoUrl"));
+                                    break;
+                                case "720p":
+                                    videoFile.resolutions.put(VideoFile.QUALITY_720P ,transcodedFileObj.optString("videoUrl"));
+                                    break;
                             }
-                        }   // finished setting transcoded files
+                        }
+                    }   // finished setting transcoded files
 
 
-                        getSrtLink(videoId);
+                    getSrtLink(videoId);
 
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
 
@@ -206,26 +202,6 @@ public class PlayerActivity extends FragmentActivity {
 
         OkHttpClient client = new OkHttpClient();
         client.newCall(request).enqueue(callback);
-    }
-
-    //Call the three lifecycle methods
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (cinemanaVideoPlayer != null) cinemanaVideoPlayer.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (cinemanaVideoPlayer != null) cinemanaVideoPlayer.onDestroy();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (cinemanaVideoPlayer != null) cinemanaVideoPlayer.onResume();
     }
 
     @Override

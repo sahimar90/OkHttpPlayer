@@ -1,11 +1,12 @@
 package org.earthlink.cinemana.player;
 
+import java.io.Serializable;
 import java.util.TreeMap;
 
 /**
  * Created by bluemix on 1/26/16.
  */
-public class VideoFile {
+public class VideoFile implements Serializable {
 
     public static final int QUALITY_720P = -3;
     public static final int QUALITY_480P = -2;
@@ -41,7 +42,6 @@ public class VideoFile {
                 return "240p";
             default:
                 return String.valueOf(QUALITY_240P);
-
         }
 
     }

@@ -8,18 +8,12 @@
     android:layoutDirection="ltr">
 
 
-    <com.google.android.exoplayer.AspectRatioFrameLayout
+    <com.google.android.exoplayer2.ui.AspectRatioFrameLayout
         android:id="@+id/video_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_gravity="center">
-
-        <SurfaceView
-            android:id="@+id/surface_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
 
         <View
             android:id="@+id/shutter"
@@ -27,21 +21,29 @@
             android:layout_height="match_parent"
             android:background="@android:color/black" />
 
-        <com.google.android.exoplayer.text.SubtitleLayout
+
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true" />
+
+
+        <com.google.android.exoplayer2.ui.SubtitleView
             android:id="@+id/subtitles"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </com.google.android.exoplayer.AspectRatioFrameLayout>
+    </com.google.android.exoplayer2.ui.AspectRatioFrameLayout>
 
 
     <LinearLayout
         android:id="@+id/qualityTextLL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|top|center_vertical"
-        android:layout_below="@+id/videoTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/videoTitle"
+        android:layout_gravity="start|top|center_vertical"
         android:layout_margin="@dimen/side_quality_ll_margin"
         android:layoutDirection="rtl"
         android:orientation="vertical">
@@ -52,13 +54,13 @@
         android:id="@+id/videoControlsLL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/additionalControlsLL"
         android:layout_gravity="end|center_vertical"
         android:gravity="end"
         android:layoutDirection="rtl"
-        android:orientation="vertical"
-        android:layout_below="@+id/additionalControlsLL"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/incrementSubs"
@@ -89,12 +91,12 @@
         android:id="@+id/additionalControlsLL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_gravity="top|end|center_vertical"
         android:layout_margin="@dimen/side_quality_ll_margin"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layoutDirection="rtl"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical" />
 
 
     <ProgressBar
@@ -105,11 +107,12 @@
         android:indeterminate="true" />
 
 
-    <Button android:id="@+id/retry_button"
+    <Button
+        android:id="@+id/retry_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Retry"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </RelativeLayout>
