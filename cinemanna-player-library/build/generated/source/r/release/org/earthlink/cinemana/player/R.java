@@ -101,7 +101,7 @@ containing a value of this type.
     }
     public static final class id {
         public static int additionalControlsLL=0x7f090014;
-        public static int circleProgress=0x7f090017;
+        public static int circleProgress=0x7f090018;
         public static int control=0x7f09000e;
         public static int decrementSubs=0x7f090016;
         public static int ffwd=0x7f090006;
@@ -115,9 +115,10 @@ containing a value of this type.
         public static int player_view=0x7f090010;
         public static int prev=0x7f090003;
         public static int qualityTextLL=0x7f090011;
-        public static int retry_button=0x7f090018;
+        public static int retry_button=0x7f090019;
         public static int rew=0x7f090004;
         public static int root=0x7f09000f;
+        public static int showHideSubs=0x7f090017;
         public static int shutter=0x7f09000c;
         public static int subtitles=0x7f09000d;
         public static int time=0x7f09000a;
@@ -165,14 +166,15 @@ containing a value of this type.
         public static int exo_controls_rewind_description=0x7f050005;
         public static int exo_controls_stop_description=0x7f050006;
         public static int failed=0x7f050015;
-        public static int sample_list_load_error=0x7f050016;
-        public static int selection_default=0x7f050017;
-        public static int selection_default_none=0x7f050018;
-        public static int selection_disabled=0x7f050019;
-        public static int storage_permission_denied=0x7f05001a;
-        public static int text=0x7f05001b;
-        public static int unexpected_intent_action=0x7f05001c;
-        public static int video=0x7f05001d;
+        public static int key_show_subtitles=0x7f050016;
+        public static int sample_list_load_error=0x7f050017;
+        public static int selection_default=0x7f050018;
+        public static int selection_default_none=0x7f050019;
+        public static int selection_disabled=0x7f05001a;
+        public static int storage_permission_denied=0x7f05001b;
+        public static int text=0x7f05001c;
+        public static int unexpected_intent_action=0x7f05001d;
+        public static int video=0x7f05001e;
     }
     public static final class style {
         public static int ExoMediaButton=0x7f080000;

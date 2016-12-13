@@ -23,6 +23,7 @@
     <string name="error_unsupported_audio">Media includes audio tracks, but none are playable by this device</string>
     <string name="error_unsupported_video">Media includes videoFile tracks, but none are playable by this device</string>
     <string name="failed">Playback failed</string>
+    <string name="key_show_subtitles">key_show_subtitles</string>
     <string name="sample_list_load_error">One or more sample lists failed to load</string>
     <string name="selection_default">Default</string>
     <string name="selection_default_none">Default (none)</string>

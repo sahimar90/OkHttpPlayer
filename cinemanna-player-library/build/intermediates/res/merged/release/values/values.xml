@@ -41,6 +41,7 @@
     <string name="exo_controls_rewind_description">Rewind</string>
     <string name="exo_controls_stop_description">Stop</string>
     <string name="failed">Playback failed</string>
+    <string name="key_show_subtitles">key_show_subtitles</string>
     <string name="sample_list_load_error">One or more sample lists failed to load</string>
     <string name="selection_default">Default</string>
     <string name="selection_default_none">Default (none)</string>

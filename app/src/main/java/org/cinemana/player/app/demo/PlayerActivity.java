@@ -1,17 +1,11 @@
 package org.cinemana.player.app.demo;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import org.earthlink.cinemana.player.CinemanaVideoPlayer;
@@ -102,46 +96,6 @@ public class PlayerActivity extends FragmentActivity {
     }
 
 
-
-    private ImageView getFullscreenIV() {
-        LayoutInflater inflater;
-
-        inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        ImageView imageView = (ImageView) inflater.inflate(R.layout.fullscreen_imageview, null);
-
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-                    switchPortrait();
-                else switchLandscape();
-            }
-        });
-
-        return imageView;
-    }
-
-    private void switchLandscape() {
-        Log.i(TAG, "switching to landscape mode");
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-//        videoInfoLL.setVisibility(View.GONE);
-        mainLL.setWeightSum(1);
-
-        //set icon is full screen
-    }
-
-    private void switchPortrait() {
-        Log.i(TAG, "switching to portrait mode");
-
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-//        videoInfoLL.setVisibility(View.VISIBLE);
-        mainLL.setWeightSum(2);
-
-    }
 
 
     private void getTranscodedFiles(final String videoId) {

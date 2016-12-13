@@ -76,6 +76,12 @@
             android:layout_margin="@dimen/side_control_margin"
             android:src="@mipmap/subtitle_decrement4" />
 
+        <Button
+            android:id="@+id/showHideSubs"
+            android:text="Show/Hide Subs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <TextView

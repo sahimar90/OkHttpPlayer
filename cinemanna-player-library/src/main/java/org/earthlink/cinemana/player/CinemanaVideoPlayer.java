@@ -1,11 +1,13 @@
 package org.earthlink.cinemana.player;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -179,6 +181,15 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
             }
         });
 
+
+        View showHideSubs = findViewById(R.id.showHideSubs);
+        showHideSubs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleSubtitle();
+            }
+        });
+
         configureSubtitleView();
         wantedResolution = videoFile.wantedResolution;
 
@@ -217,7 +228,8 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION  // in portrait mode,
+                            // the player controllers overlap with the navigation bar
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
@@ -241,6 +253,7 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
             trackSelector.addListener(this);
             trackSelector.addListener(eventLogger);
 
+
             player = ExoPlayerFactory.newSimpleInstance(this, trackSelector, new DefaultLoadControl());
             player.addListener(this);
             player.addListener(eventLogger);
@@ -258,6 +271,7 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
             player.setPlayWhenReady(shouldAutoPlay);
             playerNeedsSource = true;
         }
+
         if (playerNeedsSource) {
             Uri[] uris;
             String[] extensions;
@@ -544,7 +558,6 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
 //        videoFormatSwitch.setLayoutParams(
 //                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 //                        ViewGroup.LayoutParams.WRAP_CONTENT));
-
         int i = 0;
         for (int quality : videoFile.resolutions.keySet()) {
             TextView qualityTextView = new TextView(this);
@@ -588,6 +601,37 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
     };
 
     public void changeResolution(int wantedResolution, int position) {
+
+
+        TrackSelections<MappingTrackSelector.MappedTrackInfo> trackSelections = trackSelector.getCurrentSelections();
+
+        if (trackSelections == null) {
+            return;
+        }
+
+        String trackDebug = "";
+        int rendererCount = trackSelections.length;
+        for (int i = 0; i < rendererCount; i++) {
+            TrackGroupArray trackGroups = trackSelections.info.getTrackGroups(i);
+            if (trackGroups.length != 0) {
+                switch (player.getRendererType(i)) {
+                    case C.TRACK_TYPE_AUDIO:
+                        trackDebug += "audio";
+                        break;
+                    case C.TRACK_TYPE_VIDEO:
+                        trackDebug += "video";
+                        break;
+                    case C.TRACK_TYPE_TEXT:
+                        trackDebug += "text";
+                        break;
+                    default:
+                        continue;
+                }
+            }
+        }
+
+        Log.i(TAG, "trackDebug: " + trackDebug);
+
         this.wantedResolution = wantedResolution;
 
         Timeline currentTimeline = player.getCurrentTimeline();
@@ -595,6 +639,7 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
             return;
         }
         int currentWindowIndex = player.getCurrentWindowIndex();
+
         Log.i(TAG, "position: " + position);
         Log.i(TAG, "player.getCurrentWindowIndex(): " + player.getCurrentWindowIndex());
 
@@ -640,6 +685,39 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
 //            qualityTextView.setBackground(null);
             qualityTextView.setTypeface(null, Typeface.NORMAL);
         }
+    }
+
+
+
+    private void toggleSubtitle() {
+
+        if (trackSelector.getCurrentSelections().length > 2) {
+            if (showSubtitles()) {
+                Log.i(TAG, "will hide subtitles...");
+                trackSelector.setRendererDisabled(2, true);
+                setShowSubtitle(false);
+            } else {
+                Log.i(TAG, "will show subtitles...");
+                trackSelector.setRendererDisabled(2, false);
+                setShowSubtitle(true);
+            }
+        }
+
+    }
+
+
+    private boolean showSubtitles() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPref.getBoolean(getString(R.string.key_show_subtitles), true);
+    }
+
+    private void setShowSubtitle(Boolean showSubtitle) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        SharedPreferences.Editor sharedPrefsEditor;
+        sharedPrefsEditor = sharedPref.edit();
+        sharedPrefsEditor.putBoolean(getString(R.string.key_show_subtitles), showSubtitle);
+        sharedPrefsEditor.apply();
     }
 
 
@@ -726,6 +804,7 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
     private void showToast(int messageId) {
         showToast(getString(messageId));
     }
+
 
 
 
