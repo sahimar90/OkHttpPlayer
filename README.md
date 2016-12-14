@@ -1,3 +1,11 @@
+
+Demo
+==
+
+![Arabic subtitle ExoPlayer](art/cinemana_player_demo.gif "Arabic subtitle ExoPlayer")
+
+
+
 Features
 ==
 <li> OkHttpDataSource
@@ -92,7 +100,3 @@ The subtitles style can be configured from the library in the file [`CinemanaVid
 ```
 
 
-Demo
-==
-
-![Arabic subtitle ExoPlayer](art/cinemana_player_demo.gif "Arabic subtitle ExoPlayer")
