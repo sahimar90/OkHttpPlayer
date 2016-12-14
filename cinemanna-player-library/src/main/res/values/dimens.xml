@@ -4,4 +4,8 @@
     <dimen name="side_quality_ll_margin">10dp</dimen>
 
     <dimen name="default_circle_view_size">150dp</dimen>
+
+
+    <dimen name="medium_margin">15dp</dimen>
+
 </resources>

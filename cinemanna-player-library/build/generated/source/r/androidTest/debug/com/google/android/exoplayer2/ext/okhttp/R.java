@@ -12,8 +12,8 @@ public final class R {
 		public static final int resize_mode = 0x7f010001;
 		public static final int rewind_increment = 0x7f010002;
 		public static final int show_timeout = 0x7f010003;
-		public static final int use_controller = 0x7f010007;
-		public static final int use_texture_view = 0x7f010008;
+		public static final int use_controller = 0x7f010009;
+		public static final int use_texture_view = 0x7f01000a;
 	}
 	public static final class drawable {
 		public static final int exo_controls_fastforward = 0x7f020000;
@@ -67,7 +67,7 @@ public final class R {
 		public static final int PlaybackControlView_fastforward_increment = 0;
 		public static final int PlaybackControlView_rewind_increment = 1;
 		public static final int PlaybackControlView_show_timeout = 2;
-		public static final int[] SimpleExoPlayerView = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010007, 0x7f010008 };
+		public static final int[] SimpleExoPlayerView = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010009, 0x7f01000a };
 		public static final int SimpleExoPlayerView_fastforward_increment = 0;
 		public static final int SimpleExoPlayerView_resize_mode = 1;
 		public static final int SimpleExoPlayerView_rewind_increment = 2;

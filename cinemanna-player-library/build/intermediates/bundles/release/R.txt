@@ -1,25 +1,34 @@
-int attr color1 0x7f010004
-int attr color2 0x7f010005
-int attr color3 0x7f010006
+int attr backgroundColor 0x7f010005
+int attr color1 0x7f010006
+int attr color2 0x7f010007
+int attr color3 0x7f010008
 int attr fastforward_increment 0x7f010000
+int attr radius 0x7f010004
 int attr resize_mode 0x7f010001
 int attr rewind_increment 0x7f010002
 int attr show_timeout 0x7f010003
-int attr use_controller 0x7f010007
-int attr use_texture_view 0x7f010008
-int color jumbo 0x7f060000
-int color malibu 0x7f060001
-int color selectedQuality 0x7f060002
-int color unselectedQuality 0x7f060003
+int attr use_controller 0x7f010009
+int attr use_texture_view 0x7f01000a
+int color accentColor 0x7f060000
+int color black 0x7f060001
+int color jumbo 0x7f060002
+int color malibu 0x7f060003
+int color monsoon 0x7f060004
+int color raven 0x7f060005
+int color selectedQuality 0x7f060006
+int color slate_gray 0x7f060007
+int color unselectedQuality 0x7f060008
 int dimen default_circle_view_size 0x7f070000
-int dimen side_control_margin 0x7f070001
-int dimen side_quality_ll_margin 0x7f070002
+int dimen medium_margin 0x7f070001
+int dimen side_control_margin 0x7f070002
+int dimen side_quality_ll_margin 0x7f070003
 int drawable exo_controls_fastforward 0x7f020000
 int drawable exo_controls_next 0x7f020001
 int drawable exo_controls_pause 0x7f020002
 int drawable exo_controls_play 0x7f020003
 int drawable exo_controls_previous 0x7f020004
 int drawable exo_controls_rewind 0x7f020005
+int drawable recstyletext 0x7f020006
 int id additionalControlsLL 0x7f090014
 int id circleProgress 0x7f090018
 int id control 0x7f09000e
@@ -50,14 +59,19 @@ int layout exo_playback_control_view 0x7f040000
 int layout exo_simple_player_view 0x7f040001
 int layout fullscreen_imageview 0x7f040002
 int layout player_view_layout 0x7f040003
+int layout quality_item 0x7f040004
 int mipmap full_screen5 0x7f030000
 int mipmap retry_icon 0x7f030001
 int mipmap subtitle_decrement 0x7f030002
-int mipmap subtitle_decrement2 0x7f030003
-int mipmap subtitle_decrement3 0x7f030004
-int mipmap subtitle_decrement4 0x7f030005
-int mipmap subtitle_increment3 0x7f030006
-int mipmap subtitle_increment4 0x7f030007
+int mipmap subtitle_decrement12 0x7f030003
+int mipmap subtitle_decrement2 0x7f030004
+int mipmap subtitle_decrement3 0x7f030005
+int mipmap subtitle_decrement4 0x7f030006
+int mipmap subtitle_increment12 0x7f030007
+int mipmap subtitle_increment3 0x7f030008
+int mipmap subtitle_increment4 0x7f030009
+int mipmap subtitle_off12 0x7f03000a
+int mipmap subtitle_on12 0x7f03000b
 int string audio 0x7f050007
 int string drm_error_not_supported 0x7f050008
 int string drm_error_unknown 0x7f050009
@@ -95,9 +109,12 @@ int style ExoMediaButton_Next 0x7f080002
 int style ExoMediaButton_Previous 0x7f080003
 int style ExoMediaButton_Rewind 0x7f080004
 int style qualityTextsStyle 0x7f080005
+int[] styleable AmazingTextView { 0x7f010004, 0x7f010005 }
+int styleable AmazingTextView_backgroundColor 1
+int styleable AmazingTextView_radius 0
 int[] styleable AspectRatioFrameLayout { 0x7f010001 }
 int styleable AspectRatioFrameLayout_resize_mode 0
-int[] styleable CircleProgress { 0x7f010004, 0x7f010005, 0x7f010006 }
+int[] styleable CircleProgress { 0x7f010006, 0x7f010007, 0x7f010008 }
 int styleable CircleProgress_color1 0
 int styleable CircleProgress_color2 1
 int styleable CircleProgress_color3 2
@@ -105,7 +122,7 @@ int[] styleable PlaybackControlView { 0x7f010000, 0x7f010002, 0x7f010003 }
 int styleable PlaybackControlView_fastforward_increment 0
 int styleable PlaybackControlView_rewind_increment 1
 int styleable PlaybackControlView_show_timeout 2
-int[] styleable SimpleExoPlayerView { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010007, 0x7f010008 }
+int[] styleable SimpleExoPlayerView { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010009, 0x7f01000a }
 int styleable SimpleExoPlayerView_fastforward_increment 0
 int styleable SimpleExoPlayerView_resize_mode 1
 int styleable SimpleExoPlayerView_rewind_increment 2

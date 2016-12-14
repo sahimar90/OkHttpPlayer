@@ -1,6 +1,7 @@
 package org.earthlink.cinemana.player;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -10,7 +11,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -183,6 +184,13 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
 
 
         View showHideSubs = findViewById(R.id.showHideSubs);
+        if (showSubtitles()) {
+            ((ImageView)findViewById(R.id.showHideSubs))
+                    .setImageDrawable(getResources().getDrawable(R.mipmap.subtitle_on12));
+        } else {
+            ((ImageView)findViewById(R.id.showHideSubs))
+                    .setImageDrawable(getResources().getDrawable(R.mipmap.subtitle_off12));
+        }
         showHideSubs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -558,9 +566,13 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
 //        videoFormatSwitch.setLayoutParams(
 //                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
 //                        ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
         int i = 0;
         for (int quality : videoFile.resolutions.keySet()) {
-            TextView qualityTextView = new TextView(this);
+            AmazingTextView qualityTextView = (AmazingTextView) inflater.inflate(R.layout.quality_item, null);
             String qualityText = VideoFile.getQualityString(quality);    // spaces before and after the text, e.g., 720p,
             // to have a space when its background border is active
             qualityTextView.setText(qualityText);
@@ -586,14 +598,13 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
         public void onClick(View view) {
 
             for (int i = 0; i < qualityTextLL.getChildCount(); i++) {
-                TextView qualityTextView = (TextView) qualityTextLL.getChildAt(i);
+                AmazingTextView qualityTextView = (AmazingTextView) qualityTextLL.getChildAt(i);
                 setQualityTextStyle(qualityTextView, false, true);
             }
 
-            setQualityTextStyle((TextView) view, true, true);
+            setQualityTextStyle((AmazingTextView) view, true, true);
 
             wantedResolution = VideoFile.getQualityIndex((String) ((TextView) view).getText());
-
 
             Log.i(TAG, "will change to resolution " + VideoFile.getQualityString(wantedResolution));
             changeResolution(wantedResolution, (int) view.getTag(-101));
@@ -653,14 +664,11 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
     }
 
 
-    private void setQualityTextStyle(TextView qualityTextView, boolean active, boolean onlyBoldAndColor) {
+    private void setQualityTextStyle(AmazingTextView qualityTextView, boolean active, boolean onlyBoldAndColor) {
 //        Typeface videoQualityTextTypeface = Typeface.createFromAsset(surfaceView.getContext().getAssets(),
 //                "fonts/ITCFranklinGothicStd-BkCp.otf");
 
         if (!onlyBoldAndColor) {
-            float qualityTextSize =
-                    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 20, getResources().getDisplayMetrics());
-
 
             LinearLayout.LayoutParams qualityTextViewsMargins = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -675,13 +683,14 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
 
 //        qualityTextView.setTypeface(videoQualityTextTypeface, Typeface.NORMAL);
 
+        qualityTextView.setmBackGroundColor(0X0d0d0d);
 
         if (active) {
-            qualityTextView.setTextColor(getResources().getColor(R.color.selectedQuality));
+            qualityTextView.setTextColor(getResources().getColor(R.color.black));
 //            qualityTextView.setBackgroundResource(R.drawable.video_rounded_frame);
             qualityTextView.setTypeface(null, Typeface.BOLD);
         } else {
-            qualityTextView.setTextColor(getResources().getColor(R.color.unselectedQuality));
+            qualityTextView.setTextColor(getResources().getColor(R.color.raven));
 //            qualityTextView.setBackground(null);
             qualityTextView.setTypeface(null, Typeface.NORMAL);
         }
@@ -695,10 +704,15 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
             if (showSubtitles()) {
                 Log.i(TAG, "will hide subtitles...");
                 trackSelector.setRendererDisabled(2, true);
+                ((ImageView)findViewById(R.id.showHideSubs))
+                        .setImageDrawable(getResources().getDrawable(R.mipmap.subtitle_off12));
+
                 setShowSubtitle(false);
             } else {
                 Log.i(TAG, "will show subtitles...");
                 trackSelector.setRendererDisabled(2, false);
+                ((ImageView)findViewById(R.id.showHideSubs))
+                        .setImageDrawable(getResources().getDrawable(R.mipmap.subtitle_on12));
                 setShowSubtitle(true);
             }
         }

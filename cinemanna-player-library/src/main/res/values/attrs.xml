@@ -5,4 +5,10 @@
         <attr name="color2" format="reference|color"/>
         <attr name="color3" format="reference|color"/>
     </declare-styleable>
+
+
+    <declare-styleable name="AmazingTextView">
+        <attr name="radius" format="dimension" />
+        <attr name="backgroundColor" format="color" />
+    </declare-styleable>
 </resources>

@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <color name="accentColor">@color/malibu</color>
+    <color name="black">#0d0d0d</color>
     <color name="jumbo">#c8caca</color>
     <color name="malibu">#68ACDB</color>
+    <color name="monsoon">#777777</color>
+    <color name="raven">#727579</color>
     <color name="selectedQuality">@color/malibu</color>
+    <color name="slate_gray">#77828F</color>
     <color name="unselectedQuality">@color/jumbo</color>
+    <declare-styleable name="AmazingTextView"><attr format="dimension" name="radius"/><attr format="color" name="backgroundColor"/></declare-styleable>
     <declare-styleable name="CircleProgress"><attr format="reference|color" name="color1"/><attr format="reference|color" name="color2"/><attr format="reference|color" name="color3"/></declare-styleable>
     <dimen name="default_circle_view_size">150dp</dimen>
+    <dimen name="medium_margin">15dp</dimen>
     <dimen name="side_control_margin">5dp</dimen>
     <dimen name="side_quality_ll_margin">10dp</dimen>
     <string name="audio">Audio</string>

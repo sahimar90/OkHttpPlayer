@@ -8,26 +8,31 @@ package org.earthlink.cinemana.player;
 
 public final class R {
 	public static final class attr {
-		public static final int color1 = 0x7f010004;
-		public static final int color2 = 0x7f010005;
-		public static final int color3 = 0x7f010006;
+		public static final int backgroundColor = 0x7f010005;
+		public static final int color1 = 0x7f010006;
+		public static final int color2 = 0x7f010007;
+		public static final int color3 = 0x7f010008;
 		public static final int fastforward_increment = 0x7f010000;
+		public static final int radius = 0x7f010004;
 		public static final int resize_mode = 0x7f010001;
 		public static final int rewind_increment = 0x7f010002;
 		public static final int show_timeout = 0x7f010003;
-		public static final int use_controller = 0x7f010007;
-		public static final int use_texture_view = 0x7f010008;
+		public static final int use_controller = 0x7f010009;
+		public static final int use_texture_view = 0x7f01000a;
 	}
 	public static final class color {
-		public static final int jumbo = 0x7f060000;
-		public static final int malibu = 0x7f060001;
-		public static final int selectedQuality = 0x7f060002;
-		public static final int unselectedQuality = 0x7f060003;
+		public static final int accentColor = 0x7f060000;
+		public static final int black = 0x7f060001;
+		public static final int jumbo = 0x7f060002;
+		public static final int malibu = 0x7f060003;
+		public static final int selectedQuality = 0x7f060004;
+		public static final int unselectedQuality = 0x7f060005;
 	}
 	public static final class dimen {
 		public static final int default_circle_view_size = 0x7f070000;
-		public static final int side_control_margin = 0x7f070001;
-		public static final int side_quality_ll_margin = 0x7f070002;
+		public static final int medium_margin = 0x7f070001;
+		public static final int side_control_margin = 0x7f070002;
+		public static final int side_quality_ll_margin = 0x7f070003;
 	}
 	public static final class drawable {
 		public static final int exo_controls_fastforward = 0x7f020000;
@@ -36,10 +41,11 @@ public final class R {
 		public static final int exo_controls_play = 0x7f020003;
 		public static final int exo_controls_previous = 0x7f020004;
 		public static final int exo_controls_rewind = 0x7f020005;
+		public static final int recstyletext = 0x7f020006;
 	}
 	public static final class id {
 		public static final int additionalControlsLL = 0x7f090014;
-		public static final int circleProgress = 0x7f090017;
+		public static final int circleProgress = 0x7f090018;
 		public static final int control = 0x7f09000e;
 		public static final int decrementSubs = 0x7f090016;
 		public static final int ffwd = 0x7f090006;
@@ -53,9 +59,10 @@ public final class R {
 		public static final int player_view = 0x7f090010;
 		public static final int prev = 0x7f090003;
 		public static final int qualityTextLL = 0x7f090011;
-		public static final int retry_button = 0x7f090018;
+		public static final int retry_button = 0x7f090019;
 		public static final int rew = 0x7f090004;
 		public static final int root = 0x7f09000f;
+		public static final int showHideSubs = 0x7f090017;
 		public static final int shutter = 0x7f09000c;
 		public static final int subtitles = 0x7f09000d;
 		public static final int time = 0x7f09000a;
@@ -74,11 +81,15 @@ public final class R {
 		public static final int full_screen5 = 0x7f030000;
 		public static final int retry_icon = 0x7f030001;
 		public static final int subtitle_decrement = 0x7f030002;
-		public static final int subtitle_decrement2 = 0x7f030003;
-		public static final int subtitle_decrement3 = 0x7f030004;
-		public static final int subtitle_decrement4 = 0x7f030005;
-		public static final int subtitle_increment3 = 0x7f030006;
-		public static final int subtitle_increment4 = 0x7f030007;
+		public static final int subtitle_decrement12 = 0x7f030003;
+		public static final int subtitle_decrement2 = 0x7f030004;
+		public static final int subtitle_decrement3 = 0x7f030005;
+		public static final int subtitle_decrement4 = 0x7f030006;
+		public static final int subtitle_increment12 = 0x7f030007;
+		public static final int subtitle_increment3 = 0x7f030008;
+		public static final int subtitle_increment4 = 0x7f030009;
+		public static final int subtitle_off12 = 0x7f03000a;
+		public static final int subtitle_on12 = 0x7f03000b;
 	}
 	public static final class string {
 		public static final int audio = 0x7f050007;
@@ -103,14 +114,15 @@ public final class R {
 		public static final int exo_controls_rewind_description = 0x7f050005;
 		public static final int exo_controls_stop_description = 0x7f050006;
 		public static final int failed = 0x7f050015;
-		public static final int sample_list_load_error = 0x7f050016;
-		public static final int selection_default = 0x7f050017;
-		public static final int selection_default_none = 0x7f050018;
-		public static final int selection_disabled = 0x7f050019;
-		public static final int storage_permission_denied = 0x7f05001a;
-		public static final int text = 0x7f05001b;
-		public static final int unexpected_intent_action = 0x7f05001c;
-		public static final int video = 0x7f05001d;
+		public static final int key_show_subtitles = 0x7f050016;
+		public static final int sample_list_load_error = 0x7f050017;
+		public static final int selection_default = 0x7f050018;
+		public static final int selection_default_none = 0x7f050019;
+		public static final int selection_disabled = 0x7f05001a;
+		public static final int storage_permission_denied = 0x7f05001b;
+		public static final int text = 0x7f05001c;
+		public static final int unexpected_intent_action = 0x7f05001d;
+		public static final int video = 0x7f05001e;
 	}
 	public static final class style {
 		public static final int ExoMediaButton = 0x7f080000;
@@ -121,9 +133,12 @@ public final class R {
 		public static final int qualityTextsStyle = 0x7f080005;
 	}
 	public static final class styleable {
+		public static final int[] AmazingTextView = { 0x7f010004, 0x7f010005 };
+		public static final int AmazingTextView_backgroundColor = 1;
+		public static final int AmazingTextView_radius = 0;
 		public static final int[] AspectRatioFrameLayout = { 0x7f010001 };
 		public static final int AspectRatioFrameLayout_resize_mode = 0;
-		public static final int[] CircleProgress = { 0x7f010004, 0x7f010005, 0x7f010006 };
+		public static final int[] CircleProgress = { 0x7f010006, 0x7f010007, 0x7f010008 };
 		public static final int CircleProgress_color1 = 0;
 		public static final int CircleProgress_color2 = 1;
 		public static final int CircleProgress_color3 = 2;
@@ -131,7 +146,7 @@ public final class R {
 		public static final int PlaybackControlView_fastforward_increment = 0;
 		public static final int PlaybackControlView_rewind_increment = 1;
 		public static final int PlaybackControlView_show_timeout = 2;
-		public static final int[] SimpleExoPlayerView = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010007, 0x7f010008 };
+		public static final int[] SimpleExoPlayerView = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010009, 0x7f01000a };
 		public static final int SimpleExoPlayerView_fastforward_increment = 0;
 		public static final int SimpleExoPlayerView_resize_mode = 1;
 		public static final int SimpleExoPlayerView_rewind_increment = 2;

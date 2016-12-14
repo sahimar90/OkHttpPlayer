@@ -85,8 +85,8 @@
                     "startLine": 10,
                     "startColumn": 4,
                     "startOffset": 435,
-                    "endColumn": 39,
-                    "endOffset": 470
+                    "endColumn": 51,
+                    "endOffset": 482
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
@@ -94,8 +94,8 @@
                         "startLine": 2,
                         "startColumn": 4,
                         "startOffset": 105,
-                        "endColumn": 39,
-                        "endOffset": 140
+                        "endColumn": 51,
+                        "endOffset": 152
                     }
                 }
             },
@@ -103,18 +103,18 @@
                 "to": {
                     "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 475,
-                    "endColumn": 40,
-                    "endOffset": 511
+                    "startOffset": 487,
+                    "endColumn": 39,
+                    "endOffset": 522
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
-                        "startOffset": 145,
-                        "endColumn": 40,
-                        "endOffset": 181
+                        "startOffset": 157,
+                        "endColumn": 39,
+                        "endOffset": 192
                     }
                 }
             },
@@ -122,18 +122,18 @@
                 "to": {
                     "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 516,
-                    "endColumn": 55,
-                    "endOffset": 567
+                    "startOffset": 527,
+                    "endColumn": 39,
+                    "endOffset": 562
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 186,
-                        "endColumn": 55,
-                        "endOffset": 237
+                        "startOffset": 197,
+                        "endColumn": 39,
+                        "endOffset": 232
                     }
                 }
             },
@@ -141,75 +141,56 @@
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 572,
-                    "endColumn": 56,
-                    "endOffset": 624
+                    "startOffset": 567,
+                    "endColumn": 40,
+                    "endOffset": 603
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
-                        "startOffset": 242,
-                        "endColumn": 56,
-                        "endOffset": 294
+                        "startOffset": 237,
+                        "endColumn": 40,
+                        "endOffset": 273
                     }
                 }
             },
             {
                 "to": {
-                    "startLine": 18,
+                    "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 1383,
+                    "startOffset": 608,
+                    "endColumn": 55,
+                    "endOffset": 659
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 278,
+                        "endColumn": 55,
+                        "endOffset": 329
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 664,
                     "endColumn": 56,
-                    "endOffset": 1435
+                    "endOffset": 716
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 503,
+                        "startOffset": 334,
                         "endColumn": 56,
-                        "endOffset": 555
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 19,
-                    "startColumn": 4,
-                    "startOffset": 1440,
-                    "endColumn": 49,
-                    "endOffset": 1485
-                },
-                "from": {
-                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
-                    "position": {
-                        "startLine": 8,
-                        "startColumn": 4,
-                        "startOffset": 560,
-                        "endColumn": 49,
-                        "endOffset": 605
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 20,
-                    "startColumn": 4,
-                    "startOffset": 1490,
-                    "endColumn": 53,
-                    "endOffset": 1539
-                },
-                "from": {
-                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
-                    "position": {
-                        "startLine": 9,
-                        "startColumn": 4,
-                        "startOffset": 610,
-                        "endColumn": 53,
-                        "endOffset": 659
+                        "endOffset": 386
                     }
                 }
             },
@@ -217,18 +198,18 @@
                 "to": {
                     "startLine": 21,
                     "startColumn": 4,
-                    "startOffset": 1544,
-                    "endColumn": 39,
-                    "endOffset": 1579
+                    "startOffset": 1627,
+                    "endColumn": 56,
+                    "endOffset": 1679
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 664,
-                        "endColumn": 39,
-                        "endOffset": 699
+                        "startOffset": 747,
+                        "endColumn": 56,
+                        "endOffset": 799
                     }
                 }
             },
@@ -236,18 +217,18 @@
                 "to": {
                     "startLine": 22,
                     "startColumn": 4,
-                    "startOffset": 1584,
-                    "endColumn": 106,
-                    "endOffset": 1686
+                    "startOffset": 1684,
+                    "endColumn": 44,
+                    "endOffset": 1724
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 704,
-                        "endColumn": 106,
-                        "endOffset": 806
+                        "startOffset": 804,
+                        "endColumn": 44,
+                        "endOffset": 844
                     }
                 }
             },
@@ -255,18 +236,18 @@
                 "to": {
                     "startLine": 23,
                     "startColumn": 4,
-                    "startOffset": 1691,
-                    "endColumn": 75,
-                    "endOffset": 1762
+                    "startOffset": 1729,
+                    "endColumn": 49,
+                    "endOffset": 1774
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
-                        "startOffset": 811,
-                        "endColumn": 75,
-                        "endOffset": 882
+                        "startOffset": 849,
+                        "endColumn": 49,
+                        "endOffset": 894
                     }
                 }
             },
@@ -274,18 +255,18 @@
                 "to": {
                     "startLine": 24,
                     "startColumn": 4,
-                    "startOffset": 1767,
-                    "endColumn": 109,
-                    "endOffset": 1872
+                    "startOffset": 1779,
+                    "endColumn": 53,
+                    "endOffset": 1828
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
-                        "startOffset": 887,
-                        "endColumn": 109,
-                        "endOffset": 992
+                        "startOffset": 899,
+                        "endColumn": 53,
+                        "endOffset": 948
                     }
                 }
             },
@@ -293,18 +274,18 @@
                 "to": {
                     "startLine": 25,
                     "startColumn": 4,
-                    "startOffset": 1877,
-                    "endColumn": 77,
-                    "endOffset": 1950
+                    "startOffset": 1833,
+                    "endColumn": 39,
+                    "endOffset": 1868
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
-                        "startOffset": 997,
-                        "endColumn": 77,
-                        "endOffset": 1070
+                        "startOffset": 953,
+                        "endColumn": 39,
+                        "endOffset": 988
                     }
                 }
             },
@@ -312,18 +293,18 @@
                 "to": {
                     "startLine": 26,
                     "startColumn": 4,
-                    "startOffset": 1955,
+                    "startOffset": 1873,
                     "endColumn": 106,
-                    "endOffset": 2057
+                    "endOffset": 1975
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 1075,
+                        "startOffset": 993,
                         "endColumn": 106,
-                        "endOffset": 1177
+                        "endOffset": 1095
                     }
                 }
             },
@@ -331,18 +312,18 @@
                 "to": {
                     "startLine": 27,
                     "startColumn": 4,
-                    "startOffset": 2062,
+                    "startOffset": 1980,
                     "endColumn": 75,
-                    "endOffset": 2133
+                    "endOffset": 2051
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
-                        "startOffset": 1182,
+                        "startOffset": 1100,
                         "endColumn": 75,
-                        "endOffset": 1253
+                        "endOffset": 1171
                     }
                 }
             },
@@ -350,18 +331,18 @@
                 "to": {
                     "startLine": 28,
                     "startColumn": 4,
-                    "startOffset": 2138,
+                    "startOffset": 2056,
                     "endColumn": 109,
-                    "endOffset": 2243
+                    "endOffset": 2161
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
-                        "startOffset": 1258,
+                        "startOffset": 1176,
                         "endColumn": 109,
-                        "endOffset": 1363
+                        "endOffset": 1281
                     }
                 }
             },
@@ -369,18 +350,18 @@
                 "to": {
                     "startLine": 29,
                     "startColumn": 4,
-                    "startOffset": 2248,
-                    "endColumn": 123,
-                    "endOffset": 2367
+                    "startOffset": 2166,
+                    "endColumn": 77,
+                    "endOffset": 2239
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
-                        "startOffset": 1368,
-                        "endColumn": 123,
-                        "endOffset": 1487
+                        "startOffset": 1286,
+                        "endColumn": 77,
+                        "endOffset": 1359
                     }
                 }
             },
@@ -388,18 +369,18 @@
                 "to": {
                     "startLine": 30,
                     "startColumn": 4,
-                    "startOffset": 2372,
-                    "endColumn": 122,
-                    "endOffset": 2490
+                    "startOffset": 2244,
+                    "endColumn": 106,
+                    "endOffset": 2346
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 1492,
-                        "endColumn": 122,
-                        "endOffset": 1610
+                        "startOffset": 1364,
+                        "endColumn": 106,
+                        "endOffset": 1466
                     }
                 }
             },
@@ -407,18 +388,18 @@
                 "to": {
                     "startLine": 31,
                     "startColumn": 4,
-                    "startOffset": 2495,
-                    "endColumn": 136,
-                    "endOffset": 2627
+                    "startOffset": 2351,
+                    "endColumn": 75,
+                    "endOffset": 2422
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 1615,
-                        "endColumn": 136,
-                        "endOffset": 1747
+                        "startOffset": 1471,
+                        "endColumn": 75,
+                        "endOffset": 1542
                     }
                 }
             },
@@ -426,18 +407,18 @@
                 "to": {
                     "startLine": 32,
                     "startColumn": 4,
-                    "startOffset": 2632,
-                    "endColumn": 83,
-                    "endOffset": 2711
+                    "startOffset": 2427,
+                    "endColumn": 109,
+                    "endOffset": 2532
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 1752,
-                        "endColumn": 83,
-                        "endOffset": 1831
+                        "startOffset": 1547,
+                        "endColumn": 109,
+                        "endOffset": 1652
                     }
                 }
             },
@@ -445,18 +426,18 @@
                 "to": {
                     "startLine": 33,
                     "startColumn": 4,
-                    "startOffset": 2716,
-                    "endColumn": 117,
-                    "endOffset": 2829
+                    "startOffset": 2537,
+                    "endColumn": 123,
+                    "endOffset": 2656
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
-                        "startOffset": 1836,
-                        "endColumn": 117,
-                        "endOffset": 1949
+                        "startOffset": 1657,
+                        "endColumn": 123,
+                        "endOffset": 1776
                     }
                 }
             },
@@ -464,18 +445,18 @@
                 "to": {
                     "startLine": 34,
                     "startColumn": 4,
-                    "startOffset": 2834,
-                    "endColumn": 121,
-                    "endOffset": 2951
+                    "startOffset": 2661,
+                    "endColumn": 122,
+                    "endOffset": 2779
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 23,
                         "startColumn": 4,
-                        "startOffset": 1954,
-                        "endColumn": 121,
-                        "endOffset": 2071
+                        "startOffset": 1781,
+                        "endColumn": 122,
+                        "endOffset": 1899
                     }
                 }
             },
@@ -483,9 +464,85 @@
                 "to": {
                     "startLine": 35,
                     "startColumn": 4,
-                    "startOffset": 2956,
+                    "startOffset": 2784,
+                    "endColumn": 136,
+                    "endOffset": 2916
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 4,
+                        "startOffset": 1904,
+                        "endColumn": 136,
+                        "endOffset": 2036
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 2921,
+                    "endColumn": 83,
+                    "endOffset": 3000
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 4,
+                        "startOffset": 2041,
+                        "endColumn": 83,
+                        "endOffset": 2120
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 3005,
+                    "endColumn": 117,
+                    "endOffset": 3118
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 2125,
+                        "endColumn": 117,
+                        "endOffset": 2238
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 38,
+                    "startColumn": 4,
+                    "startOffset": 3123,
+                    "endColumn": 121,
+                    "endOffset": 3240
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 4,
+                        "startOffset": 2243,
+                        "endColumn": 121,
+                        "endOffset": 2360
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 39,
+                    "startColumn": 4,
+                    "startOffset": 3245,
                     "endColumn": 77,
-                    "endOffset": 3029
+                    "endOffset": 3318
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -500,11 +557,11 @@
             },
             {
                 "to": {
-                    "startLine": 36,
+                    "startLine": 40,
                     "startColumn": 4,
-                    "startOffset": 3034,
+                    "startOffset": 3323,
                     "endColumn": 68,
-                    "endOffset": 3098
+                    "endOffset": 3387
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -519,11 +576,11 @@
             },
             {
                 "to": {
-                    "startLine": 37,
+                    "startLine": 41,
                     "startColumn": 4,
-                    "startOffset": 3103,
+                    "startOffset": 3392,
                     "endColumn": 64,
-                    "endOffset": 3163
+                    "endOffset": 3452
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -538,11 +595,11 @@
             },
             {
                 "to": {
-                    "startLine": 38,
+                    "startLine": 42,
                     "startColumn": 4,
-                    "startOffset": 3168,
+                    "startOffset": 3457,
                     "endColumn": 62,
-                    "endOffset": 3226
+                    "endOffset": 3515
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -557,11 +614,11 @@
             },
             {
                 "to": {
-                    "startLine": 39,
+                    "startLine": 43,
                     "startColumn": 4,
-                    "startOffset": 3231,
+                    "startOffset": 3520,
                     "endColumn": 76,
-                    "endOffset": 3303
+                    "endOffset": 3592
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -576,11 +633,11 @@
             },
             {
                 "to": {
-                    "startLine": 40,
+                    "startLine": 44,
                     "startColumn": 4,
-                    "startOffset": 3308,
+                    "startOffset": 3597,
                     "endColumn": 66,
-                    "endOffset": 3370
+                    "endOffset": 3659
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -595,11 +652,11 @@
             },
             {
                 "to": {
-                    "startLine": 41,
+                    "startLine": 45,
                     "startColumn": 4,
-                    "startOffset": 3375,
+                    "startOffset": 3664,
                     "endColumn": 62,
-                    "endOffset": 3433
+                    "endOffset": 3722
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -614,96 +671,20 @@
             },
             {
                 "to": {
-                    "startLine": 42,
-                    "startColumn": 4,
-                    "startOffset": 3438,
-                    "endColumn": 50,
-                    "endOffset": 3484
-                },
-                "from": {
-                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
-                    "position": {
-                        "startLine": 24,
-                        "startColumn": 4,
-                        "startOffset": 2076,
-                        "endColumn": 50,
-                        "endOffset": 2122
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 43,
-                    "startColumn": 4,
-                    "startOffset": 3489,
-                    "endColumn": 90,
-                    "endOffset": 3575
-                },
-                "from": {
-                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
-                    "position": {
-                        "startLine": 25,
-                        "startColumn": 4,
-                        "startOffset": 2127,
-                        "endColumn": 90,
-                        "endOffset": 2213
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 44,
-                    "startColumn": 4,
-                    "startOffset": 3580,
-                    "endColumn": 53,
-                    "endOffset": 3629
-                },
-                "from": {
-                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
-                    "position": {
-                        "startLine": 26,
-                        "startColumn": 4,
-                        "startOffset": 2218,
-                        "endColumn": 53,
-                        "endOffset": 2267
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 45,
-                    "startColumn": 4,
-                    "startOffset": 3634,
-                    "endColumn": 65,
-                    "endOffset": 3695
-                },
-                "from": {
-                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
-                    "position": {
-                        "startLine": 27,
-                        "startColumn": 4,
-                        "startOffset": 2272,
-                        "endColumn": 65,
-                        "endOffset": 2333
-                    }
-                }
-            },
-            {
-                "to": {
                     "startLine": 46,
                     "startColumn": 4,
-                    "startOffset": 3700,
-                    "endColumn": 55,
-                    "endOffset": 3751
+                    "startOffset": 3727,
+                    "endColumn": 50,
+                    "endOffset": 3773
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 28,
                         "startColumn": 4,
-                        "startOffset": 2338,
-                        "endColumn": 55,
-                        "endOffset": 2389
+                        "startOffset": 2365,
+                        "endColumn": 50,
+                        "endOffset": 2411
                     }
                 }
             },
@@ -711,18 +692,18 @@
                 "to": {
                     "startLine": 47,
                     "startColumn": 4,
-                    "startOffset": 3756,
-                    "endColumn": 93,
-                    "endOffset": 3845
+                    "startOffset": 3778,
+                    "endColumn": 65,
+                    "endOffset": 3839
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 29,
                         "startColumn": 4,
-                        "startOffset": 2394,
-                        "endColumn": 93,
-                        "endOffset": 2483
+                        "startOffset": 2416,
+                        "endColumn": 65,
+                        "endOffset": 2477
                     }
                 }
             },
@@ -730,18 +711,18 @@
                 "to": {
                     "startLine": 48,
                     "startColumn": 4,
-                    "startOffset": 3850,
-                    "endColumn": 37,
-                    "endOffset": 3883
+                    "startOffset": 3844,
+                    "endColumn": 90,
+                    "endOffset": 3930
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 30,
                         "startColumn": 4,
-                        "startOffset": 2488,
-                        "endColumn": 37,
-                        "endOffset": 2521
+                        "startOffset": 2482,
+                        "endColumn": 90,
+                        "endOffset": 2568
                     }
                 }
             },
@@ -749,18 +730,18 @@
                 "to": {
                     "startLine": 49,
                     "startColumn": 4,
-                    "startOffset": 3888,
-                    "endColumn": 110,
-                    "endOffset": 3994
+                    "startOffset": 3935,
+                    "endColumn": 53,
+                    "endOffset": 3984
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 31,
                         "startColumn": 4,
-                        "startOffset": 2526,
-                        "endColumn": 110,
-                        "endOffset": 2632
+                        "startOffset": 2573,
+                        "endColumn": 53,
+                        "endOffset": 2622
                     }
                 }
             },
@@ -768,18 +749,18 @@
                 "to": {
                     "startLine": 50,
                     "startColumn": 4,
-                    "startOffset": 3999,
-                    "endColumn": 39,
-                    "endOffset": 4034
+                    "startOffset": 3989,
+                    "endColumn": 65,
+                    "endOffset": 4050
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
                         "startLine": 32,
                         "startColumn": 4,
-                        "startOffset": 2637,
-                        "endColumn": 39,
-                        "endOffset": 2672
+                        "startOffset": 2627,
+                        "endColumn": 65,
+                        "endOffset": 2688
                     }
                 }
             },
@@ -787,10 +768,105 @@
                 "to": {
                     "startLine": 51,
                     "startColumn": 4,
-                    "startOffset": 4039,
-                    "endLine": 55,
+                    "startOffset": 4055,
+                    "endColumn": 55,
+                    "endOffset": 4106
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 33,
+                        "startColumn": 4,
+                        "startOffset": 2693,
+                        "endColumn": 55,
+                        "endOffset": 2744
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 4111,
+                    "endColumn": 93,
+                    "endOffset": 4200
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 34,
+                        "startColumn": 4,
+                        "startOffset": 2749,
+                        "endColumn": 93,
+                        "endOffset": 2838
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 4205,
+                    "endColumn": 37,
+                    "endOffset": 4238
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 35,
+                        "startColumn": 4,
+                        "startOffset": 2843,
+                        "endColumn": 37,
+                        "endOffset": 2876
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 4243,
+                    "endColumn": 110,
+                    "endOffset": 4349
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 36,
+                        "startColumn": 4,
+                        "startOffset": 2881,
+                        "endColumn": 110,
+                        "endOffset": 2987
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 4354,
+                    "endColumn": 39,
+                    "endOffset": 4389
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 4,
+                        "startOffset": 2992,
+                        "endColumn": 39,
+                        "endOffset": 3027
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 4394,
+                    "endLine": 60,
                     "endColumn": 10,
-                    "endOffset": 4231
+                    "endOffset": 4586
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -806,12 +882,12 @@
             },
             {
                 "to": {
-                    "startLine": 56,
+                    "startLine": 61,
                     "startColumn": 4,
-                    "startOffset": 4236,
-                    "endLine": 59,
+                    "startOffset": 4591,
+                    "endLine": 64,
                     "endColumn": 10,
-                    "endOffset": 4455
+                    "endOffset": 4810
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -827,12 +903,12 @@
             },
             {
                 "to": {
-                    "startLine": 60,
+                    "startLine": 65,
                     "startColumn": 4,
-                    "startOffset": 4460,
-                    "endLine": 63,
+                    "startOffset": 4815,
+                    "endLine": 68,
                     "endColumn": 10,
-                    "endOffset": 4658
+                    "endOffset": 5013
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -848,12 +924,12 @@
             },
             {
                 "to": {
-                    "startLine": 64,
+                    "startLine": 69,
                     "startColumn": 4,
-                    "startOffset": 4663,
-                    "endLine": 67,
+                    "startOffset": 5018,
+                    "endLine": 72,
                     "endColumn": 10,
-                    "endOffset": 4873
+                    "endOffset": 5228
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -869,12 +945,12 @@
             },
             {
                 "to": {
-                    "startLine": 68,
+                    "startLine": 73,
                     "startColumn": 4,
-                    "startOffset": 4878,
-                    "endLine": 71,
+                    "startOffset": 5233,
+                    "endLine": 76,
                     "endColumn": 10,
-                    "endOffset": 5082
+                    "endOffset": 5437
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/values/values.xml",
@@ -890,22 +966,22 @@
             },
             {
                 "to": {
-                    "startLine": 72,
+                    "startLine": 77,
                     "startColumn": 4,
-                    "startOffset": 5087,
-                    "endLine": 80,
+                    "startOffset": 5442,
+                    "endLine": 85,
                     "endColumn": 12,
-                    "endOffset": 5527
+                    "endOffset": 5882
                 },
                 "from": {
                     "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/values/values.xml",
                     "position": {
-                        "startLine": 33,
+                        "startLine": 38,
                         "startColumn": 4,
-                        "startOffset": 2677,
-                        "endLine": 41,
+                        "startOffset": 3032,
+                        "endLine": 46,
                         "endColumn": 12,
-                        "endOffset": 3117
+                        "endOffset": 3472
                     }
                 }
             }

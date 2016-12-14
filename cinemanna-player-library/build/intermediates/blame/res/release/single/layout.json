@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/layout/quality_item.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/layout/quality_item.xml"
+    },
+    {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/layout/player_view_layout.xml",
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/layout/player_view_layout.xml"
     },

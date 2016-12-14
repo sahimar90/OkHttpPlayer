@@ -9,24 +9,33 @@ package org.earthlink.cinemana.player;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int backgroundColor=0x7f010005;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static int color1=0x7f010004;
+        public static int color1=0x7f010006;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static int color2=0x7f010005;
+        public static int color2=0x7f010007;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static int color3=0x7f010006;
+        public static int color3=0x7f010008;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -35,6 +44,16 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static int fastforward_increment=0x7f010000;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int radius=0x7f010004;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -70,7 +89,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int use_controller=0x7f010007;
+        public static int use_controller=0x7f010009;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -78,18 +97,24 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int use_texture_view=0x7f010008;
+        public static int use_texture_view=0x7f01000a;
     }
     public static final class color {
-        public static int jumbo=0x7f060000;
-        public static int malibu=0x7f060001;
-        public static int selectedQuality=0x7f060002;
-        public static int unselectedQuality=0x7f060003;
+        public static int accentColor=0x7f060000;
+        public static int black=0x7f060001;
+        public static int jumbo=0x7f060002;
+        public static int malibu=0x7f060003;
+        public static int monsoon=0x7f060004;
+        public static int raven=0x7f060005;
+        public static int selectedQuality=0x7f060006;
+        public static int slate_gray=0x7f060007;
+        public static int unselectedQuality=0x7f060008;
     }
     public static final class dimen {
         public static int default_circle_view_size=0x7f070000;
-        public static int side_control_margin=0x7f070001;
-        public static int side_quality_ll_margin=0x7f070002;
+        public static int medium_margin=0x7f070001;
+        public static int side_control_margin=0x7f070002;
+        public static int side_quality_ll_margin=0x7f070003;
     }
     public static final class drawable {
         public static int exo_controls_fastforward=0x7f020000;
@@ -98,6 +123,7 @@ containing a value of this type.
         public static int exo_controls_play=0x7f020003;
         public static int exo_controls_previous=0x7f020004;
         public static int exo_controls_rewind=0x7f020005;
+        public static int recstyletext=0x7f020006;
     }
     public static final class id {
         public static int additionalControlsLL=0x7f090014;
@@ -132,16 +158,21 @@ containing a value of this type.
         public static int exo_simple_player_view=0x7f040001;
         public static int fullscreen_imageview=0x7f040002;
         public static int player_view_layout=0x7f040003;
+        public static int quality_item=0x7f040004;
     }
     public static final class mipmap {
         public static int full_screen5=0x7f030000;
         public static int retry_icon=0x7f030001;
         public static int subtitle_decrement=0x7f030002;
-        public static int subtitle_decrement2=0x7f030003;
-        public static int subtitle_decrement3=0x7f030004;
-        public static int subtitle_decrement4=0x7f030005;
-        public static int subtitle_increment3=0x7f030006;
-        public static int subtitle_increment4=0x7f030007;
+        public static int subtitle_decrement12=0x7f030003;
+        public static int subtitle_decrement2=0x7f030004;
+        public static int subtitle_decrement3=0x7f030005;
+        public static int subtitle_decrement4=0x7f030006;
+        public static int subtitle_increment12=0x7f030007;
+        public static int subtitle_increment3=0x7f030008;
+        public static int subtitle_increment4=0x7f030009;
+        public static int subtitle_off12=0x7f03000a;
+        public static int subtitle_on12=0x7f03000b;
     }
     public static final class string {
         public static int audio=0x7f050007;
@@ -185,6 +216,52 @@ containing a value of this type.
         public static int qualityTextsStyle=0x7f080005;
     }
     public static final class styleable {
+        /** Attributes that can be used with a AmazingTextView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #AmazingTextView_backgroundColor org.earthlink.cinemana.player:backgroundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #AmazingTextView_radius org.earthlink.cinemana.player:radius}</code></td><td></td></tr>
+           </table>
+           @see #AmazingTextView_backgroundColor
+           @see #AmazingTextView_radius
+         */
+        public static final int[] AmazingTextView = {
+            0x7f010004, 0x7f010005
+        };
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.R.attr#backgroundColor}
+          attribute's value can be found in the {@link #AmazingTextView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player:backgroundColor
+        */
+        public static int AmazingTextView_backgroundColor = 1;
+        /**
+          <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.R.attr#radius}
+          attribute's value can be found in the {@link #AmazingTextView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name org.earthlink.cinemana.player:radius
+        */
+        public static int AmazingTextView_radius = 0;
         /** Attributes that can be used with a AspectRatioFrameLayout.
            <p>Includes the following attributes:</p>
            <table>
@@ -231,7 +308,7 @@ containing a value of this type.
            @see #CircleProgress_color3
          */
         public static final int[] CircleProgress = {
-            0x7f010004, 0x7f010005, 0x7f010006
+            0x7f010006, 0x7f010007, 0x7f010008
         };
         /**
           <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.R.attr#color1}
@@ -350,7 +427,7 @@ containing a value of this type.
          */
         public static final int[] SimpleExoPlayerView = {
             0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
-            0x7f010007, 0x7f010008
+            0x7f010009, 0x7f01000a
         };
         /**
           <p>This symbol is the offset where the {@link org.earthlink.cinemana.player.R.attr#fastforward_increment}

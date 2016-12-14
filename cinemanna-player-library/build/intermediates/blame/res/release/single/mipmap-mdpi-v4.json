@@ -20,6 +20,14 @@
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-mdpi/subtitle_increment4.png"
     },
     {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/mipmap-mdpi-v4/subtitle_off12.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-mdpi/subtitle_off12.png"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/mipmap-mdpi-v4/subtitle_increment12.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-mdpi/subtitle_increment12.png"
+    },
+    {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/mipmap-mdpi-v4/subtitle_decrement2.png",
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-mdpi/subtitle_decrement2.png"
     },
@@ -28,7 +36,15 @@
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-mdpi/retry_icon.png"
     },
     {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/mipmap-mdpi-v4/subtitle_decrement12.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-mdpi/subtitle_decrement12.png"
+    },
+    {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/mipmap-mdpi-v4/subtitle_decrement3.png",
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-mdpi/subtitle_decrement3.png"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/release/mipmap-mdpi-v4/subtitle_on12.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/mipmap-mdpi/subtitle_on12.png"
     }
 ]
