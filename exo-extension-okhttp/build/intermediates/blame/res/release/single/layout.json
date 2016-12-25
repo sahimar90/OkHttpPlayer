@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/res/merged/release/layout/exo_simple_player_view.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/exploded-aar/CinemanaPlayer/exo-player-library/unspecified/res/layout/exo_simple_player_view.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/res/merged/release/layout/exo_playback_control_view.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/exploded-aar/CinemanaPlayer/exo-player-library/unspecified/res/layout/exo_playback_control_view.xml"
+    }
+]

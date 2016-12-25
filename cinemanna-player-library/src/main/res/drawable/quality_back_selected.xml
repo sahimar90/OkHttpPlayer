@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/transparent"/>
+    <!--<stroke android:width="1dip" android:color="@color/tabSelected" />-->
+    <stroke android:width="1sp" android:color="@color/selected" />
+    <corners android:radius="@dimen/small_space"/>
+    <padding android:left="5dip" android:top="5dip" android:right="5dip" android:bottom="5dip" />
+</shape>

@@ -8,56 +8,59 @@ import java.util.TreeMap;
  */
 public class VideoFile implements Serializable {
 
-    public static final int QUALITY_720P = -3;
-    public static final int QUALITY_480P = -2;
-    public static final int QUALITY_360P = -1;
-    public static final int QUALITY_240P = 0;
+    public enum Resolution {
+        RESOLUTION_720P,
+        RESOLUTION_480P,
+        RESOLUTION_360P,
+        RESOLUTION_240P
+    }
 
-    public static final int DASH = 0;
-    public static final int SS = 1;
-    public static final int HLS = 2;
-    public static final int OTHER = 3;  // e.g., MP4 or WebM
-
-
-    public int videoType = OTHER;
+//    public static final int RESOLUTION_720P = -3;
+//    public static final int RESOLUTION_480P = -2;
+//    public static final int RESOLUTION_360P = -1;
+//    public static final int RESOLUTION_240P = 0;
 
     public String title;
     public String id;
-    public TreeMap<Integer, String> resolutions = new TreeMap<>();  // <quality, url>; e.g, <QUALITY_720P, "http://example.com/video720p.mp4"
-    public int wantedResolution = QUALITY_360P;
+
+//  <quality, url>; e.g, <RESOLUTION_720P, "http://example.com/video720p.mp4"
+//  public TreeMap<Integer, String> qualities = new TreeMap<>();
+//  public List<Quality> qualities = new ArrayList<>();
+//  public int wantedResolution = RESOLUTION_360P;
+
+    public TreeMap<Resolution, Quality> qualities = new TreeMap<>();
+    public Resolution wantedResolution = Resolution.RESOLUTION_240P;
 
     public String arTranslationFilePath;
 
+//    public static String getQualityString(int quality) {
+//        switch (quality) {
+//            case RESOLUTION_720P:
+//                return "720p";
+//            case RESOLUTION_480P:
+//                return "480p";
+//            case RESOLUTION_360P:
+//                return "360p";
+//            case RESOLUTION_240P:
+//                return "240p";
+//            default:
+//                return String.valueOf(RESOLUTION_240P);
+//        }
+//    }
+//
+//    public static int getQualityIndex(String quality) {
+//        switch (quality) {
+//            case "720p":
+//                return RESOLUTION_720P;
+//            case "480p":
+//                return RESOLUTION_480P;
+//            case "360p":
+//                return RESOLUTION_360P;
+//            case "240p":
+//                return RESOLUTION_240P;
+//            default:
+//                return RESOLUTION_240P;
+//        }
+//    }
 
-    public static String getQualityString(int quality) {
-
-        switch (quality) {
-            case QUALITY_720P:
-                return "720p";
-            case QUALITY_480P:
-                return "480p";
-            case QUALITY_360P:
-                return "360p";
-            case QUALITY_240P:
-                return "240p";
-            default:
-                return String.valueOf(QUALITY_240P);
-        }
-
-    }
-
-    public static int getQualityIndex(String quality) {
-        switch (quality) {
-            case "720p":
-                return QUALITY_720P;
-            case "480p":
-                return QUALITY_480P;
-            case "360p":
-                return QUALITY_360P;
-            case "240p":
-                return QUALITY_240P;
-            default:
-                return QUALITY_240P;
-        }
-    }
 }

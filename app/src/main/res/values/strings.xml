@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">ExoPlayerWrapper</string>
-    <string name="title_activity_player">SimplePlayer</string>
+    <string name="app_name">CinemanaPlayer</string>
+    <string name="title_activity_player">CinemanaPlayer</string>
 </resources>

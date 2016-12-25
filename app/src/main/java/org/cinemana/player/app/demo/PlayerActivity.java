@@ -9,12 +9,14 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import org.earthlink.cinemana.player.CinemanaVideoPlayer;
+import org.earthlink.cinemana.player.Quality;
 import org.earthlink.cinemana.player.VideoFile;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -22,8 +24,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static org.earthlink.cinemana.player.VideoFile.Resolution.RESOLUTION_480P;
+import static org.earthlink.cinemana.player.VideoFile.Resolution.RESOLUTION_720P;
 
-public class PlayerActivity extends FragmentActivity {
+
+public class PlayerActivity extends FragmentActivity implements Serializable {
 
     private static final String TAG = PlayerActivity.class.getSimpleName();
     String transcodedFilesPath_url = "http://cinemana.earthlinktele.com/api/android/transcoddedFiles/id/";
@@ -40,10 +45,8 @@ public class PlayerActivity extends FragmentActivity {
         setContentView(R.layout.activity_player);
 
         mainLL = (LinearLayout) findViewById(R.id.mainLL);
-        getTranscodedFiles("4100");
+        getTranscodedFiles("61832");
     }
-
-
 
     private void startCinemanaPlayer(VideoFile videoFile) {
         Intent i = new Intent(this, CinemanaVideoPlayer.class);
@@ -52,7 +55,6 @@ public class PlayerActivity extends FragmentActivity {
 
         startActivity(i);
     }
-
 
     private void getSrtLink(String videoId) {
 
@@ -77,7 +79,7 @@ public class PlayerActivity extends FragmentActivity {
                     videoFile.title = response.optString("en_title");
                     videoFile.id = response.optString("nb");
 
-                    videoFile.wantedResolution = VideoFile.QUALITY_720P;
+                    videoFile.wantedResolution = VideoFile.Resolution.RESOLUTION_480P;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -88,14 +90,11 @@ public class PlayerActivity extends FragmentActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         };
 
         getResponse(allVideoInfo_URL + videoId, callback);
     }
-
-
 
 
     private void getTranscodedFiles(final String videoId) {
@@ -109,38 +108,57 @@ public class PlayerActivity extends FragmentActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 JSONArray transcodedFiles;
+                String responseString = response.body().string();
                 try {
-                    transcodedFiles = new JSONArray(response.body().string());
+                    transcodedFiles = new JSONArray(responseString);
                     for (int i = 0; i < transcodedFiles.length(); i++) {
                         JSONObject transcodedFileObj = transcodedFiles.getJSONObject(i);
 
                         if (transcodedFileObj.optString("container").contains("mp4")) {
-                            switch (transcodedFileObj.optString("resolution")) {
+                            String resolutionName = transcodedFileObj.optString("resolution");
+                            switch (resolutionName) {
                                 case "240p":
-                                    videoFile.resolutions.put(VideoFile.QUALITY_240P ,transcodedFileObj.optString("videoUrl"));
+                                    Quality quality_240p = new Quality(
+                                                    VideoFile.Resolution.RESOLUTION_240P,
+                                                    resolutionName,
+                                                    transcodedFileObj.optString("videoUrl")
+                                                    );
+                                    videoFile.qualities.put(VideoFile.Resolution.RESOLUTION_240P, quality_240p);
                                     break;
                                 case "360p":
-                                    videoFile.resolutions.put(VideoFile.QUALITY_360P ,transcodedFileObj.optString("videoUrl"));
+                                    Quality quality_360p = new Quality(
+                                            VideoFile.Resolution.RESOLUTION_360P,
+                                            resolutionName,
+                                            transcodedFileObj.optString("videoUrl")
+                                    );
+                                    videoFile.qualities.put(VideoFile.Resolution.RESOLUTION_360P, quality_360p);
                                     break;
                                 case "480p":
-                                    videoFile.resolutions.put(VideoFile.QUALITY_480P ,transcodedFileObj.optString("videoUrl"));
-                                    break;
+                                    Quality quality_480p = new Quality(
+                                            RESOLUTION_480P,
+                                            resolutionName,
+                                            transcodedFileObj.optString("videoUrl")
+                                    );
+                                    videoFile.qualities.put(VideoFile.Resolution.RESOLUTION_480P, quality_480p);
+
                                 case "720p":
-                                    videoFile.resolutions.put(VideoFile.QUALITY_720P ,transcodedFileObj.optString("videoUrl"));
+                                    Quality quality_720p = new Quality(
+                                            RESOLUTION_720P,
+                                            resolutionName,
+                                            transcodedFileObj.optString("videoUrl")
+                                    );
+                                    videoFile.qualities.put(VideoFile.Resolution.RESOLUTION_720P, quality_720p);
                                     break;
                             }
                         }
                     }   // finished setting transcoded files
 
-
                     getSrtLink(videoId);
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.i(TAG, "responseString: " + responseString);
                 }
-
-
             }
         };
 

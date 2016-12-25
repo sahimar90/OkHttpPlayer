@@ -1,0 +1,49 @@
+[
+    {
+        "outputFile": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v11/values-v11.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 10,
+                    "endOffset": 329
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.1.1/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 6,
+                        "endColumn": 10,
+                        "endOffset": 329
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 334,
+                    "endLine": 8,
+                    "endColumn": 12,
+                    "endOffset": 417
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.github.castorflex.smoothprogressbar/library/1.1.0/res/values-v11/values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 182,
+                        "endLine": 5,
+                        "endColumn": 12,
+                        "endOffset": 265
+                    }
+                }
+            }
+        ]
+    }
+]

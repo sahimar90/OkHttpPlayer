@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="progressBarColors">
+        <item>#808080</item>
+        <item>#606060</item>
+        <item>#404040</item>
+        <item>#252525</item>
+    </array>
+</resources>

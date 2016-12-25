@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/castorflex/work/SmoothProgressBar/library/src/main/res/values-v11/styles.xml -->
+    <eat-comment/>
+    <style name="SPB" parent="android:Widget.Holo.ProgressBar.Horizontal">
+    </style>
+</resources>

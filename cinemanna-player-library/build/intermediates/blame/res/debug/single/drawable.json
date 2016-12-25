@@ -2,5 +2,21 @@
     {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/debug/drawable/recstyletext.xml",
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/drawable/recstyletext.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/debug/drawable/rounded_back_shaped.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/drawable/rounded_back_shaped.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/debug/drawable/quality_back_unselected.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/drawable/quality_back_unselected.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/debug/drawable/quality_back_selected.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/drawable/quality_back_selected.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/debug/drawable/rounded_back.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/src/main/res/drawable/rounded_back.xml"
     }
 ]

@@ -1,0 +1,323 @@
+[
+    {
+        "outputFile": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 57,
+                    "endOffset": 108
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 57,
+                        "endOffset": 108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 113,
+                    "endLine": 7,
+                    "endColumn": 9,
+                    "endOffset": 278
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 113,
+                        "endLine": 7,
+                        "endColumn": 9,
+                        "endOffset": 278
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 283,
+                    "endColumn": 52,
+                    "endOffset": 331
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 283,
+                        "endColumn": 52,
+                        "endOffset": 331
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 336,
+                    "endColumn": 48,
+                    "endOffset": 380
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 336,
+                        "endColumn": 48,
+                        "endOffset": 380
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 935,
+                    "endColumn": 77,
+                    "endOffset": 1008
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 935,
+                        "endColumn": 77,
+                        "endOffset": 1008
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1013,
+                    "endColumn": 68,
+                    "endOffset": 1077
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1013,
+                        "endColumn": 68,
+                        "endOffset": 1077
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1082,
+                    "endColumn": 64,
+                    "endOffset": 1142
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1082,
+                        "endColumn": 64,
+                        "endOffset": 1142
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1147,
+                    "endColumn": 62,
+                    "endOffset": 1205
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1147,
+                        "endColumn": 62,
+                        "endOffset": 1205
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1210,
+                    "endColumn": 76,
+                    "endOffset": 1282
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1210,
+                        "endColumn": 76,
+                        "endOffset": 1282
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1287,
+                    "endColumn": 66,
+                    "endOffset": 1349
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 1287,
+                        "endColumn": 66,
+                        "endOffset": 1349
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1354,
+                    "endColumn": 62,
+                    "endOffset": 1412
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1354,
+                        "endColumn": 62,
+                        "endOffset": 1412
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1417,
+                    "endLine": 24,
+                    "endColumn": 10,
+                    "endOffset": 1609
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1417,
+                        "endLine": 24,
+                        "endColumn": 10,
+                        "endOffset": 1609
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1614,
+                    "endLine": 28,
+                    "endColumn": 10,
+                    "endOffset": 1833
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 4,
+                        "startOffset": 1614,
+                        "endLine": 28,
+                        "endColumn": 10,
+                        "endOffset": 1833
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 1838,
+                    "endLine": 32,
+                    "endColumn": 10,
+                    "endOffset": 2036
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 4,
+                        "startOffset": 1838,
+                        "endLine": 32,
+                        "endColumn": 10,
+                        "endOffset": 2036
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 33,
+                    "startColumn": 4,
+                    "startOffset": 2041,
+                    "endLine": 36,
+                    "endColumn": 10,
+                    "endOffset": 2251
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 33,
+                        "startColumn": 4,
+                        "startOffset": 2041,
+                        "endLine": 36,
+                        "endColumn": 10,
+                        "endOffset": 2251
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 2256,
+                    "endLine": 40,
+                    "endColumn": 10,
+                    "endOffset": 2460
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidGitHubProjects/ExoPlayer/library/buildout/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 4,
+                        "startOffset": 2256,
+                        "endLine": 40,
+                        "endColumn": 10,
+                        "endOffset": 2460
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,15 +1,31 @@
 [
     {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/cinemana_playback_control_view.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/layout/cinemana_playback_control_view.xml"
+    },
+    {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/fullscreen_imageview.xml",
         "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/layout/fullscreen_imageview.xml"
     },
     {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/cinemana_player_view.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/layout/cinemana_player_view.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/quality_item2.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/layout/quality_item2.xml"
+    },
+    {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/exo_simple_player_view.xml",
-        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/layout/exo_simple_player_view.xml"
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.1.1/res/layout/exo_simple_player_view.xml"
     },
     {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/exo_playback_control_view.xml",
-        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.0.4/res/layout/exo_playback_control_view.xml"
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.1.1/res/layout/exo_playback_control_view.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/quality_item.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/bundles/debug/res/layout/quality_item.xml"
     },
     {
         "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/cinemanna-player-library/build/intermediates/res/merged/androidTest/debug/layout/player_view_layout.xml",

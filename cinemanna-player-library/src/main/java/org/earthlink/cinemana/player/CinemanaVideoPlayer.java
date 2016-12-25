@@ -1,23 +1,16 @@
 package org.earthlink.cinemana.player;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,12 +31,8 @@ import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MergingMediaSource;
 import com.google.android.exoplayer2.source.SingleSampleMediaSource;
+import com.google.android.exoplayer2.source.TrackGroup;
 import com.google.android.exoplayer2.source.TrackGroupArray;
-import com.google.android.exoplayer2.source.dash.DashMediaSource;
-import com.google.android.exoplayer2.source.dash.DefaultDashChunkSource;
-import com.google.android.exoplayer2.source.hls.HlsMediaSource;
-import com.google.android.exoplayer2.source.smoothstreaming.DefaultSsChunkSource;
-import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource;
 import com.google.android.exoplayer2.text.CaptionStyleCompat;
 import com.google.android.exoplayer2.text.Cue;
 import com.google.android.exoplayer2.text.TextRenderer;
@@ -51,23 +40,19 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.FixedTrackSelection;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
-import com.google.android.exoplayer2.trackselection.TrackSelections;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
-import com.google.android.exoplayer2.ui.PlaybackControlView;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.ui.SubtitleView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.util.MimeTypes;
 import com.google.android.exoplayer2.util.Util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 import java.util.TimerTask;
 
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import okhttp3.OkHttpClient;
 
 
@@ -75,8 +60,7 @@ import okhttp3.OkHttpClient;
  * Created by cklar on 23.09.15.
  */
 public class CinemanaVideoPlayer extends Activity implements View.OnClickListener, ExoPlayer.EventListener,
-        TrackSelector.EventListener<MappingTrackSelector.MappedTrackInfo>,
-        PlaybackControlView.VisibilityListener, TextRenderer.Output {
+        CinemanaPlaybackControlView.VisibilityListener, TextRenderer.Output {
 
 
     private static final String TAG = CinemanaVideoPlayer.class.getSimpleName();
@@ -93,19 +77,17 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
     private EventLogger eventLogger;
     private SubtitleView subtitleLayout;
 
-    private int wantedResolution = VideoFile.QUALITY_720P;
 
-
-    LinearLayout qualityTextLL, videoControlsLL, additionalControlsLL;
     ImageView incrementSubs, decrementSubs;
     private float fontScale = 2f;
 
     TextView videoTitle;
-    private ProgressBar circleProgress;
+//    private ProgressBar circleProgress;
 
+    private SmoothProgressBar progressBar;
     private Handler mainHandler;
     private Timeline.Window window;
-    private SimpleExoPlayerView simpleExoPlayerView;
+    private CinemanaPlayerView cinemanaPlayerView;
     private Button retryButton;
 
     private DataSource.Factory mediaDataSourceFactory;
@@ -117,11 +99,20 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
     private boolean shouldAutoPlay;
     private int playerWindow;
     private long playerPosition;
-    protected Timer hideOSBarsTimer;
+//    protected Timer hideOSBarsTimer;
     protected static final int HIDE_SYSTEM_BARS_DELAY = 2500;
 
 
     OkHttpClient okHttpClient;
+
+    public interface SettingsChanged {
+        void onResolutionChanged(int resolution);
+        void onSubtitleFontSizedChanged(float fontScale);
+        void onPaused(long position);
+    }
+
+    SettingsChanged settingsChanged;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,25 +123,20 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
 
         initUi();
         hideSystemBars();
-
     }
 
     void initUi() {
-
         setContentView(R.layout.player_view_layout);
 
         userAgent = Util.getUserAgent(this, TAG);
 
         okHttpClient = new OkHttpClient();
 
-        hideOSBarsTimer = new Timer();
-        hideOSBarsTimer.schedule(new HideSystemBarsTask(), HIDE_SYSTEM_BARS_DELAY);
-
+//        hideOSBarsTimer = new Timer();
+//        hideOSBarsTimer.schedule(new HideSystemBarsTask(), HIDE_SYSTEM_BARS_DELAY);
 
         subtitleLayout = (SubtitleView) findViewById(R.id.subtitles);
 
-        qualityTextLL = (LinearLayout) findViewById(R.id.qualityTextLL);
-        videoControlsLL = (LinearLayout) findViewById(R.id.videoControlsLL);
 
         retryButton = (Button) findViewById(R.id.retry_button);
         retryButton.setOnClickListener(this);
@@ -160,47 +146,32 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
         decrementSubs = (ImageView) findViewById(R.id.decrementSubs);
 
         videoTitle = (TextView) findViewById(R.id.videoTitle);
+        Typeface videoTitleTypeface
+                = Typeface.createFromAsset(getAssets(), "fonts/helveticaneueltarabic-roman.ttf");
+        videoTitle.setTypeface(videoTitleTypeface);
+
+
 
         videoTitle.setText(videoFile.title);
 
-        additionalControlsLL = (LinearLayout) findViewById(R.id.additionalControlsLL);
+//        circleProgress = (ProgressBar) findViewById(circleProgress);
+//        circleProgress.setAlpha(0.4f);
 
-        circleProgress = (ProgressBar) findViewById(R.id.circleProgress);
-        circleProgress.setAlpha(0.4f);
+        progressBar = (SmoothProgressBar) findViewById(R.id.progressBar);
+//        incrementSubs.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                incrementFontSize();
+//            }
+//        });
 
-        incrementSubs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                incrementFontSize();
-            }
-        });
-
-        decrementSubs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                decrementFontSize();
-            }
-        });
-
-
-        View showHideSubs = findViewById(R.id.showHideSubs);
-        if (showSubtitles()) {
-            ((ImageView)findViewById(R.id.showHideSubs))
-                    .setImageDrawable(getResources().getDrawable(R.mipmap.subtitle_on12));
-        } else {
-            ((ImageView)findViewById(R.id.showHideSubs))
-                    .setImageDrawable(getResources().getDrawable(R.mipmap.subtitle_off12));
-        }
-        showHideSubs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleSubtitle();
-            }
-        });
-
+//        decrementSubs.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                decrementFontSize();
+//            }
+//        });
         configureSubtitleView();
-        wantedResolution = videoFile.wantedResolution;
-
 
         shouldAutoPlay = true;
         mediaDataSourceFactory = buildDataSourceFactory(true);
@@ -220,15 +191,11 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
         retryButton = (Button) findViewById(R.id.retry_button);
         retryButton.setOnClickListener(this);
 
-        simpleExoPlayerView = (SimpleExoPlayerView) findViewById(R.id.player_view);
-        simpleExoPlayerView.setControllerVisibilityListener(this);
-//        simpleExoPlayerView.requestFocus();
-
-
-        addQualitiesTextViews();
+        cinemanaPlayerView = (CinemanaPlayerView) findViewById(R.id.player_view);
+        cinemanaPlayerView.setControllerVisibilityListener(this);
+        cinemanaPlayerView.requestFocus();
 
         initializePlayer();
-
     }
 
 
@@ -237,43 +204,55 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 //                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION  // in portrait mode,
-                            // the player controllers overlap with the navigation bar
+                        // the player controllers overlap with the navigation bar
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
         );
-
-
     }
 
 
     private void initializePlayer() {
 
-        circleProgress.setVisibility(View.VISIBLE);
-
+//        circleProgress.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
 
         if (player == null) {
 
-            eventLogger = new EventLogger();
             TrackSelection.Factory videoTrackSelectionFactory =
                     new FixedTrackSelection.Factory();
-            trackSelector = new DefaultTrackSelector(mainHandler, videoTrackSelectionFactory);
-            trackSelector.addListener(this);
-            trackSelector.addListener(eventLogger);
-
+            trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+//            trackSelector.addListener(this);
+//            trackSelector.addListener(eventLogger);
+            eventLogger = new EventLogger(trackSelector);
 
             player = ExoPlayerFactory.newSimpleInstance(this, trackSelector, new DefaultLoadControl());
+
             player.addListener(this);
             player.addListener(eventLogger);
             player.setAudioDebugListener(eventLogger);
             player.setVideoDebugListener(eventLogger);
             player.setId3Output(eventLogger);
 
-            simpleExoPlayerView.setPlayer(player);
-            if (playerPosition == C.TIME_UNSET) {
-                player.seekToDefaultPosition(playerWindow);
+
+            // CONTROLLER
+            cinemanaPlayerView.setPlayer(player);
+            Quality lastQuality = PlayerPrefs.with(this).getLastSelectedQuality();
+            if (lastQuality == null) {
+                videoFile.wantedResolution = VideoFile.Resolution.RESOLUTION_360P;
+                player.seekToDefaultPosition(2);
             } else {
-                player.seekTo(playerWindow, playerPosition);
+                videoFile.wantedResolution = lastQuality.resolution;
+                player.seekTo(lastQuality.windowIndex,
+                        PlayerPrefs.with(this).getLastSeekPosition(videoFile.id));
+            }
+
+            cinemanaPlayerView.getController().setVideoData(videoFile, trackSelector);
+            cinemanaPlayerView.getController().setDecorView(getWindow().getDecorView());
+
+
+            if (videoFile.arTranslationFilePath.contains(".srt")) {
+                cinemanaPlayerView.getController().setSubtitleLayout(subtitleLayout);
             }
 
             player.setPlayWhenReady(shouldAutoPlay);
@@ -281,38 +260,28 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
         }
 
         if (playerNeedsSource) {
-            Uri[] uris;
-            String[] extensions;
+            String[] extensions = new String[videoFile.qualities.entrySet().size()];
 
-            List<String> uriStrings = new ArrayList<>();
+            MediaSource[] mediaSources = new MediaSource[videoFile.qualities.entrySet().size()];
 
-            for (Map.Entry<Integer, String> entry : videoFile.resolutions.entrySet()) {
-                int key = entry.getKey();
-                String value = entry.getValue();
-                uriStrings.add(value);
-            }
+            int j = 0;
+            for (Map.Entry<VideoFile.Resolution, Quality> entry : videoFile.qualities.entrySet()) {
+//                VideoFile.Resolution resolution = entry.getKey();
+                Quality quality = entry.getValue();
 
-            uris = new Uri[uriStrings.size()];
-            for (int i = 0; i < uriStrings.size(); i++) {
-                uris[i] = Uri.parse(uriStrings.get(i));
-            }
+                mediaSources[j] =
+                        buildMediaSource(
+                                Uri.parse(quality.url),
+                                Uri.parse(videoFile.arTranslationFilePath),
+                                extensions[j]
+                        );
 
-            extensions = new String[uriStrings.size()];
-
-            if (Util.maybeRequestReadExternalStoragePermission(this, uris)) {
-                // The player will be reinitialized if the permission is granted.
-                return;
-            }
-
-            MediaSource[] mediaSources = new MediaSource[uris.length];
-            for (int i = 0; i < uris.length; i++) {
-                mediaSources[i] = buildMediaSource(uris[i], Uri.parse(videoFile.arTranslationFilePath), extensions[i]);
-                Log.i(TAG, "uris[" + i + "]: " + uris[i]);
+                Log.i(TAG, quality.name + "@" + j);
+                quality.windowIndex = j++;
             }
 
             MediaSource mediaSource = mediaSources.length == 1 ? mediaSources[0]
                     : new ConcatenatingMediaSource(mediaSources);
-
 
             player.prepare(mediaSource, false, false);
             playerNeedsSource = false;
@@ -320,27 +289,12 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
         }
     }
 
-//    // adds a control view to the end of videoControlsLL
-//    public void addViewControl(View view) {
-//        int margin = (int) surfaceView.getContext().getResources().getDimension(R.dimen.side_control_margin);
-//        LinearLayout.LayoutParams params =
-//                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                        ViewGroup.LayoutParams.WRAP_CONTENT);
-//        params.setMargins(margin, margin, margin, margin); //substitute parameters for left, top, right, bottom
-//        view.setLayoutParams(params);
-//
-//        additionalControlsLL.addView(view);
-//    }
-
     @Override
     public void onClick(View view) {
         if (view == retryButton) {
             initializePlayer();
         }
-
-
     }
-
 
     private void releasePlayer() {
         if (player != null) {
@@ -392,7 +346,8 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
         switch (playbackState) {
             case ExoPlayer.STATE_BUFFERING:
                 text += "buffering";
-                circleProgress.setVisibility(View.VISIBLE);
+//                circleProgress.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 break;
             case ExoPlayer.STATE_ENDED:
                 text += "ended";
@@ -401,7 +356,8 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
                 text += "idle";
                 break;
             case ExoPlayer.STATE_READY:
-                circleProgress.setVisibility(View.INVISIBLE);
+//                circleProgress.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
                 text += "ready";
                 break;
             default:
@@ -418,6 +374,38 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
 
     }
 
+    @Override
+    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+        updateButtonVisibilities();
+        MappingTrackSelector.MappedTrackInfo mappedTrackInfo = trackSelector.getCurrentMappedTrackInfo();
+        if (mappedTrackInfo != null) {
+            if (mappedTrackInfo.getTrackTypeRendererSupport(C.TRACK_TYPE_VIDEO)
+                    == MappingTrackSelector.MappedTrackInfo.RENDERER_SUPPORT_UNSUPPORTED_TRACKS) {
+                showToast(R.string.error_unsupported_video);
+            }
+            if (mappedTrackInfo.getTrackTypeRendererSupport(C.TRACK_TYPE_AUDIO)
+                    == MappingTrackSelector.MappedTrackInfo.RENDERER_SUPPORT_UNSUPPORTED_TRACKS) {
+                showToast(R.string.error_unsupported_audio);
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        PlayerPrefs.with(this).setLastSeekPosition(player.getCurrentPosition(), videoFile.id);
+//        settingsChanged.onPaused(player.getCurrentPosition());
+
+        player.setPlayWhenReady(false);
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     public void onPlayerError(ExoPlaybackException e) {
@@ -461,31 +449,26 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
     protected void onDestroy() {
         super.onDestroy();
 
-        if (null != hideOSBarsTimer) {
-            hideOSBarsTimer.cancel();
-        }
-
+//        if (null != hideOSBarsTimer) {
+//            hideOSBarsTimer.cancel();
+//        }
 
         player.stop();
-
         releasePlayer();
     }
 
-
-    private void hideControls() {
-        videoControlsLL.setVisibility(View.GONE);
-        qualityTextLL.setVisibility(View.GONE);
-        videoTitle.setVisibility(View.GONE);
-        additionalControlsLL.setVisibility(View.GONE);
-    }
+//    private void hideControls() {
+//        videoControlsLL.setVisibility(View.GONE);
+//        qualityTextLL.setVisibility(View.GONE);
+//        videoTitle.setVisibility(View.GONE);
+//        additionalControlsLL.setVisibility(View.GONE);
+//    }
 
     private void showControls() {
         retryButton.setVisibility(View.VISIBLE);
-
-        videoControlsLL.setVisibility(View.VISIBLE);
-        qualityTextLL.setVisibility(View.VISIBLE);
+//        circleProgress.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
         videoTitle.setVisibility(View.VISIBLE);
-        additionalControlsLL.setVisibility(View.VISIBLE);
     }
 
 
@@ -496,15 +479,19 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
             return;
         }
 
-        TrackSelections<MappingTrackSelector.MappedTrackInfo>
-                trackSelections = trackSelector.getCurrentSelections();
-        if (trackSelections == null) {
+        MappingTrackSelector.MappedTrackInfo mappedTrackInfo
+                = trackSelector.getCurrentMappedTrackInfo();
+
+        if (mappedTrackInfo == null) {
             return;
         }
 
+        TrackGroupArray trackSelections
+                = mappedTrackInfo.getUnassociatedTrackGroups();
+
         int rendererCount = trackSelections.length;
         for (int i = 0; i < rendererCount; i++) {
-            TrackGroupArray trackGroups = trackSelections.info.getTrackGroups(i);
+            TrackGroup trackGroups = trackSelections.get(i);
             if (trackGroups.length != 0) {
                 Button button = new Button(this);
                 int label;
@@ -544,197 +531,6 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
     }
 
 
-    private void decrementFontSize() {
-        fontScale = Math.max(fontScale / 1.05f, 0.5f);
-        subtitleLayout.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
-
-        Log.i(TAG, "fontScale: " + fontScale);
-    }
-
-    private void incrementFontSize() {
-
-        fontScale = Math.min(fontScale * 1.05f, 3f);
-        subtitleLayout.setFractionalTextSize(SubtitleView.DEFAULT_TEXT_SIZE_FRACTION * fontScale);
-
-        Log.i(TAG, "fontScale: " + fontScale);
-    }
-
-    private void addQualitiesTextViews() {
-        Log.i(TAG, "adding quality TextViews");
-
-//        Switch videoFormatSwitch = new Switch(this);
-//        videoFormatSwitch.setLayoutParams(
-//                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                        ViewGroup.LayoutParams.WRAP_CONTENT));
-
-        LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
-        int i = 0;
-        for (int quality : videoFile.resolutions.keySet()) {
-            AmazingTextView qualityTextView = (AmazingTextView) inflater.inflate(R.layout.quality_item, null);
-            String qualityText = VideoFile.getQualityString(quality);    // spaces before and after the text, e.g., 720p,
-            // to have a space when its background border is active
-            qualityTextView.setText(qualityText);
-
-            qualityTextView.setTag(videoFile.resolutions.get(quality)); // the url link
-            qualityTextView.setTag(-101, i++);
-
-            qualityTextView.setOnClickListener(qualityChangeListener);
-
-            if (wantedResolution == quality) {
-                setQualityTextStyle(qualityTextView, true, false);
-            } else {
-                setQualityTextStyle(qualityTextView, false, false);
-            }
-
-            qualityTextLL.addView(qualityTextView);
-        }
-
-    }
-
-    View.OnClickListener qualityChangeListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            for (int i = 0; i < qualityTextLL.getChildCount(); i++) {
-                AmazingTextView qualityTextView = (AmazingTextView) qualityTextLL.getChildAt(i);
-                setQualityTextStyle(qualityTextView, false, true);
-            }
-
-            setQualityTextStyle((AmazingTextView) view, true, true);
-
-            wantedResolution = VideoFile.getQualityIndex((String) ((TextView) view).getText());
-
-            Log.i(TAG, "will change to resolution " + VideoFile.getQualityString(wantedResolution));
-            changeResolution(wantedResolution, (int) view.getTag(-101));
-        }
-    };
-
-    public void changeResolution(int wantedResolution, int position) {
-
-
-        TrackSelections<MappingTrackSelector.MappedTrackInfo> trackSelections = trackSelector.getCurrentSelections();
-
-        if (trackSelections == null) {
-            return;
-        }
-
-        String trackDebug = "";
-        int rendererCount = trackSelections.length;
-        for (int i = 0; i < rendererCount; i++) {
-            TrackGroupArray trackGroups = trackSelections.info.getTrackGroups(i);
-            if (trackGroups.length != 0) {
-                switch (player.getRendererType(i)) {
-                    case C.TRACK_TYPE_AUDIO:
-                        trackDebug += "audio";
-                        break;
-                    case C.TRACK_TYPE_VIDEO:
-                        trackDebug += "video";
-                        break;
-                    case C.TRACK_TYPE_TEXT:
-                        trackDebug += "text";
-                        break;
-                    default:
-                        continue;
-                }
-            }
-        }
-
-        Log.i(TAG, "trackDebug: " + trackDebug);
-
-        this.wantedResolution = wantedResolution;
-
-        Timeline currentTimeline = player.getCurrentTimeline();
-        if (currentTimeline == null) {
-            return;
-        }
-        int currentWindowIndex = player.getCurrentWindowIndex();
-
-        Log.i(TAG, "position: " + position);
-        Log.i(TAG, "player.getCurrentWindowIndex(): " + player.getCurrentWindowIndex());
-
-        if (currentWindowIndex < currentTimeline.getWindowCount() - 1) {
-//            Log.i(TAG, "will change window to " + (currentWindowIndex + 1));
-//            player.seekToDefaultPosition(currentWindowIndex + 1);
-            player.seekToDefaultPosition(position);
-        } else if (currentTimeline.getWindow(currentWindowIndex, window, false).isDynamic) {
-            player.seekToDefaultPosition();
-        }
-    }
-
-
-    private void setQualityTextStyle(AmazingTextView qualityTextView, boolean active, boolean onlyBoldAndColor) {
-//        Typeface videoQualityTextTypeface = Typeface.createFromAsset(surfaceView.getContext().getAssets(),
-//                "fonts/ITCFranklinGothicStd-BkCp.otf");
-
-        if (!onlyBoldAndColor) {
-
-            LinearLayout.LayoutParams qualityTextViewsMargins = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            qualityTextViewsMargins.setMargins(3, 3, 3, 3);
-//            qualityTextView.setTextSize(qualityTextSize);
-            qualityTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            qualityTextView.setLayoutParams(qualityTextViewsMargins);
-        }
-
-//        qualityTextView.setTypeface(videoQualityTextTypeface, Typeface.NORMAL);
-
-        qualityTextView.setmBackGroundColor(0X0d0d0d);
-
-        if (active) {
-            qualityTextView.setTextColor(getResources().getColor(R.color.black));
-//            qualityTextView.setBackgroundResource(R.drawable.video_rounded_frame);
-            qualityTextView.setTypeface(null, Typeface.BOLD);
-        } else {
-            qualityTextView.setTextColor(getResources().getColor(R.color.raven));
-//            qualityTextView.setBackground(null);
-            qualityTextView.setTypeface(null, Typeface.NORMAL);
-        }
-    }
-
-
-
-    private void toggleSubtitle() {
-
-        if (trackSelector.getCurrentSelections().length > 2) {
-            if (showSubtitles()) {
-                Log.i(TAG, "will hide subtitles...");
-                trackSelector.setRendererDisabled(2, true);
-                ((ImageView)findViewById(R.id.showHideSubs))
-                        .setImageDrawable(getResources().getDrawable(R.mipmap.subtitle_off12));
-
-                setShowSubtitle(false);
-            } else {
-                Log.i(TAG, "will show subtitles...");
-                trackSelector.setRendererDisabled(2, false);
-                ((ImageView)findViewById(R.id.showHideSubs))
-                        .setImageDrawable(getResources().getDrawable(R.mipmap.subtitle_on12));
-                setShowSubtitle(true);
-            }
-        }
-
-    }
-
-
-    private boolean showSubtitles() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        return sharedPref.getBoolean(getString(R.string.key_show_subtitles), true);
-    }
-
-    private void setShowSubtitle(Boolean showSubtitle) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-
-        SharedPreferences.Editor sharedPrefsEditor;
-        sharedPrefsEditor = sharedPref.edit();
-        sharedPrefsEditor.putBoolean(getString(R.string.key_show_subtitles), showSubtitle);
-        sharedPrefsEditor.apply();
-    }
-
-
     private DataSource.Factory buildDataSourceFactory(boolean useBandwidthMeter) {
         return buildDataSourceFactory(useBandwidthMeter ? BANDWIDTH_METER : null);
     }
@@ -745,25 +541,13 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
     }
 
 
-
     private MediaSource buildMediaSource(Uri uri, Uri subtitleUri, String overrideExtension) {
         int type = Util.inferContentType(!TextUtils.isEmpty(overrideExtension) ? "." + overrideExtension
                 : uri.getLastPathSegment());
         switch (type) {
-            case C.TYPE_SS:
-                return new SsMediaSource(uri, buildDataSourceFactory(false),
-                        new DefaultSsChunkSource.Factory(mediaDataSourceFactory), mainHandler, eventLogger);
-            case C.TYPE_DASH:
-                return new DashMediaSource(uri, buildDataSourceFactory(false),
-                        new DefaultDashChunkSource.Factory(mediaDataSourceFactory), mainHandler, eventLogger);
-            case C.TYPE_HLS:
-                return new HlsMediaSource(uri, mediaDataSourceFactory, mainHandler, eventLogger);
             case C.TYPE_OTHER:
-                Log.i(TAG, "C.TYPE_OTHER");
-
                 Format textFormat = Format.createTextSampleFormat(null, MimeTypes.APPLICATION_SUBRIP,
                         null, Format.NO_VALUE, Format.NO_VALUE, "ar", null);
-
 
                 MediaSource subtitleSource =
                         new SingleSampleMediaSource(subtitleUri,
@@ -783,24 +567,10 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
 
 
     @Override
-    public void onTrackSelectionsChanged(TrackSelections<?
-            extends MappingTrackSelector.MappedTrackInfo> trackSelections) {
-        updateButtonVisibilities();
-        MappingTrackSelector.MappedTrackInfo trackInfo = trackSelections.info;
-        if (trackInfo.hasOnlyUnplayableTracks(C.TRACK_TYPE_VIDEO)) {
-            showToast(R.string.error_unsupported_video);
-        }
-        if (trackInfo.hasOnlyUnplayableTracks(C.TRACK_TYPE_AUDIO)) {
-            showToast(R.string.error_unsupported_audio);
-        }
-    }
-
-    @Override
     public void onVisibilityChange(int visibility) {
-        Log.i(TAG, "visibility changed...");
 
-        hideOSBarsTimer = new Timer();
-        hideOSBarsTimer.schedule(new HideSystemBarsTask(), HIDE_SYSTEM_BARS_DELAY);
+//        hideOSBarsTimer = new Timer();
+//        hideOSBarsTimer.schedule(new HideSystemBarsTask(), HIDE_SYSTEM_BARS_DELAY);
 
     }
 
@@ -820,12 +590,9 @@ public class CinemanaVideoPlayer extends Activity implements View.OnClickListene
     }
 
 
-
-
     private class HideSystemBarsTask extends TimerTask {
         @Override
         public void run() {
-            Log.i(TAG, "will hide system bars");
 
             mainHandler.post(new Runnable() {
                 @Override

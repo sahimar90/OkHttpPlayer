@@ -8,6 +8,13 @@
     <string name="audio">Audio</string>
     <string name="text">Text</string>
 
+    <string name="exo_controls_previous_description">Previous track</string>
+    <string name="exo_controls_next_description">Next track</string>
+    <string name="exo_controls_pause_description">Pause</string>
+    <string name="exo_controls_play_description">Play</string>
+    <string name="exo_controls_stop_description">Stop</string>
+    <string name="exo_controls_rewind_description">Rewind</string>
+    <string name="exo_controls_fastforward_description">Fast forward</string>
 
     <string name="unexpected_intent_action">Unexpected intent action: <xliff:g id="action">%1$s</xliff:g></string>
 
@@ -40,5 +47,9 @@
     <string name="storage_permission_denied">Permission to access storage was denied</string>
 
     <string name="sample_list_load_error">One or more sample lists failed to load</string>
-    <string name="key_show_subtitles">key_show_subtitles</string>
+    <string name="key_show_subtitles">key_subtitles_show</string>
+    <string name="key_last_quality">key_last_quality</string>
+    <string name="key_last_window">key_last_window</string>
+    <string name="key_subtitle_font_size">key_subtitle_font_size</string>
+    <string name="key_seek_position">key_seek_position</string>
 </resources>

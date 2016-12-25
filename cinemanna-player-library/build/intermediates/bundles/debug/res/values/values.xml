@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <array name="progressBarColors">
+        <item>#808080</item>
+        <item>#606060</item>
+        <item>#404040</item>
+        <item>#252525</item>
+    </array>
     <color name="accentColor">@color/malibu</color>
     <color name="black">#0d0d0d</color>
+    <color name="colorAccent">#FF4081</color>
     <color name="jumbo">#c8caca</color>
     <color name="malibu">#68ACDB</color>
+    <color name="monsoon">#777777</color>
+    <color name="raven">#727579</color>
+    <color name="selected">#f7f7f7</color>
     <color name="selectedQuality">@color/malibu</color>
+    <color name="slate_gray">#77828F</color>
+    <color name="transparent">#00000000</color>
     <color name="unselectedQuality">@color/jumbo</color>
     <declare-styleable name="AmazingTextView"><attr format="dimension" name="radius"/><attr format="color" name="backgroundColor"/></declare-styleable>
     <declare-styleable name="CircleProgress"><attr format="reference|color" name="color1"/><attr format="reference|color" name="color2"/><attr format="reference|color" name="color3"/></declare-styleable>
     <dimen name="default_circle_view_size">150dp</dimen>
+    <dimen name="huge_margin">25dp</dimen>
+    <dimen name="large_space">20dp</dimen>
     <dimen name="medium_margin">15dp</dimen>
+    <dimen name="medium_space">10dp</dimen>
     <dimen name="side_control_margin">5dp</dimen>
     <dimen name="side_quality_ll_margin">10dp</dimen>
+    <dimen name="small_space">5dp</dimen>
     <string name="audio">Audio</string>
+    <string name="controls_settings">Settings</string>
     <string name="drm_error_not_supported">Protected content not supported on API levels below 18</string>
     <string name="drm_error_unknown">An unknown DRM error occurred</string>
     <string name="drm_error_unsupported_scheme">This device does not support the required DRM scheme</string>
@@ -26,8 +43,19 @@
     <string name="error_querying_decoders">Unable to query device decoders</string>
     <string name="error_unsupported_audio">Media includes audio tracks, but none are playable by this device</string>
     <string name="error_unsupported_video">Media includes videoFile tracks, but none are playable by this device</string>
+    <string name="exo_controls_fastforward_description">Fast forward</string>
+    <string name="exo_controls_next_description">Next track</string>
+    <string name="exo_controls_pause_description">Pause</string>
+    <string name="exo_controls_play_description">Play</string>
+    <string name="exo_controls_previous_description">Previous track</string>
+    <string name="exo_controls_rewind_description">Rewind</string>
+    <string name="exo_controls_stop_description">Stop</string>
     <string name="failed">Playback failed</string>
-    <string name="key_show_subtitles">key_show_subtitles</string>
+    <string name="key_last_quality">key_last_quality</string>
+    <string name="key_last_window">key_last_window</string>
+    <string name="key_seek_position">key_seek_position</string>
+    <string name="key_show_subtitles">key_subtitles_show</string>
+    <string name="key_subtitle_font_size">key_subtitle_font_size</string>
     <string name="sample_list_load_error">One or more sample lists failed to load</string>
     <string name="selection_default">Default</string>
     <string name="selection_default_none">Default (none)</string>
@@ -36,6 +64,27 @@
     <string name="text">Text</string>
     <string name="unexpected_intent_action">Unexpected intent action: <ns1:g id="action">%1$s</ns1:g></string>
     <string name="video">Video</string>
+    <style name="ExoMediaButton">
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">71dip</item>
+        <item name="android:layout_height">52dip</item>
+    </style>
+    <style name="ExoMediaButton.FastForward">
+        <item name="android:src">@mipmap/forward_button</item>
+        <item name="android:contentDescription">@string/exo_controls_fastforward_description</item>
+    </style>
+    <style name="ExoMediaButton.Next">
+        <item name="android:src">@mipmap/next_button</item>
+        <item name="android:contentDescription">@string/exo_controls_next_description</item>
+    </style>
+    <style name="ExoMediaButton.Rewind">
+        <item name="android:src">@mipmap/backward_button</item>
+        <item name="android:contentDescription">@string/exo_controls_rewind_description</item>
+    </style>
+    <style name="ExoMediaButton.Settings">
+        <item name="android:src">@mipmap/dots</item>
+        <item name="android:contentDescription">@string/controls_settings</item>
+    </style>
     <style name="qualityTextsStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

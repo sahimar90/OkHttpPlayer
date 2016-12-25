@@ -7,5 +7,9 @@
 
 
     <dimen name="medium_margin">15dp</dimen>
+    <dimen name="huge_margin">25dp</dimen>
+    <dimen name="small_space">5dp</dimen>
+    <dimen name="medium_space">10dp</dimen>
+    <dimen name="large_space">25dp</dimen>
 
 </resources>

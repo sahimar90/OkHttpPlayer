@@ -1,0 +1,28 @@
+[
+    {
+        "outputFile": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v11/values-v11.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 10,
+                    "endOffset": 329
+                },
+                "from": {
+                    "file": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/exploded-aar/CinemanaPlayer/exo-player-library/unspecified/res/values-v11/values-v11.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 6,
+                        "endColumn": 10,
+                        "endOffset": 329
+                    }
+                }
+            }
+        ]
+    }
+]

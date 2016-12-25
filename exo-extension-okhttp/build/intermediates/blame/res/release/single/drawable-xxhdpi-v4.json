@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/res/merged/release/drawable-xxhdpi-v4/exo_controls_pause.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/exploded-aar/CinemanaPlayer/exo-player-library/unspecified/res/drawable-xxhdpi-v4/exo_controls_pause.png"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/res/merged/release/drawable-xxhdpi-v4/exo_controls_fastforward.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/exploded-aar/CinemanaPlayer/exo-player-library/unspecified/res/drawable-xxhdpi-v4/exo_controls_fastforward.png"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/res/merged/release/drawable-xxhdpi-v4/exo_controls_play.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/exploded-aar/CinemanaPlayer/exo-player-library/unspecified/res/drawable-xxhdpi-v4/exo_controls_play.png"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/res/merged/release/drawable-xxhdpi-v4/exo_controls_previous.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/exploded-aar/CinemanaPlayer/exo-player-library/unspecified/res/drawable-xxhdpi-v4/exo_controls_previous.png"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/res/merged/release/drawable-xxhdpi-v4/exo_controls_rewind.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/exploded-aar/CinemanaPlayer/exo-player-library/unspecified/res/drawable-xxhdpi-v4/exo_controls_rewind.png"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/res/merged/release/drawable-xxhdpi-v4/exo_controls_next.png",
+        "source": "/Users/bluemix/AndroidStudioProjects/CinemanaPlayer/exo-extension-okhttp/build/intermediates/exploded-aar/CinemanaPlayer/exo-player-library/unspecified/res/drawable-xxhdpi-v4/exo_controls_next.png"
+    }
+]
