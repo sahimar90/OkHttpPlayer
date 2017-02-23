@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/build/intermediates/res/merged/release/layout/exo_simple_player_view.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.1.1/res/layout/exo_simple_player_view.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/build/intermediates/res/merged/release/layout/fullscreen_imageview.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/src/main/res/layout/fullscreen_imageview.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/build/intermediates/res/merged/release/layout/quality_item.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/src/main/res/layout/quality_item.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/build/intermediates/res/merged/release/layout/okhttp_player_view.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/src/main/res/layout/okhttp_player_view.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/build/intermediates/res/merged/release/layout/exo_playback_control_view.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/build/intermediates/exploded-aar/com.google.android.exoplayer/exoplayer/r2.1.1/res/layout/exo_playback_control_view.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/build/intermediates/res/merged/release/layout/ok_playback_control_view.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/src/main/res/layout/ok_playback_control_view.xml"
+    },
+    {
+        "merged": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/build/intermediates/res/merged/release/layout/player_view_layout.xml",
+        "source": "/Users/bluemix/AndroidStudioProjects/OkhttpPlayer/okhttp-player-library/src/main/res/layout/player_view_layout.xml"
+    }
+]

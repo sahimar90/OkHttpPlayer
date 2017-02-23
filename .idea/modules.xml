@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CinemanaPlayer.iml" filepath="$PROJECT_DIR$/CinemanaPlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OkhttpPlayer.iml" filepath="$PROJECT_DIR$/OkhttpPlayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cinemanna-player-library/cinemanna-player-library.iml" filepath="$PROJECT_DIR$/cinemanna-player-library/cinemanna-player-library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/okhttp-player-library/okhttp-player-library.iml" filepath="$PROJECT_DIR$/okhttp-player-library/okhttp-player-library.iml" />
     </modules>
   </component>
 </project>

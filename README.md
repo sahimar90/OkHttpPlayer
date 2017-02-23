@@ -2,7 +2,7 @@
 Demo
 ==
 
-![Arabic subtitle ExoPlayer](art/cinemana_player_demo.gif "Arabic subtitle ExoPlayer")
+![Arabic subtitle ExoPlayer](art/OkHttpPlayer-demo.png "Arabic subtitle ExoPlayer")
 
 
 
@@ -15,20 +15,20 @@ Features
 
 Setup
 ==
-Adding CinemanaPlayer Activity to your Manifest.xml
+Adding OkHttpVideoPlayer Activity to your Manifest.xml
 ```
-<activity android:name="org.earthlink.cinemana.player.CinemanaVideoPlayer"
-    android:configChanges="orientation|screenSize|keyboardHidden"
-    />
+    <activity android:name="io.fomalhaut.android.okhttpplayer.OkHttpVideoPlayer"
+        android:configChanges="orientation|screenSize|keyboardHidden"
+        />
 ```
 
 
 API
 ==
 ```
-Intent i = new Intent(this, CinemanaVideoPlayer.class);
-i.putExtra(CinemanaVideoPlayer.KEY_VIDEO_FILE, videoFile);
-i.putExtra(CinemanaVideoPlayer.KEY_START_POSITION, 0);
+Intent i = new Intent(this, OkHttpVideoPlayer.class);
+i.putExtra(OkHttpVideoPlayer.KEY_VIDEO_FILE, videoFile);
+i.putExtra(OkHttpVideoPlayer.KEY_START_POSITION, 0);
 
 startActivity(i);
 
@@ -80,7 +80,7 @@ ExtractorMediaSource extractorMediaSource =
                 mainHandler, eventLogger);
 ```
 
-The subtitles style can be configured from the library in the file [`CinemanaVideoPlayer.java`](https://github.com/bluemix/CinemanaPlayer/blob/master/cinemanna-player-library/src/main/java/org/earthlink/cinemana/player/CinemanaVideoPlayer.java):
+The subtitles style can be configured from the library in the file [`OkHttpVideoPlayer.java`](https://github.com/bluemix/OkHttpOkHttpVideoPlayerPlayer/blob/master/OkHttp-player-library/src/main/java/io/fomalhaut/android/okhttpplayer/OkHttpVideoPlayer.java):
 
 
 ```

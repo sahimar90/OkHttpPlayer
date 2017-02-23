@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="org.cinemana.player.app.demo" >
+package="io.fomalhaut.player.app.demo" >
 
 <application
     android:allowBackup="false"
@@ -20,7 +20,7 @@ package="org.cinemana.player.app.demo" >
     </activity>
 
 
-    <activity android:name="org.earthlink.cinemana.player.CinemanaVideoPlayer"
+    <activity android:name="io.fomalhaut.android.okhttpplayer.OkHttpVideoPlayer"
         android:configChanges="orientation|screenSize|keyboardHidden"
         />
 

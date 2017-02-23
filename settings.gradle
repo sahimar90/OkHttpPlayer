@@ -1,2 +1,2 @@
-include ':app', ':cinemanna-player-library'
+include ':app', ':okhttp-player-library'
 //, ':exo-player-library', ':exo-extension-okhttp'

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <array name="progressBarColors">
+        <item>#808080</item>
+        <item>#606060</item>
+        <item>#404040</item>
+        <item>#252525</item>
+    </array>
+    <attr format="reference" name="controller_layout_id"/>
+    <attr format="integer" name="fastforward_increment"/>
+    <attr format="reference" name="player_layout_id"/>
+    <attr format="enum" name="resize_mode">
+    <enum name="fit" value="0"/>
+    <enum name="fixed_width" value="1"/>
+    <enum name="fixed_height" value="2"/>
+    <enum name="fill" value="3"/>
+  </attr>
+    <attr format="integer" name="rewind_increment"/>
+    <attr format="integer" name="show_timeout"/>
+    <attr format="enum" name="surface_type">
+    <enum name="none" value="0"/>
+    <enum name="surface_view" value="1"/>
+    <enum name="texture_view" value="2"/>
+  </attr>
+    <bool name="spb_default_mirror_mode">false</bool>
+    <bool name="spb_default_progressiveStart_activated">false</bool>
+    <bool name="spb_default_reversed">false</bool>
+    <color name="accentColor">@color/malibu</color>
+    <color name="black">#0d0d0d</color>
+    <color name="colorAccent">#247b1c</color>
+    <color name="jumbo">#c8caca</color>
+    <color name="malibu">#68ACDB</color>
+    <color name="monsoon">#777777</color>
+    <color name="raven">#727579</color>
+    <color name="selected">#f7f7f7</color>
+    <color name="selectedQuality">@color/malibu</color>
+    <color name="slate_gray">#77828F</color>
+    <color name="spb_default_color">#33b5e5</color>
+    <color name="transparent">#00000000</color>
+    <color name="unselectedQuality">@color/jumbo</color>
+    <declare-styleable name="AmazingTextView"><attr format="dimension" name="radius"/><attr format="color" name="backgroundColor"/></declare-styleable>
+    <declare-styleable name="AspectRatioFrameLayout"><attr name="resize_mode"/></declare-styleable>
+    <declare-styleable name="CircleProgress"><attr format="reference|color" name="color1"/><attr format="reference|color" name="color2"/><attr format="reference|color" name="color3"/></declare-styleable>
+    <declare-styleable name="ExpandableLayout"><attr format="integer" name="el_duration"/><attr format="boolean" name="el_expanded"/><attr format="float" name="el_parallax"/><attr format="boolean" name="el_translate_children"/><attr format="boolean" name="layout_expandable"/><attr name="android:orientation"/></declare-styleable>
+    <declare-styleable name="PlaybackControlView"><attr name="show_timeout"/><attr name="rewind_increment"/><attr name="fastforward_increment"/><attr name="controller_layout_id"/></declare-styleable>
+    <declare-styleable name="SimpleExoPlayerView"><attr format="boolean" name="use_artwork"/><attr format="boolean" name="use_controller"/><attr name="surface_type"/><attr name="show_timeout"/><attr name="rewind_increment"/><attr name="fastforward_increment"/><attr name="resize_mode"/><attr name="player_layout_id"/><attr name="controller_layout_id"/></declare-styleable>
+    <declare-styleable name="SmoothProgressBar"><attr format="reference" name="spbStyle"/><attr format="color" name="spb_color"/><attr format="dimension" name="spb_stroke_width"/><attr format="dimension" name="spb_stroke_separator_length"/><attr format="integer" name="spb_sections_count"/><attr format="float" name="spb_speed"/><attr format="float" name="spb_progressiveStart_speed"/><attr format="float" name="spb_progressiveStop_speed"/><attr format="enum" name="spb_interpolator"><enum name="spb_interpolator_accelerate" value="0"/><enum name="spb_interpolator_linear" value="1"/><enum name="spb_interpolator_acceleratedecelerate" value="2"/><enum name="spb_interpolator_decelerate" value="3"/></attr><attr format="boolean" name="spb_reversed"/><attr format="boolean" name="spb_mirror_mode"/><attr format="reference" name="spb_colors"/><attr format="boolean" name="spb_progressiveStart_activated"/><attr format="reference" name="spb_background"/><attr format="boolean" name="spb_generate_background_with_colors"/><attr format="boolean" name="spb_gradients"/></declare-styleable>
+    <dimen name="default_circle_view_size">150dp</dimen>
+    <dimen name="exo_media_button_height">52dp</dimen>
+    <dimen name="exo_media_button_width">71dp</dimen>
+    <dimen name="huge_margin">25dp</dimen>
+    <dimen name="large_space">25dp</dimen>
+    <dimen name="medium_margin">15dp</dimen>
+    <dimen name="medium_space">10dp</dimen>
+    <dimen name="side_control_margin">5dp</dimen>
+    <dimen name="side_quality_ll_margin">10dp</dimen>
+    <dimen name="small_space">5dp</dimen>
+    <dimen name="spb_default_stroke_separator_length">4dp</dimen>
+    <dimen name="spb_default_stroke_width">4dp</dimen>
+    <item name="exo_artwork" type="id"/>
+    <item name="exo_content_frame" type="id"/>
+    <item name="exo_controller_placeholder" type="id"/>
+    <item name="exo_duration" type="id"/>
+    <item name="exo_ffwd" type="id"/>
+    <item name="exo_next" type="id"/>
+    <item name="exo_overlay" type="id"/>
+    <item name="exo_pause" type="id"/>
+    <item name="exo_play" type="id"/>
+    <item name="exo_position" type="id"/>
+    <item name="exo_prev" type="id"/>
+    <item name="exo_progress" type="id"/>
+    <item name="exo_rew" type="id"/>
+    <item name="exo_shutter" type="id"/>
+    <item name="exo_subtitles" type="id"/>
+    <integer name="spb_default_interpolator">0</integer>
+    <integer name="spb_default_sections_count">4</integer>
+    <string name="audio">Audio</string>
+    <string name="controls_settings">Settings</string>
+    <string name="define_smoothprogressbar"/>
+    <string name="drm_error_not_supported">Protected content not supported on API levels below 18</string>
+    <string name="drm_error_unknown">An unknown DRM error occurred</string>
+    <string name="drm_error_unsupported_scheme">This device does not support the required DRM scheme</string>
+    <string name="enable_random_adaptation">Enable random adaptation</string>
+    <string name="error_drm_not_supported">Protected content not supported on API levels below 18</string>
+    <string name="error_drm_unknown">An unknown DRM error occurred</string>
+    <string name="error_drm_unsupported_scheme">This device does not support the required DRM scheme</string>
+    <string name="error_instantiating_decoder">Unable to instantiate decoder <ns1:g id="decoder_name">%1$s</ns1:g></string>
+    <string name="error_no_decoder">This device does not provide a decoder for <ns1:g id="mime_type">%1$s</ns1:g></string>
+    <string name="error_no_secure_decoder">This device does not provide a secure decoder for <ns1:g id="mime_type">%1$s</ns1:g></string>
+    <string name="error_querying_decoders">Unable to query device decoders</string>
+    <string name="error_unsupported_audio">Media includes audio tracks, but none are playable by this device</string>
+    <string name="error_unsupported_video">Media includes videoFile tracks, but none are playable by this device</string>
+    <string name="exo_controls_fastforward_description">Fast forward</string>
+    <string name="exo_controls_next_description">Next track</string>
+    <string name="exo_controls_pause_description">Pause</string>
+    <string name="exo_controls_play_description">Play</string>
+    <string name="exo_controls_previous_description">Previous track</string>
+    <string name="exo_controls_rewind_description">Rewind</string>
+    <string name="exo_controls_stop_description">Stop</string>
+    <string name="failed">Playback failed</string>
+    <string name="key_last_quality">key_last_quality</string>
+    <string name="key_last_window">key_last_window</string>
+    <string name="key_seek_position">key_seek_position</string>
+    <string name="key_show_subtitles">key_subtitles_show</string>
+    <string name="key_subtitle_font_size">key_subtitle_font_size</string>
+    <string name="library_smoothprogressbar_author">Antoine Merle</string>
+    <string name="library_smoothprogressbar_authorWebsite">https://github.com/castorflex</string>
+    <string name="library_smoothprogressbar_isOpenSource">true</string>
+    <string name="library_smoothprogressbar_libraryDescription">Small library allowing you to make a smooth indeterminate progress bar. You can either user your progress bars and set this drawable or use directly the SmoothProgressBarView.</string>
+    <string name="library_smoothprogressbar_libraryName">SmoothProgressBar</string>
+    <string name="library_smoothprogressbar_libraryVersion">1.0.0</string>
+    <string name="library_smoothprogressbar_libraryWebsite">https://github.com/castorflex/SmoothProgressBar</string>
+    <string name="library_smoothprogressbar_licenseId">apache_2_0</string>
+    <string name="library_smoothprogressbar_repositoryLink">https://github.com/castorflex/SmoothProgressBar.git</string>
+    <string name="sample_list_load_error">One or more sample lists failed to load</string>
+    <string name="selection_default">Default</string>
+    <string name="selection_default_none">Default (none)</string>
+    <string name="selection_disabled">Disabled</string>
+    <item format="float" name="spb_default_speed" type="string">1</item>
+    <string name="storage_permission_denied">Permission to access storage was denied</string>
+    <string name="text">Text</string>
+    <string name="unexpected_intent_action">Unexpected intent action: <ns1:g id="action">%1$s</ns1:g></string>
+    <string name="video">Video</string>
+    <style name="ExoMediaButton">
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">71dip</item>
+        <item name="android:layout_height">52dip</item>
+    </style>
+    <style name="ExoMediaButton.FastForward">
+        <item name="android:src">@mipmap/forward_button</item>
+        <item name="android:contentDescription">@string/exo_controls_fastforward_description</item>
+    </style>
+    <style name="ExoMediaButton.Next">
+        <item name="android:src">@mipmap/next_button</item>
+        <item name="android:contentDescription">@string/exo_controls_next_description</item>
+    </style>
+    <style name="ExoMediaButton.Pause">
+    <item name="android:src">@drawable/exo_controls_pause</item>
+    <item name="android:contentDescription">@string/exo_controls_pause_description</item>
+  </style>
+    <style name="ExoMediaButton.Play">
+    <item name="android:src">@drawable/exo_controls_play</item>
+    <item name="android:contentDescription">@string/exo_controls_play_description</item>
+  </style>
+    <style name="ExoMediaButton.Previous">
+    <item name="android:src">@drawable/exo_controls_previous</item>
+    <item name="android:contentDescription">@string/exo_controls_previous_description</item>
+  </style>
+    <style name="ExoMediaButton.Rewind">
+        <item name="android:src">@mipmap/backward_button</item>
+        <item name="android:contentDescription">@string/exo_controls_rewind_description</item>
+    </style>
+    <style name="ExoMediaButton.Settings">
+        <item name="android:src">@mipmap/dots</item>
+        <item name="android:contentDescription">@string/controls_settings</item>
+    </style>
+    <style name="SPB" parent="android:Widget.ProgressBar.Horizontal">
+    </style>
+    <style name="SmoothProgressBar" parent="SPB">
+        <item name="spb_color">@color/spb_default_color</item>
+        <item name="spb_sections_count">@integer/spb_default_sections_count</item>
+        <item name="spb_speed">@string/spb_default_speed</item>
+        <item name="spb_stroke_width">@dimen/spb_default_stroke_width</item>
+        <item name="spb_stroke_separator_length">@dimen/spb_default_stroke_separator_length</item>
+        <item name="spb_reversed">@bool/spb_default_reversed</item>
+        <item name="spb_mirror_mode">@bool/spb_default_mirror_mode</item>
+        <item name="spb_interpolator">@integer/spb_default_interpolator</item>
+    </style>
+    <style name="Theme.SmoothProgressBarDefaults" parent="android:Theme">
+        <item name="spbStyle">@style/SmoothProgressBar</item>
+    </style>
+    <style name="qualityTextsStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+</resources>

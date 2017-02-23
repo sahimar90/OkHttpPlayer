@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">CinemanaPlayer</string>
-    <string name="title_activity_player">CinemanaPlayer</string>
+    <string name="app_name">OkHttpPlayer</string>
+    <string name="title_activity_player">OkHttpPlayer</string>
 </resources>

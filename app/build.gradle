@@ -5,7 +5,7 @@ android {
     buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "cinemana.earthlinktele.com.cinemanaplayer"
+        applicationId "fomalhaut.io.okhttpplayer"
         minSdkVersion 16
         targetSdkVersion project.ext.targetSdkVersion
         versionCode 200
@@ -26,6 +26,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
 
 
-    compile project(':cinemanna-player-library')
+    compile project(':okhttp-player-library')
 
 }
