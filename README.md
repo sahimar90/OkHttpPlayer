@@ -80,7 +80,7 @@ ExtractorMediaSource extractorMediaSource =
                 mainHandler, eventLogger);
 ```
 
-The subtitles style can be configured from the library in the file [`OkHttpVideoPlayer.java`](https://github.com/bluemix/OkHttpOkHttpVideoPlayerPlayer/blob/master/OkHttp-player-library/src/main/java/io/fomalhaut/android/okhttpplayer/OkHttpVideoPlayer.java):
+The subtitles style can be configured from the library in the file [`OkHttpVideoPlayer.java`](https://github.com/bluemix/OkHttpPlayer/blob/master/okhttp-player-library/src/main/java/io/fomalhaut/android/okhttpplayer/OkHttpVideoPlayer.java):
 
 
 ```
