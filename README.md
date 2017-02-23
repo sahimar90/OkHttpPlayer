@@ -2,7 +2,7 @@
 Demo
 ==
 
-![Arabic subtitle ExoPlayer](art/OkHttpPlayer-demo.png "Arabic subtitle ExoPlayer")
+![Arabic subtitle ExoPlayer](art/OkHttpPlayer-demo.jpg "Arabic subtitle ExoPlayer")
 
 
 
